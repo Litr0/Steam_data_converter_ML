@@ -320,19 +320,3 @@ network_df.head()
 # %%
 # Save the network DataFrame to a CSV file
 network_df.to_csv('data/steam.csv', index=False)
-
-# %% [markdown]
-# ## Understanding dataset MOOC
-
-# %%
-mooc = pd.read_csv('data/mooc.csv', sep=',')
-mooc.head()
-
-# %%
-mooc[(mooc['state_label'] == 1)]
-
-# %%
-mooc[(mooc['user_id'] == 1812)
-     & (mooc['item_id'] == 8)]
-
-
