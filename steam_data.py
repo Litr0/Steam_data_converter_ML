@@ -126,6 +126,24 @@ def add_sentiment_scores_to_df(df, sentiment_scores):
     return steam_reviews_all_roberta
 
 
+def transform_to_network(df):
+    network_data = []
+    for _, row in df.iterrows():
+        user = row['author.steamid']
+        item = row['app_id']
+        timestamp = row['timestamp']
+        state_label = 0
+        negative = row['neg']
+        neutral = row['neu']
+        positive = row['pos']
+        # Add the features list to the network data
+        array_to_append = [user, item, timestamp, state_label, negative, neutral, positive]
+        network_data.append(array_to_append)
+    # Create a DataFrame from the network data
+    network_df = pd.DataFrame(network_data, columns=['user_id', 'item_id', 'timestamp', 'state_label', 'negative', 'neutral', 'positive'])
+    return network_df
+
+
 def main():
     # Load data
     steam_reviews = load_data()
@@ -158,6 +176,20 @@ def main():
 
     # Save the final DataFrame to a CSV file
     steam_reviews_all_with_sentiment.to_csv('data/steam_reviews_roberta.csv', index=False)
+
+
+# Transform to network the data obtained from the Roberta model
+def main_2():
+    # Load data
+
+    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
+
+    network_df = transform_to_network(steam_reviews)
+
+    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
+
+    network_df.to_csv('data/steam.csv', index=False)
+
 
 if __name__ == "__main__":
     main()
