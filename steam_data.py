@@ -17,7 +17,7 @@ from scipy.special import softmax
 
 np.random.seed(42)
 
-def load_data(df_name = 'steaM_reviews.csv', sample_size = 0.1):
+def load_data(df_name = 'steam_reviews.csv', sample_size = 0.1):
     total_rows = sum(1 for row in open('data/' + df_name)) - 1
     sample_size = int(total_rows * sample_size)
 
