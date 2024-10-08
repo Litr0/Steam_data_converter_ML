@@ -90,7 +90,6 @@ def merge_and_order_reviews(df1, df2, parameter = 'timestamp'):
 # Roberta Model
 def preprocess_text(text):
     new_text = []
-    print(text)
     for t in text.split(" "):
         t = "@user" if t.startswith("@") and len(t) > 1 else t
         t = "http" if t.startswith("http") else t
