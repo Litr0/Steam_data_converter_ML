@@ -133,6 +133,7 @@ def main():
 
     # Get English reviews
     steam_reviews_english = get_english_reviews(steam_reviews)
+    print(f"Number of English reviews: {steam_reviews_english.shape[0]}")
 
     # Get updated and not updated reviews
     steam_reviews_updated = get_updated_steam_reviews(steam_reviews_english)
@@ -140,14 +141,17 @@ def main():
 
     # Create review DataFrame
     steam_reviews_updated = create_review_df(steam_reviews_updated)
+    print(f"Number of updated reviews: {steam_reviews_updated.shape[0]}")
     steam_reviews_not_updated = create_review_df(steam_reviews_not_updated)
+    print(f"Number of not updated reviews: {steam_reviews_not_updated.shape[0]}")
 
     # Merge and order reviews
     steam_reviews_all = merge_and_order_reviews(steam_reviews_updated, steam_reviews_not_updated)
-
+    print(f"Number of all reviews: {steam_reviews_all.shape[0]}")
 
     # Get sentiment scores using Roberta model
     sentiment_scores = get_sentiment_scores_roberta(steam_reviews_all)
+    print(f"First 5 sentiment scores: {sentiment_scores[:5]}")
 
     # Add sentiment scores to DataFrame
     steam_reviews_all_with_sentiment = add_sentiment_scores_to_df(steam_reviews_all, sentiment_scores)
