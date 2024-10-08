@@ -78,12 +78,11 @@ def create_review_df(df):
     new_df = pd.DataFrame(data, columns=['app_id', 'app_name', 'review', 'review_id', 
                                          'timestamp', 'recommended', 'author_id', 
                                          'weighted_vote_score'])
-    new_df = new_df.sort_values(by=['timestamp'], ascending=[True])
+    new_df.sort_values(by=['timestamp'], ascending=[True])
     return new_df
 
 def merge_and_order_reviews(df1, df2, parameter = 'timestamp'):
     df_ordered = pd.concat([df1, df2]).sort_values(by=[parameter], ascending=[True])
-    df_ordered['review'] = df_ordered['review'].fillna('', inplace=True)
 
     return df_ordered
 
@@ -148,6 +147,7 @@ def main():
 
     # Merge and order reviews
     steam_reviews_all = merge_and_order_reviews(steam_reviews_updated, steam_reviews_not_updated)
+    steam_reviews_all.fillna({'review': ''}, inplace=True)
     print(f"Number of all reviews: {steam_reviews_all.shape[0]}")
 
     # Get sentiment scores using Roberta model
