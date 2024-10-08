@@ -21,10 +21,9 @@ def load_data(df_name = 'steam_reviews.csv', sample_size = 0.1):
     total_rows = sum(1 for row in open('data/' + df_name)) - 1
     sample_size = int(total_rows * sample_size)
 
-    with tqdm(total=sample_size, desc="Loading data") as pbar:
-        steam_reviews = pd.read_csv('data/' + df_name, skiprows=lambda x: x > 0 and np.random.rand() > 0.1, nrows=sample_size, chunksize=1000)
-        steam_reviews = pd.concat([chunk for chunk in steam_reviews])
-        pbar.update(len(steam_reviews))
+    print(f"Loading {sample_size} rows from {df_name}")
+    steam_reviews = pd.read_csv('data/' + df_name, skiprows=lambda x: x > 0 and np.random.rand() > 0.1, nrows=sample_size)
+    print(f"Loaded {steam_reviews.shape[0]} rows")
 
     return steam_reviews
 
