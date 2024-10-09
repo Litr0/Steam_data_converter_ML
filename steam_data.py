@@ -132,7 +132,10 @@ def transform_to_network(df):
         user = row['author_id']
         item = row['app_id']
         timestamp = row['timestamp']
-        state_label = 0
+        try:
+            state_label = row['review_bombing']
+        except:
+            state_label = 0
         negative = row['neg']
         neutral = row['neu']
         positive = row['pos']
@@ -193,6 +196,38 @@ def main_2():
     network_df.to_csv('data/steam.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
+
+# Marking with a 1 the reviews that mention Take-Two or OpenIV in a new column called 'review_bombing'
+def main_3():
+    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
+
+    #Possible review Bombing for GTA V between 2017-06-01 and 2017-07-31
+    one_game_only_english = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False)) 
+                                      & (steam_reviews["language"] == "english")
+                                      & (steam_reviews["recommended"] == False)
+                                      & (steam_reviews["timestamp"] > 1496268000)
+                                      & (steam_reviews["timestamp"] < 1501538399)
+                                      & ((steam_reviews["review"].str.contains("Take-Two", case = False))
+                                      |  (steam_reviews["review"].str.contains("OpenIV", case = False)))]
+
+    # Create a DataFrame excluding the values in one_game_only_english
+    steam_reviews_excluding_bombing = steam_reviews[~steam_reviews.index.isin(one_game_only_english.index)]
+
+    steam_reviews_excluding_bombing = steam_reviews_excluding_bombing.assign(review_bombing=0)
+
+    one_game_only_english = one_game_only_english.assign(review_bombing=1)
+
+    # Merge the two DataFrames
+    steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, one_game_only_english)
+
+    network_df = transform_to_network(steam_reviews_all)
+    print(f"First 5 rows of the network data: {network_df.head()}")
+
+    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
+
+    network_df.to_csv('data/steam.csv', index=False)
+    print("Data saved to 'data/steam.csv'")
+
 if __name__ == "__main__":
-    main_2()
+    main_3()
 
