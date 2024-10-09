@@ -225,7 +225,7 @@ def main_3():
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
-    network_df.to_csv('data/steam.csv', index=False)
+    network_df.to_csv('data/steam_1.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
 if __name__ == "__main__":
