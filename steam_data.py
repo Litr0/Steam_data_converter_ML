@@ -202,8 +202,7 @@ def main_3():
     steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
 
     #Possible review Bombing for GTA V between 2017-06-01 and 2017-07-31
-    one_game_only_english = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False)) 
-                                      & (steam_reviews["language"] == "english")
+    one_game_only_english = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False))
                                       & (steam_reviews["recommended"] == False)
                                       & (steam_reviews["timestamp"] > 1496268000)
                                       & (steam_reviews["timestamp"] < 1501538399)
