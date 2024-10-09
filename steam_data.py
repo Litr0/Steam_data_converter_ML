@@ -183,13 +183,15 @@ def main_2():
     # Load data
 
     steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
+    print(f"Number of all reviews: {steam_reviews.shape[0]}")
 
     network_df = transform_to_network(steam_reviews)
+    print(f"First 5 rows of the network data: {network_df.head()}")
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
     network_df.to_csv('data/steam.csv', index=False)
-
+    print("Data saved to 'data/steam.csv'")
 
 if __name__ == "__main__":
     main_2()
