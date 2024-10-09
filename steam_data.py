@@ -219,12 +219,14 @@ def main_3():
     # Merge the two DataFrames
     steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, one_game_only_english)
 
+    steam_reviews_all.to_csv('data/steam_reviews_all.csv', index=False)
+
     network_df = transform_to_network(steam_reviews_all)
     print(f"First 5 rows of the network data: {network_df.head()}")
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
-    network_df.to_csv('data/steam_1.csv', index=False)
+    network_df.to_csv('data/steam.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
 if __name__ == "__main__":
