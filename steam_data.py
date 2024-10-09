@@ -129,7 +129,7 @@ def add_sentiment_scores_to_df(df, sentiment_scores):
 def transform_to_network(df):
     network_data = []
     for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Transforming to network"):
-        user = row['author.steamid']
+        user = row['author_id']
         item = row['app_id']
         timestamp = row['timestamp']
         state_label = 0
