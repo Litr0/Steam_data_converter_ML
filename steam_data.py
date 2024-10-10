@@ -243,5 +243,5 @@ def main_4():
     print(f"Number of GTA V reviews: {gta_v_reviews.shape[0]}")
 
 if __name__ == "__main__":
-    main_3()
+    main_4()
 
