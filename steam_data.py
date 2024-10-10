@@ -229,6 +229,19 @@ def main_3():
     network_df.to_csv('data/steam.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
+# See how many GTA V reviews are in total
+def main_4():
+    steam_reviews = pd.read_csv('data/steam_reviews.csv')
+
+    # Filter out non-english reviews
+    steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
+
+    # Filter out reviews for GTA V
+
+    gta_v_reviews = steam_reviews_english[(steam_reviews_english["app_name"].str.contains("Grand Theft Auto", case = False))]
+
+    print(f"Number of GTA V reviews: {gta_v_reviews.shape[0]}")
+
 if __name__ == "__main__":
     main_3()
 
