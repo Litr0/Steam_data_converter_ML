@@ -130,7 +130,7 @@ def transform_to_network(df):
     network_data = []
     for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Transforming to network"):
         user = row['author_id']
-        item = row['app_id']
+        item = row['review_id']
         timestamp = row['timestamp']
         try:
             state_label = row['review_bombing']
@@ -149,11 +149,14 @@ def transform_to_network(df):
 
 def main():
     # Load data
-    steam_reviews = load_data()
+    steam_reviews = pd.read_csv('data/steam_reviews.csv')
 
     # Get English reviews
     steam_reviews_english = get_english_reviews(steam_reviews)
     print(f"Number of English reviews: {steam_reviews_english.shape[0]}")
+
+    # Filter out non GTA V reviews
+    steam_reviews_english = steam_reviews_english[(steam_reviews_english["app_name"].str.contains("Grand Theft Auto V", case = False))]
 
     # Get updated and not updated reviews
     steam_reviews_updated = get_updated_steam_reviews(steam_reviews_english)
@@ -181,24 +184,8 @@ def main():
     steam_reviews_all_with_sentiment.to_csv('data/steam_reviews_roberta.csv', index=False)
 
 
-# Transform to network the data obtained from the Roberta model
-def main_2():
-    # Load data
-
-    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
-    print(f"Number of all reviews: {steam_reviews.shape[0]}")
-
-    network_df = transform_to_network(steam_reviews)
-    print(f"First 5 rows of the network data: {network_df.head()}")
-
-    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
-
-    network_df.to_csv('data/steam.csv', index=False)
-    print("Data saved to 'data/steam.csv'")
-
-
 # Marking with a 1 the reviews that mention Take-Two or OpenIV in a new column called 'review_bombing'
-def main_3():
+def main_2():
     steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
 
     #Possible review Bombing for GTA V between 2017-06-01 and 2017-07-31
@@ -229,6 +216,21 @@ def main_3():
     network_df.to_csv('data/steam.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
+# Transform to network the data obtained from the Roberta model
+def main_3():
+    # Load data
+
+    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
+    print(f"Number of all reviews: {steam_reviews.shape[0]}")
+
+    network_df = transform_to_network(steam_reviews)
+    print(f"First 5 rows of the network data: {network_df.head()}")
+
+    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
+
+    network_df.to_csv('data/steam.csv', index=False)
+    print("Data saved to 'data/steam.csv'")
+
 # See how many GTA V reviews are in total
 def main_4():
     steam_reviews = pd.read_csv('data/steam_reviews.csv')
@@ -243,5 +245,5 @@ def main_4():
     print(f"Number of GTA V reviews: {gta_v_reviews.shape[0]}")
 
 if __name__ == "__main__":
-    main_4()
+    main()
 
