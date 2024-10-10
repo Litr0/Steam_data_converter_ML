@@ -193,11 +193,15 @@ def main_2():
                                       & (steam_reviews["recommended"] == False)
                                       & (steam_reviews["timestamp"] > 1496268000)
                                       & (steam_reviews["timestamp"] < 1501538399)
-                                      & ((steam_reviews["review"].str.contains("Take-Two", case = False))
+                                      & ((steam_reviews["review"].str.contains("Take Two", case = False))
+                                      |  (steam_reviews["review"].str.contains("Take-Two", case = False)) 
                                       |  (steam_reviews["review"].str.contains("OpenIV", case = False))
+                                      |  (steam_reviews["review"].str.contains("Open IV", case = False))  
                                       |  (steam_reviews["review"].str.contains("Rockstar", case = False))
                                       |  (steam_reviews["review"].str.contains("modding", case = False))
                                       |  (steam_reviews["review"].str.contains("mod", case = False)))]
+    
+    print(f"Number of reviews that mention Take-Two, OpenIV, modding, mod or Rockstar: {one_game_only_english.shape[0]}")
 
     # Create a DataFrame excluding the values in one_game_only_english
     steam_reviews_excluding_bombing = steam_reviews[~steam_reviews.index.isin(one_game_only_english.index)]
