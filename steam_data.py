@@ -194,7 +194,10 @@ def main_2():
                                       & (steam_reviews["timestamp"] > 1496268000)
                                       & (steam_reviews["timestamp"] < 1501538399)
                                       & ((steam_reviews["review"].str.contains("Take-Two", case = False))
-                                      |  (steam_reviews["review"].str.contains("OpenIV", case = False)))]
+                                      |  (steam_reviews["review"].str.contains("OpenIV", case = False))
+                                      |  (steam_reviews["review"].str.contains("Rockstar", case = False))
+                                      |  (steam_reviews["review"].str.contains("modding", case = False))
+                                      |  (steam_reviews["review"].str.contains("mod", case = False)))]
 
     # Create a DataFrame excluding the values in one_game_only_english
     steam_reviews_excluding_bombing = steam_reviews[~steam_reviews.index.isin(one_game_only_english.index)]
@@ -216,23 +219,9 @@ def main_2():
     network_df.to_csv('data/steam.csv', index=False)
     print("Data saved to 'data/steam.csv'")
 
-# Transform to network the data obtained from the Roberta model
-def main_3():
-    # Load data
-
-    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
-    print(f"Number of all reviews: {steam_reviews.shape[0]}")
-
-    network_df = transform_to_network(steam_reviews)
-    print(f"First 5 rows of the network data: {network_df.head()}")
-
-    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
-
-    network_df.to_csv('data/steam.csv', index=False)
-    print("Data saved to 'data/steam.csv'")
 
 # See how many GTA V reviews are in total
-def main_4():
+def main_3():
     steam_reviews = pd.read_csv('data/steam_reviews.csv')
 
     # Filter out non-english reviews
@@ -245,5 +234,5 @@ def main_4():
     print(f"Number of GTA V reviews: {gta_v_reviews.shape[0]}")
 
 if __name__ == "__main__":
-    main()
+    main_2()
 
