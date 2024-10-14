@@ -237,6 +237,29 @@ def main_3():
 
     print(f"Number of GTA V reviews: {gta_v_reviews.shape[0]}")
 
+
+# See how many users and games are in the dataset
+def main_4():
+    steam_reviews = pd.read_csv('data/steam_reviews_all.csv')
+
+    # Print the size of the dataset
+    print(f"Number of rows in the dataset: {steam_reviews.shape[0]}")
+
+    # Filter out non-english reviews
+    steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
+
+    # Get the number of unique users
+    unique_users = steam_reviews_english['author.steamid'].nunique()
+    print(f"Number of unique users: {unique_users}")
+
+    # Get the number of unique games
+    unique_games = steam_reviews_english['app_id'].nunique()
+    print(f"Number of unique games: {unique_games}")
+
+    # Get the number of unique reviews
+    unique_reviews = steam_reviews_english['review_id'].nunique()
+    print(f"Number of unique reviews: {unique_reviews}")
+
 if __name__ == "__main__":
-    main_2()
+    main_4()
 
