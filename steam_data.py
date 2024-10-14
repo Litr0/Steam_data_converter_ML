@@ -248,24 +248,26 @@ def main_3():
 
 # See how many users and games are in the dataset
 def main_4():
-    steam_reviews = pd.read_csv('data/steam_reviews_all.csv')
+    steam_reviews = pd.read_csv('data/steam_reviews.csv')
+
+    # Filter out non-english reviews
+    steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
 
     # Print the size of the dataset
-    print(f"Number of rows in the dataset: {steam_reviews.shape[0]}")
+    print(f"Number of rows in the dataset: {steam_reviews_english.shape[0]}")
 
     # Get the number of unique users
-    unique_users = steam_reviews['author_id'].nunique()
+    unique_users = steam_reviews_english['author.steamid'].nunique()
     print(f"Number of unique users: {unique_users}")
 
     # Get the number of unique games
-    unique_games = steam_reviews['app_id'].nunique()
+    unique_games = steam_reviews_english['app_id'].nunique()
     print(f"Number of unique games: {unique_games}")
 
     # Get the number of unique reviews
-    unique_reviews = steam_reviews['review_id'].nunique()
+    unique_reviews = steam_reviews_english['review_id'].nunique()
     print(f"Number of unique reviews: {unique_reviews}")
 
 if __name__ == "__main__":
-    main()
-    main_2()
+    main_4()
 
