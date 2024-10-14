@@ -269,6 +269,7 @@ def main_4():
     print(f"Number of unique reviews: {unique_reviews}")
 
 if __name__ == "__main__":
+    main_4()
     main()
     main_2()
 
