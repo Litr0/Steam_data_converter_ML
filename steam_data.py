@@ -13,6 +13,7 @@ from transformers import AutoModelForSequenceClassification
 from transformers import TFAutoModelForSequenceClassification
 from transformers import AutoTokenizer, AutoConfig
 from scipy.special import softmax
+import zipfile
 
 
 np.random.seed(42)
@@ -130,7 +131,7 @@ def transform_to_network(df):
     network_data = []
     for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Transforming to network"):
         user = row['author_id']
-        item = row['review_id']
+        item = row['item_id']
         timestamp = row['timestamp']
         try:
             state_label = row['review_bombing']
@@ -156,7 +157,7 @@ def main():
     print(f"Number of English reviews: {steam_reviews_english.shape[0]}")
 
     # Filter out non GTA V reviews
-    steam_reviews_english = steam_reviews_english[(steam_reviews_english["app_name"].str.contains("Grand Theft Auto V", case = False))]
+    # steam_reviews_english = steam_reviews_english[(steam_reviews_english["app_name"].str.contains("Grand Theft Auto V", case = False))]
 
     # Get updated and not updated reviews
     steam_reviews_updated = get_updated_steam_reviews(steam_reviews_english)
@@ -221,7 +222,14 @@ def main_2():
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
     network_df.to_csv('data/steam.csv', index=False)
+
     print("Data saved to 'data/steam.csv'")
+
+    # Create a Zip file
+    with zipfile.ZipFile('data/steam_data_complete.zip', 'w') as zipf:
+        zipf.write('data/steam_reviews_roberta.csv', arcname='steam_reviews_roberta.csv')
+        zipf.write('data/steam_reviews_all.csv', arcname='steam_reviews_all.csv')
+        zipf.write('data/steam.csv', arcname='steam.csv')
 
 
 # See how many GTA V reviews are in total
@@ -258,5 +266,6 @@ def main_4():
     print(f"Number of unique reviews: {unique_reviews}")
 
 if __name__ == "__main__":
-    main_4()
+    main()
+    main_2()
 
