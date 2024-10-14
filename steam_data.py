@@ -245,19 +245,16 @@ def main_4():
     # Print the size of the dataset
     print(f"Number of rows in the dataset: {steam_reviews.shape[0]}")
 
-    # Filter out non-english reviews
-    steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
-
     # Get the number of unique users
-    unique_users = steam_reviews_english['author.steamid'].nunique()
+    unique_users = steam_reviews['author_id'].nunique()
     print(f"Number of unique users: {unique_users}")
 
     # Get the number of unique games
-    unique_games = steam_reviews_english['app_id'].nunique()
+    unique_games = steam_reviews['app_id'].nunique()
     print(f"Number of unique games: {unique_games}")
 
     # Get the number of unique reviews
-    unique_reviews = steam_reviews_english['review_id'].nunique()
+    unique_reviews = steam_reviews['review_id'].nunique()
     print(f"Number of unique reviews: {unique_reviews}")
 
 if __name__ == "__main__":
