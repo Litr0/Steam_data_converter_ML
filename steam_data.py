@@ -278,7 +278,7 @@ def main_4():
 
 
 #Clustering the users to reduce the number of users
-def main_5():
+def main_5(n_clusters = 20000):
     # Load the data
     df = pd.read_csv('data/steam_reviews_all.csv')
 
@@ -289,7 +289,7 @@ def main_5():
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    kmeans = KMeans(n_clusters = 20000, random_state = 42)
+    kmeans = KMeans(n_clusters = n_clusters, random_state = 42)
     kmeans.fit(scaled_data)
 
     df["cluster_id"] = kmeans.labels_
