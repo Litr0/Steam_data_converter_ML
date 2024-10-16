@@ -14,6 +14,11 @@ from transformers import TFAutoModelForSequenceClassification
 from transformers import AutoTokenizer, AutoConfig
 from scipy.special import softmax
 import zipfile
+#Clustering
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+
 
 
 np.random.seed(42)
@@ -130,7 +135,10 @@ def add_sentiment_scores_to_df(df, sentiment_scores):
 def transform_to_network(df):
     network_data = []
     for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Transforming to network"):
-        user = row['author_id']
+        try:
+            user = row['cluster_id']
+        except:
+            user = row['author_id']
         item = row['item_id']
         timestamp = row['timestamp']
         try:
@@ -268,8 +276,44 @@ def main_4():
     unique_reviews = steam_reviews_english['review_id'].nunique()
     print(f"Number of unique reviews: {unique_reviews}")
 
+
+#Clustering the users to reduce the number of users
+def main_5():
+    # Load the data
+    df = pd.read_csv('data/steam_reviews_all.csv')
+
+    data = df[["recommended", "neg", "neu", "pos"]]
+
+    data["recommended"] = data["recommended"].astype(int)
+
+    scaler = StandardScaler()
+    scaled_data = scaler.fit_transform(data)
+
+    kmeans = KMeans(n_clusters = 20000, random_state = 42)
+    kmeans.fit(scaled_data)
+
+    df["cluster_id"] = kmeans.labels_
+
+    silhouette_avg = silhouette_score(scaled_data, kmeans.labels_)
+    print("The average silhouette_score is :", silhouette_avg)
+
+    if silhouette_avg < 0.2:
+        print("The silhouette score is low. Try increasing the number of clusters.")
+        exit()
+
+    df.to_csv('data/steam_reviews_user_cluster.csv', index = False)
+
+    print("Clustering complete. User IDs and Cluster IDs saved as 'steam_reviews_user_cluster.csv'.")
+
+    network_df = transform_to_network(df)
+    print(f"First 5 rows of the network data: {network_df.head()}")
+
+    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
+
+    network_df.to_csv('data/steam_cluster.csv', index=False)
+
+    print("Data saved to 'data/steam_cluster.csv'")
+
 if __name__ == "__main__":
-    main_4()
-    main()
-    main_2()
+    main_5()
 
