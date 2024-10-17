@@ -339,7 +339,6 @@ def main_6():
 
     print("Data saved to 'data/steam_normalized_timestamps.csv'")
 
-
 if __name__ == "__main__":
     main_5()
 
