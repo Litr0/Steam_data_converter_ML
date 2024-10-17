@@ -305,6 +305,11 @@ def main_5(n_clusters = 20000):
 
     print("Clustering complete. User IDs and Cluster IDs saved as 'steam_reviews_user_cluster.csv'.")
 
+    # Transform the timestamps, so now they start form 0
+    df['timestamp'] = df['timestamp'] - df['timestamp'].min()
+
+    print(f"First 5 rows of the data after the changes of the timestamp: {df.head()}")
+
     network_df = transform_to_network(df)
     print(f"First 5 rows of the network data: {network_df.head()}")
 
@@ -313,6 +318,27 @@ def main_5(n_clusters = 20000):
     network_df.to_csv('data/steam_cluster.csv', index=False)
 
     print("Data saved to 'data/steam_cluster.csv'")
+
+
+# Transform only the timestamps
+def main_6():
+    # Load the data
+    df = pd.read_csv('data/steam_reviews_all.csv')
+
+    # Transform the timestamps, so now they start form 0
+    df['timestamp'] = df['timestamp'] - df['timestamp'].min()
+
+    print(f"First 5 rows of the data after the changes of the timestamp: {df.head()}")
+
+    network_df = transform_to_network(df)
+    print(f"First 5 rows of the network data: {network_df.head()}")
+
+    network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
+
+    network_df.to_csv('data/steam_normalized_timestamps.csv', index=False)
+
+    print("Data saved to 'data/steam_normalized_timestamps.csv'")
+
 
 if __name__ == "__main__":
     main_5()
