@@ -293,7 +293,7 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    kmeans = MiniBatchKMeans(n_clusters=n_clusters, random_state=42, batch_size=1024)
+    kmeans = MiniBatchKMeans(n_clusters=n_clusters, random_state=42, batch_size=10000)
     kmeans.fit(scaled_data)
 
     df["cluster_id"] = kmeans.labels_
