@@ -139,7 +139,7 @@ def transform_to_network(df):
             user = row['cluster_id']
         except:
             user = row['author_id']
-        item = row['item_id']
+        item = row['app_id']
         timestamp = row['timestamp']
         try:
             state_label = row['review_bombing']
