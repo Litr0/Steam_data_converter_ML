@@ -286,6 +286,8 @@ def main_5(n_clusters = 20000):
 
     data.loc[:, "recommended"] = data["recommended"].astype(bool).astype(int)
 
+    print(f"First 5 rows of the data: {data.head()}")
+
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
