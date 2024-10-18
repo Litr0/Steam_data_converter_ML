@@ -292,8 +292,9 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    kmeans = KMeans(n_clusters = n_clusters, random_state = 42)
-    kmeans.fit(scaled_data)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+    for _ in tqdm(range(1), desc="Fitting KMeans"):
+        kmeans.fit(scaled_data)
 
     df["cluster_id"] = kmeans.labels_
 
