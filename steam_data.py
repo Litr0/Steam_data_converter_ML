@@ -18,6 +18,7 @@ import zipfile
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
+from sklearn.cluster import MiniBatchKMeans
 
 
 
@@ -292,7 +293,7 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    kmeans = KMeans(n_clusters = n_clusters, random_state = 42)
+    kmeans = MiniBatchKMeans(n_clusters=n_clusters, random_state=42, batch_size=1024)
     kmeans.fit(scaled_data)
 
     df["cluster_id"] = kmeans.labels_
