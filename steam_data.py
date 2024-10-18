@@ -284,7 +284,7 @@ def main_5(n_clusters = 20000):
 
     data = df[["recommended", "neg", "neu", "pos"]]
 
-    data["recommended"] = data["recommended"].astype(int)
+    data.loc[:, "recommended"] = data["recommended"].astype(int)
 
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
