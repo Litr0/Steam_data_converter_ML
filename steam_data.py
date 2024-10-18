@@ -20,7 +20,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples
-import numba
 
 
 
@@ -157,12 +156,6 @@ def transform_to_network(df):
     # Create a DataFrame from the network data
     network_df = pd.DataFrame(network_data, columns=['user_id', 'item_id', 'timestamp', 'state_label', 'negative', 'neutral', 'positive'])
     return network_df
-
-
-@numba.jit(nopython=True)
-def optimized_silhouette_samples(X, labels):
-    # Your optimized silhouette calculation here
-    return silhouette_samples(X, labels)
 
 
 def main():
@@ -310,7 +303,7 @@ def main_5(n_clusters = 20000):
 
     print(f"First 5 rows of the data with the cluster IDs:\n {df.head()}")
 
-    silhouette_avg = optimized_silhouette_samples(scaled_data, kmeans.labels_)
+    silhouette_avg = silhouette_samples(scaled_data, kmeans.labels_)
     print("The average silhouette_score is :", silhouette_avg)
 
     if silhouette_avg < 0.2:
