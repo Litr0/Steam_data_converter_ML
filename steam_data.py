@@ -300,6 +300,8 @@ def main_5(n_clusters = 20000):
 
     df['cluster_id'] = pd.factorize(df['cluster_id'])[0]
 
+    print(f"First 5 rows of the data with the cluster IDs:\n {df.head()}")
+
     silhouette_avg = silhouette_score(scaled_data, kmeans.labels_)
     print("The average silhouette_score is :", silhouette_avg)
 
