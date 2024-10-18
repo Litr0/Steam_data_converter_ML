@@ -225,7 +225,7 @@ def main_2():
     steam_reviews_all.to_csv('data/steam_reviews_all.csv', index=False)
 
     network_df = transform_to_network(steam_reviews_all)
-    print(f"First 5 rows of the network data: {network_df.head()}")
+    print(f"First 5 rows of the network data:\n {network_df.head()}")
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
