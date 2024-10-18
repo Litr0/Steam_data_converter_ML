@@ -297,6 +297,8 @@ def main_5(n_clusters = 20000):
 
     df["cluster_id"] = kmeans.labels_
 
+    df['cluster_id'] = pd.factorize(df['cluster_id'])[0]
+
     silhouette_avg = silhouette_score(scaled_data, kmeans.labels_)
     print("The average silhouette_score is :", silhouette_avg)
 
