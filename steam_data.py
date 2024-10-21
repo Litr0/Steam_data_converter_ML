@@ -20,6 +20,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples
+import time
 
 
 
@@ -303,10 +304,16 @@ def main_5(n_clusters = 20000):
 
     print(f"First 5 rows of the data with the cluster IDs:\n {df.head()}")
 
+    start_time = time.time()
+
     silhouette_avg = silhouette_samples(scaled_data, kmeans.labels_)
     silhouette_avg_mean = np.mean(silhouette_avg)
     print("The mean silhouette_score is :", silhouette_avg_mean)
     print("The average silhouette_score is :", silhouette_avg)
+
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Elapsed time for silhouette score calculation: {elapsed_time:.2f} seconds")
 
     if silhouette_avg < 0.2:
         print("The silhouette score is low. Try increasing the number of clusters.")
