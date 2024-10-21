@@ -304,6 +304,8 @@ def main_5(n_clusters = 20000):
     print(f"First 5 rows of the data with the cluster IDs:\n {df.head()}")
 
     silhouette_avg = silhouette_samples(scaled_data, kmeans.labels_)
+    silhouette_avg_mean = np.mean(silhouette_avg)
+    print("The mean silhouette_score is :", silhouette_avg_mean)
     print("The average silhouette_score is :", silhouette_avg)
 
     if silhouette_avg < 0.2:
