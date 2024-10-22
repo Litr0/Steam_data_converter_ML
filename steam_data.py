@@ -337,7 +337,7 @@ def main_5(n_clusters = 20000):
     print(f"First 5 rows of the data after the changes of the timestamp: {df.head()}")
 
     network_df = transform_to_network(df)
-    print(f"First 5 rows of the network data: {network_df.head()}")
+    print(f"First 5 rows of the network data:\n {network_df.head()}")
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
