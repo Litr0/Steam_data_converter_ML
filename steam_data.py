@@ -296,7 +296,7 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    hdb = hdbscan.HDBSCAN(min_cluster_size=50, min_samples=10, metric='euclidean', cluster_selection_method='eom', verbose=True)
+    hdb = hdbscan.HDBSCAN(min_cluster_size=50, min_samples=10, metric='euclidean', cluster_selection_method='eom')
     hdb.fit(scaled_data)
 
     df["cluster_id"] = hdb.labels_
