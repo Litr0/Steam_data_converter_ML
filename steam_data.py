@@ -309,6 +309,9 @@ def main_5(n_clusters = 20000):
 
     score = 0
 
+    print("Number of clusters:", len(set(hdb.labels_)))
+    print("Calculating silhouette score...")
+
     if len(set(hdb.labels_)) > 1:  # Ensure there's more than one cluster
         score = silhouette_score(scaled_data, hdb.labels_)
         print(f"Silhouette score: {score}")
