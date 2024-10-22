@@ -296,7 +296,7 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    hdb = hdbscan.HDBSCAN(min_cluster_size=15, min_samples=5, metric='euclidean', cluster_selection_method='eom')
+    hdb = hdbscan.HDBSCAN(min_cluster_size=50, min_samples=10, metric='euclidean', cluster_selection_method='eom')
     hdb.fit(scaled_data)
 
     df["cluster_id"] = hdb.labels_
@@ -323,7 +323,7 @@ def main_5(n_clusters = 20000):
     elapsed_time = end_time - start_time
     print(f"Elapsed time for silhouette score calculation: {elapsed_time:.2f} seconds")
 
-    if score < 0.4:
+    if score < 0.2:
         print("Silhouette score is too low. Exiting.")
         exit()
 
