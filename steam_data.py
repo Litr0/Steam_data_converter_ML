@@ -323,7 +323,7 @@ def main_5(n_clusters = 20000):
     elapsed_time = end_time - start_time
     print(f"Elapsed time for silhouette score calculation: {elapsed_time:.2f} seconds")
 
-    if score < 0.2:
+    if score < 0.4:
         print("Silhouette score is too low. Exiting.")
         exit()
 
