@@ -21,6 +21,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples
 import time
+import hdbscan
 
 
 
@@ -295,10 +296,10 @@ def main_5(n_clusters = 20000):
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(data)
 
-    kmeans = MiniBatchKMeans(n_clusters=n_clusters, random_state=42, batch_size=100000, verbose=True)
-    kmeans.fit(scaled_data)
+    hdb = hdbscan.HDBSCAN(min_cluster_size=50, min_samples=10, metric='euclidean', cluster_selection_method='eom')
+    hdb.fit(scaled_data)
 
-    df["cluster_id"] = kmeans.labels_
+    df["cluster_id"] = hdb.labels_
 
     df['cluster_id'] = pd.factorize(df['cluster_id'])[0]
 
@@ -306,22 +307,26 @@ def main_5(n_clusters = 20000):
 
     start_time = time.time()
 
-    silhouette_avg = silhouette_samples(scaled_data, kmeans.labels_)
-    silhouette_avg_mean = np.mean(silhouette_avg)
-    print("The mean silhouette_score is :", silhouette_avg_mean)
-    print("The average silhouette_score is :", silhouette_avg)
+    score = 0
+
+    if len(set(hdb.labels_)) > 1:  # Ensure there's more than one cluster
+        score = silhouette_score(scaled_data, hdb.labels_)
+        print(f"Silhouette score: {score}")
+
+    else:
+        print("No valid clusters found.")
 
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Elapsed time for silhouette score calculation: {elapsed_time:.2f} seconds")
 
-    if silhouette_avg_mean < 0.2:
-        print("The silhouette score is low. Try increasing the number of clusters.")
+    if score < 0.2:
+        print("Silhouette score is too low. Exiting.")
         exit()
 
-    df.to_csv('data/steam_reviews_user_cluster.csv', index = False)
+    df.to_csv('data/steam_reviews_user_cluster_scan.csv', index = False)
 
-    print("Clustering complete. User IDs and Cluster IDs saved as 'steam_reviews_user_cluster.csv'.")
+    print("Clustering complete. User IDs and Cluster IDs saved as 'steam_reviews_user_cluster_scan.csv'.")
 
     # Transform the timestamps, so now they start form 0
     df['timestamp'] = df['timestamp'] - df['timestamp'].min()
@@ -333,9 +338,9 @@ def main_5(n_clusters = 20000):
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
-    network_df.to_csv('data/steam_cluster.csv', index=False)
+    network_df.to_csv('data/steam_cluster_scan.csv', index=False)
 
-    print("Data saved to 'data/steam_cluster.csv'")
+    print("Data saved to 'data/steam_cluster_scan.csv'")
 
 
 # Transform only the timestamps
