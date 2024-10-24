@@ -70,7 +70,7 @@ def get_not_updated_steam_reviews(steam_reviews):
 
 def create_review_df(df):
     data = []
-    for _, row in df.iterrows():
+    for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Creating review DataFrame"):
         app_id = row['app_id']
         app_name = row['app_name']
         review_id = row['review_id']
