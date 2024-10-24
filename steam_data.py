@@ -379,7 +379,7 @@ def main_7():
     # Filter out the timestamps between April 1, 2017 and September 30, 2017
     df = df[(df['timestamp'] >= 1491004800) & (df['timestamp'] <= 1506729599)]
 
-    df.to_csv('data/steam_filtered_timestamps.csv', index=False)
+    df.to_csv('data/steam_filtered_timestamps_2017.csv', index=False)
 
 if __name__ == "__main__":
     main()
