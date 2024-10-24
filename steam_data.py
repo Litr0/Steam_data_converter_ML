@@ -365,6 +365,17 @@ def main_6():
 
     print("Data saved to 'data/steam_normalized_timestamps.csv'")
 
+
+# Taking only the timestamps between April 1, 2017 and September 30, 2017
+def main_7():
+    # Load the data
+    df = pd.read_csv('data/steam.csv')
+
+    # Filter out the timestamps between April 1, 2017 and September 30, 2017
+    df = df[(df['timestamp'] >= 1491004800) & (df['timestamp'] <= 1506729599)]
+
+    df.to_csv('data/steam_filtered_timestamps.csv', index=False)
+
 if __name__ == "__main__":
-    main_5()
+    main_7()
 
