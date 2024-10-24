@@ -186,6 +186,11 @@ def main():
     steam_reviews_all.fillna({'review': ''}, inplace=True)
     print(f"Number of all reviews: {steam_reviews_all.shape[0]}")
 
+    # Filter out the reviews between January 1, 2017 and December 31, 2017
+    steam_reviews_all = steam_reviews_all[(steam_reviews_all['timestamp'] >= 1483228800) & (steam_reviews_all['timestamp'] <= 1514764799)]
+
+    print(f"Number of all reviews in 2017: {steam_reviews_all.shape[0]}")
+
     # Get sentiment scores using Roberta model
     sentiment_scores = get_sentiment_scores_roberta(steam_reviews_all)
     print(f"First 5 sentiment scores: {sentiment_scores[:5]}")
@@ -194,12 +199,12 @@ def main():
     steam_reviews_all_with_sentiment = add_sentiment_scores_to_df(steam_reviews_all, sentiment_scores)
 
     # Save the final DataFrame to a CSV file
-    steam_reviews_all_with_sentiment.to_csv('data/steam_reviews_roberta.csv', index=False)
+    steam_reviews_all_with_sentiment.to_csv('data/steam_reviews_roberta_2017.csv', index=False)
 
 
 # Marking with a 1 the reviews that mention Take-Two or OpenIV in a new column called 'review_bombing'
 def main_2():
-    steam_reviews = pd.read_csv('data/steam_reviews_roberta.csv')
+    steam_reviews = pd.read_csv('data/steam_reviews_roberta_2017.csv')
 
     #Possible review Bombing for GTA V between 2017-06-01 and 2017-07-31
     one_game_only_english = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False))
@@ -226,16 +231,16 @@ def main_2():
     # Merge the two DataFrames
     steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, one_game_only_english)
 
-    steam_reviews_all.to_csv('data/steam_reviews_all.csv', index=False)
+    steam_reviews_all.to_csv('data/steam_reviews_all_2017.csv', index=False)
 
     network_df = transform_to_network(steam_reviews_all)
     print(f"First 5 rows of the network data:\n {network_df.head()}")
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
-    network_df.to_csv('data/steam.csv', index=False)
+    network_df.to_csv('data/steam_2017.csv', index=False)
 
-    print("Data saved to 'data/steam.csv'")
+    print("Data saved to 'data/steam_2017.csv'")
 
     # Create a Zip file
     with zipfile.ZipFile('data/steam_data_complete.zip', 'w') as zipf:
@@ -369,13 +374,15 @@ def main_6():
 # Taking only the timestamps between January 1, 2017 and December 31, 2017
 def main_7():
     # Load the data
-    df = pd.read_csv('data/steam.csv')
+    df = pd.read_csv('data/steam_2017.csv')
 
-    # Filter out the timestamps between January 1, 2017 and December 31, 2017
-    df = df[(df['timestamp'] >= 1483228800) & (df['timestamp'] <= 1514764799)]
+    # Filter out the timestamps between April 1, 2017 and September 30, 2017
+    df = df[(df['timestamp'] >= 1491004800) & (df['timestamp'] <= 1506729599)]
 
     df.to_csv('data/steam_filtered_timestamps.csv', index=False)
 
 if __name__ == "__main__":
+    main()
+    main_2()
     main_7()
 
