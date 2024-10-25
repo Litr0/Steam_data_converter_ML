@@ -375,7 +375,6 @@ def main_7():
     df.to_csv('data/steam_filtered_timestamps_2017.csv', index=False)
 
 if __name__ == "__main__":
-    main()
     main_2()
     main_7()
 
