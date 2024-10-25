@@ -242,13 +242,6 @@ def main_2():
 
     print("Data saved to 'data/steam_2017.csv'")
 
-    # Create a Zip file
-    with zipfile.ZipFile('data/steam_data_complete.zip', 'w') as zipf:
-        zipf.write('data/steam_reviews_roberta.csv', arcname='steam_reviews_roberta.csv')
-        zipf.write('data/steam_reviews_all.csv', arcname='steam_reviews_all.csv')
-        zipf.write('data/steam.csv', arcname='steam.csv')
-
-
 # See how many GTA V reviews are in total
 def main_3():
     steam_reviews = pd.read_csv('data/steam_reviews.csv')
