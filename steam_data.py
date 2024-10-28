@@ -78,7 +78,11 @@ def create_review_df(df):
         timestamp = row['timestamp_created']
         timestamp_updated = row['timestamp_updated']
         recommended = row['recommended']
-        author_id = row['author.steamid']
+        try:
+            author_id = row['author.steamid']
+        except:
+            print("No author.steamid column")
+            author_id = row['author_id']
         weighted_vote_score = row['weighted_vote_score']
         data.append([app_id, app_name, review, review_id,timestamp, recommended, author_id, weighted_vote_score])
         # Add the updated review if it exists
@@ -427,6 +431,36 @@ def main_8():
     print(f"Number of reviews in 2017: {all_reviews.shape[0]}")
 
     all_reviews.to_csv('data/steam_firewatch_sonic_reviews_2017.csv', index=False)
+
+def main_9():
+    df = pd.read_csv('data/steam_firewatch_sonic_reviews_2017.csv')
+
+    print(f"First 5 rows of the data:\n {df.head()}")
+
+    new_df = create_review_df(df)
+
+    new_df.fillna({'review': ''}, inplace=True)
+
+    # Replace the author_id with smaller numbers starting from 0
+    new_df['author_id'] = pd.factorize(new_df['author_id'])[0]
+
+    # Replace the app_id with smaller numbers starting from 0
+    new_df['app_id'] = pd.factorize(new_df['app_id'])[0]
+
+    print(f"First 5 rows of the new data:\n {new_df.head()}")
+
+    # Get sentiment scores using Roberta model
+    sentiment_scores = get_sentiment_scores_roberta(new_df)
+    print(f"First 5 sentiment scores: {sentiment_scores[:5]}")
+
+    # Add sentiment scores to DataFrame
+    steam_reviews_all_with_sentiment = add_sentiment_scores_to_df(new_df, sentiment_scores)
+
+    # Save the final DataFrame to a CSV file
+    steam_reviews_all_with_sentiment.to_csv('data/steam_reviews_roberta_2017_new.csv', index=False)
+
+    print("Data saved to 'data/steam_reviews_roberta_2017_new.csv'")
+
 if __name__ == "__main__":
-    main_8()
+    main_9()
 
