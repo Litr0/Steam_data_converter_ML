@@ -410,7 +410,7 @@ def main_8():
     # Filter out non-english reviews
     steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
     # Keep only the columns we need
-    steam_reviews_english = steam_reviews_english[['app_id', 'app_name', 'review', 'review_id','timestamp_created', 'timestamp_updated', 'recommended', 'author.steamid', 'weighted_vote_score']]
+    steam_reviews_english = steam_reviews_english[['app_id', 'app_name', 'review', 'timestamp_created', 'timestamp_updated', 'recommended', 'author.steamid', 'weighted_vote_score']]
     # Rename the column author.steamid to author_id
     steam_reviews_english.rename(columns={'author.steamid': 'author_id'}, inplace=True)
 
