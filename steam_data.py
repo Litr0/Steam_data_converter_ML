@@ -99,6 +99,7 @@ def create_review_df(df):
                                          'timestamp', 'recommended', 'author_id', 
                                          'weighted_vote_score'])
     new_df.sort_values(by=['timestamp'], ascending=[True])
+    print(f"First 10 rows of the new DataFrame:\n {new_df.head(10)}")
     return new_df
 
 def merge_and_order_reviews(df1, df2, parameter = 'timestamp'):
@@ -478,7 +479,7 @@ def main_9():
     df.fillna({'language': 'english'}, inplace=True)
 
     print(f"No. of rows in the data: {df.shape[0]}")
-    print(f"First 5 rows of the data:\n {df.head(10)}")
+    print(f"First 10 rows of the data:\n {df.head(10)}")
 
     new_df = create_review_df(df)
 
