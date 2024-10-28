@@ -481,7 +481,17 @@ def main_9():
     print(f"No. of rows in the data: {df.shape[0]}")
     print(f"First 10 rows of the data:\n {df.head(10)}")
 
-    new_df = create_review_df(df)
+    # Get updated and not updated reviews
+    steam_reviews_updated = get_updated_steam_reviews(df)
+    steam_reviews_not_updated = get_not_updated_steam_reviews(df)
+
+    # Create review DataFrame
+    steam_reviews_updated = create_review_df(steam_reviews_updated)
+    print(f"Number of updated reviews: {steam_reviews_updated.shape[0]}")
+    steam_reviews_not_updated = create_review_df(steam_reviews_not_updated)
+    print(f"Number of not updated reviews: {steam_reviews_not_updated.shape[0]}")
+
+    new_df = merge_and_order_reviews(steam_reviews_updated, steam_reviews_not_updated)
 
     new_df.fillna({'review': ''}, inplace=True)
     new_df.fillna({'weighted_vote_score': 0}, inplace=True)
