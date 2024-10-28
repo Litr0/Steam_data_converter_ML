@@ -478,7 +478,7 @@ def main_9():
     df.fillna({'language': 'english'}, inplace=True)
 
     print(f"No. of rows in the data: {df.shape[0]}")
-    print(f"First 5 rows of the data:\n {df.head()}")
+    print(f"First 5 rows of the data:\n {df.head(10)}")
 
     new_df = create_review_df(df)
 
