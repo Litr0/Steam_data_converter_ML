@@ -76,7 +76,8 @@ def create_review_df(df):
         try:
             review_id = row['review_id']
         except:
-            print("No review_id column")
+            if _ == 0:
+                print("No review_id column")
             review_id = 0
         review = row['review']
         timestamp = row['timestamp_created']
@@ -85,7 +86,8 @@ def create_review_df(df):
         try:
             author_id = row['author.steamid']
         except:
-            print("No author.steamid column")
+            if _ == 0:
+                print("No author.steamid column")
             author_id = row['author_id']
         weighted_vote_score = row['weighted_vote_score']
         data.append([app_id, app_name, review, review_id,timestamp, recommended, author_id, weighted_vote_score])
