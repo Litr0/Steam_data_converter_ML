@@ -213,10 +213,10 @@ def main():
 
 # Marking with a 1 the reviews that mention Take-Two or OpenIV in a new column called 'review_bombing'
 def main_2():
-    steam_reviews = pd.read_csv('data/steam_reviews_roberta_2017.csv')
+    steam_reviews = pd.read_csv('data/steam_reviews_roberta_2017_new.csv')
 
     #Possible review Bombing for GTA V between 2017-06-01 and 2017-07-31
-    one_game_only_english = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False))
+    gta_reviews = steam_reviews[(steam_reviews["app_name"].str.contains("Grand Theft Auto", case = False))
                                       & (steam_reviews["recommended"] == False)
                                       & (steam_reviews["timestamp"] > 1496268000)
                                       & (steam_reviews["timestamp"] < 1501538399)
@@ -228,19 +228,43 @@ def main_2():
                                       |  (steam_reviews["review"].str.contains("modding", case = False))
                                       |  (steam_reviews["review"].str.contains("mod", case = False)))]
     
-    print(f"Number of reviews that mention Take-Two, OpenIV, modding, mod or Rockstar: {one_game_only_english.shape[0]}")
+    firewatch_reviews = steam_reviews[(steam_reviews["app_name"].str.contains("Firewatch", case = False))
+                                        & (steam_reviews["recommended"] == False)
+                                        & (steam_reviews["timestamp"] >= 1504224000) 
+                                        & (steam_reviews["timestamp"] <= 1506815999)
+                                        & ((steam_reviews["review"].str.contains("Pewdiepie", case = False))
+                                        |  (steam_reviews["review"].str.contains("Pew Die Pie", case = False)))]
+
+
+    sonic_mania_reviews = steam_reviews[(steam_reviews["app_name"].str.contains("Sonic Mania", case = False))
+                                        & (steam_reviews["recommended"] == False)
+                                        & (steam_reviews["timestamp"] >= 1501545600)
+                                        & (steam_reviews["timestamp"] <= 1504223999)  
+                                        & ((steam_reviews["review"].str.contains("Denuvo", case = False))
+                                        |  (steam_reviews["review"].str.contains("DRM", case = False))
+                                        |  (steam_reviews["review"].str.contains("Sega", case = False)))]
+    
+    print(f"Number of reviews that mention Take-Two, OpenIV, modding, mod or Rockstar: {gta_reviews.shape[0]}")
+    print(f"Number of reviews that mention Pewdiepie: {firewatch_reviews.shape[0]}")
+    print(f"Number of reviews that mention Denuvo, DRM or Sega: {sonic_mania_reviews.shape[0]}")
 
     # Create a DataFrame excluding the values in one_game_only_english
-    steam_reviews_excluding_bombing = steam_reviews[~steam_reviews.index.isin(one_game_only_english.index)]
+    steam_reviews_excluding_bombing = steam_reviews[(~steam_reviews.index.isin(gta_reviews.index))
+                                                    & (~steam_reviews.index.isin(firewatch_reviews.index))
+                                                    & (~steam_reviews.index.isin(sonic_mania_reviews.index))]
 
     steam_reviews_excluding_bombing = steam_reviews_excluding_bombing.assign(review_bombing=0)
 
-    one_game_only_english = one_game_only_english.assign(review_bombing=1)
+    gta_reviews = gta_reviews.assign(review_bombing=1)
+
+    sonic_mania_reviews = sonic_mania_reviews.assign(review_bombing=1)
+
+    firewatch_reviews = firewatch_reviews.assign(review_bombing=1)
 
     # Merge the two DataFrames
-    steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, one_game_only_english)
+    steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, gta_reviews)
 
-    steam_reviews_all.to_csv('data/steam_reviews_all_2017.csv', index=False)
+    steam_reviews_all.to_csv('data/steam_reviews_all_2017_new.csv', index=False)
 
     network_df = transform_to_network(steam_reviews_all)
     print(f"First 5 rows of the network data:\n {network_df.head()}")
@@ -249,7 +273,7 @@ def main_2():
 
     network_df.to_csv('data/steam_2017.csv', index=False)
 
-    print("Data saved to 'data/steam_2017.csv'")
+    print("Data saved to 'data/steam_2017_new.csv'")
 
 # See how many GTA V reviews are in total
 def main_3():
@@ -441,6 +465,7 @@ def main_8():
 def main_9():
     df = pd.read_csv('data/steam_firewatch_sonic_reviews_2017.csv')
 
+    print(f"No. of rows in the data: {df.shape[0]}")
     print(f"First 5 rows of the data:\n {df.head()}")
 
     new_df = create_review_df(df)
@@ -469,4 +494,5 @@ def main_9():
 
 if __name__ == "__main__":
     main_9()
+    main_2()
 
