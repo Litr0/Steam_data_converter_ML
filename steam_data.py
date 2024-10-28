@@ -159,7 +159,6 @@ def transform_to_network(df):
     network_df = pd.DataFrame(network_data, columns=['user_id', 'item_id', 'timestamp', 'state_label', 'negative', 'neutral', 'positive'])
     return network_df
 
-
 def main():
     # Load data
     steam_reviews = pd.read_csv('data/steam_reviews.csv')
@@ -388,8 +387,46 @@ def main_8():
     print(f"Columns in the Firewatch data: {fw.columns.tolist()}")
     print(f"Columns in the Sonic Mania data: {sm.columns.tolist()}")
 
-    print(f"First 5 timestamps for Firewatch: {fw['created_timestamp'].head().tolist()}")
-  
+    # Add the app_id and app_name columns
+    sm['app_id'] = 584400
+    sm['app_name'] = 'Sonic Mania'
+
+    fw['app_id'] = 383870
+    fw['app_name'] = 'Firewatch'
+
+    # Filter out non-english reviews
+    sm = sm[(sm["language"] == "english")]
+    fw = fw[(fw["language"] == "english")]
+
+    # Merge the two DataFrames
+    all_reviews = pd.concat([sm, fw])
+    # Sort the reviews by timestamp_created and timestamp_updated
+    all_reviews = all_reviews.sort_values(by=['timestamp_created', 'timestamp_updated'], ascending=[True, True])
+
+    print(f"First 5 rows of the merged data:\n {all_reviews.head()}")
+
+    steam_reviews = pd.read_csv('data/steam_reviews.csv')
+
+    # Filter out non-english reviews
+    steam_reviews_english = steam_reviews[(steam_reviews["language"] == "english")]
+    # Keep only the columns we need
+    steam_reviews_english = steam_reviews_english[['app_id', 'app_name', 'review', 'review_id','timestamp_created', 'timestamp_updated', 'recommended', 'author.steamid', 'weighted_vote_score']]
+    # Rename the column author.steamid to author_id
+    steam_reviews_english.rename(columns={'author.steamid': 'author_id'}, inplace=True)
+
+    # Merge the two DataFrames
+    all_reviews = pd.concat([all_reviews, steam_reviews_english])
+    # Sort the reviews by timestamp_created and timestamp_updated
+    all_reviews = all_reviews.sort_values(by=['timestamp_created', 'timestamp_updated'], ascending=[True, True])
+
+    print(f"First 5 rows of the merged data:\n {all_reviews.head()}")
+
+    # Filter the reviews between January 1, 2017 and December 31, 2017
+    all_reviews = all_reviews[(all_reviews['timestamp_created'] >= 1483228800) & (all_reviews['timestamp_created'] <= 1514764799)]
+
+    print(f"Number of reviews in 2017: {all_reviews.shape[0]}")
+
+    all_reviews.to_csv('data/steam_firewatch_sonic_reviews_2017.csv', index=False)
 if __name__ == "__main__":
     main_8()
 
