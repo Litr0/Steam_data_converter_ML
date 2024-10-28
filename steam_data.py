@@ -471,6 +471,7 @@ def main_9():
     new_df = create_review_df(df)
 
     new_df.fillna({'review': ''}, inplace=True)
+    new_df.fillna({'weighted_vote_score': 0}, inplace=True)
 
     # Replace the author_id with smaller numbers starting from 0
     new_df['author_id'] = pd.factorize(new_df['author_id'])[0]
