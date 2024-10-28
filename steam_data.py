@@ -465,6 +465,10 @@ def main_8():
 def main_9():
     df = pd.read_csv('data/steam_firewatch_sonic_reviews_2017.csv')
 
+    # Merge the columns weighted_review_score and weighted_vote_score
+    df['weighted_vote_score'] = df[['weighted_review_score', 'weighted_vote_score']].max(axis=1)
+    df.drop(columns=['weighted_review_score'], inplace=True)
+
     df.fillna({'review': ''}, inplace=True)
     df.fillna({'weighted_vote_score': 0}, inplace=True)
     df.fillna({'language': 'english'}, inplace=True)
