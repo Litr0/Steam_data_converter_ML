@@ -374,7 +374,17 @@ def main_7():
 
     df.to_csv('data/steam_filtered_timestamps_2017.csv', index=False)
 
+
+# Exploration of new data of games and reviews
+def main_8():
+    # Load the data
+    fw = pd.read_csv('data/383870_Firewatch_Reviews.csv')
+    sm = pd.read_csv('data/584400_Sonic_Mania_Reviews.csv')
+
+    print(f"First 5 rows of the Firewatch data:\n {fw.head()}")
+
+    print(f"First 5 rows of the Sonic Mania data:\n {sm.head()}")
+  
 if __name__ == "__main__":
-    main_2()
-    main_7()
+    main_8()
 
