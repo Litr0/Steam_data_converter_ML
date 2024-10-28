@@ -264,6 +264,10 @@ def main_2():
     # Merge the two DataFrames
     steam_reviews_all = merge_and_order_reviews(steam_reviews_excluding_bombing, gta_reviews)
 
+    steam_reviews_all = merge_and_order_reviews(steam_reviews_all, sonic_mania_reviews)
+
+    steam_reviews_all = merge_and_order_reviews(steam_reviews_all, firewatch_reviews)
+
     steam_reviews_all.to_csv('data/steam_reviews_all_2017_new.csv', index=False)
 
     network_df = transform_to_network(steam_reviews_all)
