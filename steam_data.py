@@ -384,6 +384,9 @@ def main_8():
     print(f"First 5 rows of the Firewatch data:\n {fw.head()}")
 
     print(f"First 5 rows of the Sonic Mania data:\n {sm.head()}")
+
+    print(f"Columns in the Firewatch data: {fw.columns.tolist()}")
+    print(f"Columns in the Sonic Mania data: {sm.columns.tolist()}")
   
 if __name__ == "__main__":
     main_8()
