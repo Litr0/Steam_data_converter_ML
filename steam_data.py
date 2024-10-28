@@ -387,6 +387,8 @@ def main_8():
 
     print(f"Columns in the Firewatch data: {fw.columns.tolist()}")
     print(f"Columns in the Sonic Mania data: {sm.columns.tolist()}")
+
+    print(f"First 5 timestamps for Firewatch: {fw['created_timestamp'].head().tolist()}")
   
 if __name__ == "__main__":
     main_8()
