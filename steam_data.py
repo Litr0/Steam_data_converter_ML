@@ -465,6 +465,10 @@ def main_8():
 def main_9():
     df = pd.read_csv('data/steam_firewatch_sonic_reviews_2017.csv')
 
+    df.fillna({'review': ''}, inplace=True)
+    df.fillna({'weighted_vote_score': 0}, inplace=True)
+    df.fillna({'language': 'english'}, inplace=True)
+
     print(f"No. of rows in the data: {df.shape[0]}")
     print(f"First 5 rows of the data:\n {df.head()}")
 
@@ -472,6 +476,7 @@ def main_9():
 
     new_df.fillna({'review': ''}, inplace=True)
     new_df.fillna({'weighted_vote_score': 0}, inplace=True)
+    new_df.fillna({'language': 'english'}, inplace=True)
 
     # Replace the author_id with smaller numbers starting from 0
     new_df['author_id'] = pd.factorize(new_df['author_id'])[0]
