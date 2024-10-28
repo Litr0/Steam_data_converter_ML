@@ -73,7 +73,11 @@ def create_review_df(df):
     for _, row in tqdm(df.iterrows(), total=df.shape[0], desc="Creating review DataFrame"):
         app_id = row['app_id']
         app_name = row['app_name']
-        review_id = row['review_id']
+        try:
+            review_id = row['review_id']
+        except:
+            print("No review_id column")
+            review_id = 0
         review = row['review']
         timestamp = row['timestamp_created']
         timestamp_updated = row['timestamp_updated']
