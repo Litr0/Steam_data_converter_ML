@@ -275,7 +275,7 @@ def main_2():
 
     network_df.rename(columns={'negative': 'comma_separated_list_of_features', 'neutral': '', 'positive': ''}, inplace=True)
 
-    network_df.to_csv('data/steam_2017.csv', index=False)
+    network_df.to_csv('data/steam_2017_new.csv', index=False)
 
     print("Data saved to 'data/steam_2017_new.csv'")
 
@@ -517,6 +517,5 @@ def main_9():
     print("Data saved to 'data/steam_reviews_roberta_2017_new.csv'")
 
 if __name__ == "__main__":
-    main_9()
     main_2()
 
