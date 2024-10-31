@@ -323,6 +323,15 @@ def main_4():
     for _, row in reviews_per_game.head(15).iterrows():
         print(f"{row['app_name']}, {row['app_id']}, {row['number_of_reviews']}")
 
+    #Print the name and id of GTA V, Firewatch and Sonic Mania
+    gta_v = steam_reviews[steam_reviews['app_name'].str.contains("Grand Theft Auto", case = False)].head(1)
+    firewatch = steam_reviews[steam_reviews['app_name'].str.contains("Firewatch", case = False)].head(1)
+    sonic_mania = steam_reviews[steam_reviews['app_name'].str.contains("Sonic Mania", case = False)].head(1)
+
+    print(f"GTA V: {gta_v['app_name'].values[0]}, {gta_v['app_id'].values[0]}")
+    print(f"Firewatch: {firewatch['app_name'].values[0]}, {firewatch['app_id'].values[0]}")
+    print(f"Sonic Mania: {sonic_mania['app_name'].values[0]}, {sonic_mania['app_id'].values[0]}")
+
 
 #Clustering the users to reduce the number of users
 def main_5(n_clusters = 20000):
