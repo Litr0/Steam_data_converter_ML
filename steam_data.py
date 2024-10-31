@@ -313,7 +313,7 @@ def main_4():
     print(f"Number of reviews per user:\n {reviews_per_user}")
 
     # Get the number of reviews per game
-    reviews_per_game = steam_reviews['app_id'].value_counts()
+    reviews_per_game = steam_reviews['app_name'].value_counts()
     print(f"Number of reviews per game:\n {reviews_per_game}")
 
 
