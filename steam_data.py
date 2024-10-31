@@ -308,9 +308,13 @@ def main_4():
     unique_games = steam_reviews['app_id'].nunique()
     print(f"Number of unique games: {unique_games}")
 
-    # Get the number of unique reviews
-    unique_reviews = steam_reviews['review_id'].nunique()
-    print(f"Number of unique reviews: {unique_reviews}")
+    # Get the number of reviews per user
+    reviews_per_user = steam_reviews['author_id'].value_counts()
+    print(f"Number of reviews per user:\n {reviews_per_user}")
+
+    # Get the number of reviews per game
+    reviews_per_game = steam_reviews['app_id'].value_counts()
+    print(f"Number of reviews per game:\n {reviews_per_game}")
 
 
 #Clustering the users to reduce the number of users
@@ -514,5 +518,5 @@ def main_9():
     print("Data saved to 'data/steam_reviews_roberta_2017_new.csv'")
 
 if __name__ == "__main__":
-    main_2()
+    main_4()
 
