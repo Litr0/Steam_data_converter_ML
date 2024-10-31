@@ -313,8 +313,15 @@ def main_4():
     print(f"Number of reviews per user:\n {reviews_per_user}")
 
     # Get the number of reviews per game
-    reviews_per_game = steam_reviews['app_name'].value_counts()
-    print(f"Number of reviews per game:\n {reviews_per_game}")
+    reviews_per_game = steam_reviews['app_name'].value_counts().reset_index()
+    reviews_per_game.columns = ['app_name', 'number_of_reviews']
+
+    app_ids = steam_reviews[['app_name', 'app_id']].drop_duplicates()
+
+    reviews_per_game = reviews_per_game.merge(app_ids, on='app_name')
+
+    for _, row in reviews_per_game.iterrows():
+        print(f"{row['app_name']}, {row['app_id']}, {row['number_of_reviews']}")
 
 
 #Clustering the users to reduce the number of users
