@@ -320,7 +320,7 @@ def main_4():
 
     reviews_per_game = reviews_per_game.merge(app_ids, on='app_name')
 
-    for _, row in reviews_per_game.iterrows():
+    for _, row in reviews_per_game.head(15).iterrows():
         print(f"{row['app_name']}, {row['app_id']}, {row['number_of_reviews']}")
 
 
