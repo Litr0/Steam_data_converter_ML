@@ -561,6 +561,10 @@ def main_10():
     plt.ylabel('Percentage of Not Recommended Reviews')
     plt.title('Biweekly Percentage of Not Recommended Reviews for GTA V in 2017')
     plt.grid(True)
+    # Set the x-ticks to show the month names
+    plt.xticks(biweekly_percentage_not_recommended.index, 
+               [pd.to_datetime(ts, unit='s').strftime('%b') for ts in biweekly_percentage_not_recommended.index], 
+               rotation=45)
     # Save the plot as an image
     plt.savefig('biweekly_percentage_not_recommended_gta_v_2017.png')
 
