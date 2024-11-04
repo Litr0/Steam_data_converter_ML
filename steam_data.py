@@ -554,15 +554,30 @@ def main_10():
     biweekly_reviews = gta_v.groupby('biweekly').size()
     biweekly_not_recommended = gta_v[gta_v['recommended'] == False].groupby('biweekly').size()
     biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews)
+    biweekly_mean_neg = gta_v.groupby('biweekly')['neg'].mean()
+    biweekly_mean_neu = gta_v.groupby('biweekly')['neu'].mean()
+    biweekly_mean_pos = gta_v.groupby('biweekly')['pos'].mean()
 
-    plt.figure(figsize=(18, 6))
-    plt.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-')
-    plt.xlabel('Biweekly Period')
-    plt.ylabel('Percentage of Not Recommended Reviews')
-    plt.title('Biweekly Percentage of Not Recommended Reviews for GTA V in 2017')
-    plt.grid(True)
-    # Save the plot as an image
-    plt.savefig('biweekly_percentage_not_recommended_gta_v_2017.png')
+    fig, ax1 = plt.subplots(figsize=(18, 6))
+
+    ax1.set_xlabel('Biweekly Period')
+    ax1.set_ylabel('Mean Sentiment Scores')
+    ax1.plot(biweekly_mean_neg.index, biweekly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
+    ax1.plot(biweekly_mean_neu.index, biweekly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
+    ax1.plot(biweekly_mean_pos.index, biweekly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
+    ax1.tick_params(axis='y')
+    ax1.legend(loc='upper left')
+    ax1.grid(True)
+
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Percentage of Not Recommended Reviews')
+    ax2.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
+    ax2.tick_params(axis='y')
+    ax2.legend(loc='upper right')
+
+    plt.title('Biweekly Mean Sentiment Scores and Percentage of Not Recommended Reviews for GTA V in 2017')
+    fig.tight_layout()
+    plt.savefig('biweekly_mean_sentiment_scores_and_percentage_not_recommended_gta_v_2017.png')
 
 
 if __name__ == "__main__":
