@@ -553,7 +553,7 @@ def main_10():
     gta_v['biweekly'] = (gta_v['timestamp'] // (one_week_unix * 2)) * (one_week_unix * 2)
     biweekly_reviews = gta_v.groupby('biweekly').size()
     biweekly_not_recommended = gta_v[gta_v['recommended'] == False].groupby('biweekly').size()
-    biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews) * 100
+    biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews)
 
     plt.figure(figsize=(18, 6))
     plt.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-')
