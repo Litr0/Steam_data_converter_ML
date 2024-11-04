@@ -546,6 +546,10 @@ def main_10():
 
     print(f"Number of reviews of every game:\n {seven_games['app_name'].value_counts()}")
 
+    one_week_unix = 604800
+
+    print(df.head())
+    
 if __name__ == "__main__":
     main_10()
 
