@@ -537,10 +537,14 @@ def main_9():
 def main_10():
     df = pd.read_csv('data/steam_reviews_all_2017_new.csv')
 
-    # Print the games with the most reviews
-    reviews_per_game = df['app_name'].value_counts().reset_index()
-    reviews_per_game.columns = ['app_name', 'number_of_reviews']
-    print(f"First 5 rows of the reviews per game data:\n {reviews_per_game.head()}")
+    # Plot the number of the reviews of 7 games
+    games = ['Grand Theft Auto V', 'Firewatch', 'Sonic Mania', 
+             'PLAYERUNKNOWN\'S BATTLEGROUNDS', 'Doki Doki Literature Club', 
+             'Tom Clancy\'s Rainbow Six Siege', 'Rocket League']
+    
+    seven_games = df[df['app_name'].isin(games)]
+
+    print(f"Number of reviews of every game:\n {seven_games['app_name'].value_counts()}")
 
 if __name__ == "__main__":
     main_10()
