@@ -561,7 +561,6 @@ def main_10():
     plt.ylabel('Percentage of Not Recommended Reviews')
     plt.title('Weekly Percentage of Not Recommended Reviews for GTA V in 2017')
     plt.grid(True)
-    plt.show()
     # Save the plot as an image
     plt.savefig('weekly_percentage_not_recommended_gta_v_2017.png')
 
