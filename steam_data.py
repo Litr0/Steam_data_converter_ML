@@ -555,16 +555,12 @@ def main_10():
     biweekly_not_recommended = gta_v[gta_v['recommended'] == False].groupby('biweekly').size()
     biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews) * 100
 
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(18, 6))
     plt.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-')
     plt.xlabel('Biweekly Period')
     plt.ylabel('Percentage of Not Recommended Reviews')
     plt.title('Biweekly Percentage of Not Recommended Reviews for GTA V in 2017')
     plt.grid(True)
-    # Set the x-ticks to show the month names
-    plt.xticks(biweekly_percentage_not_recommended.index, 
-               [pd.to_datetime(ts, unit='s').strftime('%b') for ts in biweekly_percentage_not_recommended.index], 
-               rotation=90)
     # Save the plot as an image
     plt.savefig('biweekly_percentage_not_recommended_gta_v_2017.png')
 
