@@ -533,6 +533,15 @@ def main_9():
 
     print("Data saved to 'data/steam_reviews_roberta_2017_new.csv'")
 
+# Plotting graphs to caracterize the data
+def main_10():
+    df = pd.read_csv('data/steam_reviews_all_2017_new.csv')
+
+    # Print the games with the most reviews
+    reviews_per_game = df['app_name'].value_counts().reset_index()
+    reviews_per_game.columns = ['app_name', 'number_of_reviews']
+    print(f"First 5 rows of the reviews per game data:\n {reviews_per_game.head()}")
+
 if __name__ == "__main__":
-    main_4()
+    main_10()
 
