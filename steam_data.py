@@ -548,8 +548,24 @@ def main_10():
 
     one_week_unix = 604800
 
-    print(df.head())
-    
+    # Evolution of percentage of not recommended reviews for GTA V in 2017 through every week
+    gta_v = df[(df['app_name'] == 'Grand Theft Auto V')]
+    gta_v['week'] = (gta_v['timestamp'] // one_week_unix) * one_week_unix
+    weekly_reviews = gta_v.groupby('week').size()
+    weekly_not_recommended = gta_v[gta_v['recommended'] == False].groupby('week').size()
+    weekly_percentage_not_recommended = (weekly_not_recommended / weekly_reviews) * 100
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(weekly_percentage_not_recommended.index, weekly_percentage_not_recommended, marker='o', linestyle='-')
+    plt.xlabel('Week')
+    plt.ylabel('Percentage of Not Recommended Reviews')
+    plt.title('Weekly Percentage of Not Recommended Reviews for GTA V in 2017')
+    plt.grid(True)
+    plt.show()
+    # Save the plot as an image
+    plt.savefig('weekly_percentage_not_recommended_gta_v_2017.png')
+
+
 if __name__ == "__main__":
     main_10()
 
