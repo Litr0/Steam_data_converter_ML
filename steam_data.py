@@ -548,36 +548,36 @@ def main_10():
 
     one_week_unix = 604800
 
-    # Evolution of percentage of not recommended reviews for GTA V in 2017 through every week
-    gta_v = df[(df['app_name'] == 'Grand Theft Auto V')]
-    gta_v['biweekly'] = (gta_v['timestamp'] // (one_week_unix * 2)) * (one_week_unix * 2)
-    biweekly_reviews = gta_v.groupby('biweekly').size()
-    biweekly_not_recommended = gta_v[gta_v['recommended'] == False].groupby('biweekly').size()
-    biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews)
-    biweekly_mean_neg = gta_v.groupby('biweekly')['neg'].mean()
-    biweekly_mean_neu = gta_v.groupby('biweekly')['neu'].mean()
-    biweekly_mean_pos = gta_v.groupby('biweekly')['pos'].mean()
+    for game in games:
+        game_reviews = df[df['app_name'] == game]
+        game_reviews['biweekly'] = (game_reviews['timestamp'] // (one_week_unix * 2)) * (one_week_unix * 2)
+        biweekly_reviews = game_reviews.groupby('biweekly').size()
+        biweekly_not_recommended = game_reviews[game_reviews['recommended'] == False].groupby('biweekly').size()
+        biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews)
+        biweekly_mean_neg = game_reviews.groupby('biweekly')['neg'].mean()
+        biweekly_mean_neu = game_reviews.groupby('biweekly')['neu'].mean()
+        biweekly_mean_pos = game_reviews.groupby('biweekly')['pos'].mean()
 
-    fig, ax1 = plt.subplots(figsize=(18, 6))
+        fig, ax1 = plt.subplots(figsize=(18, 6))
 
-    ax1.set_xlabel('Biweekly Period')
-    ax1.set_ylabel('Mean Sentiment Scores')
-    ax1.plot(biweekly_mean_neg.index, biweekly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
-    ax1.plot(biweekly_mean_neu.index, biweekly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
-    ax1.plot(biweekly_mean_pos.index, biweekly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
-    ax1.tick_params(axis='y')
-    ax1.legend(loc='upper left')
-    ax1.grid(True)
+        ax1.set_xlabel('Biweekly Period')
+        ax1.set_ylabel('Mean Sentiment Scores')
+        ax1.plot(biweekly_mean_neg.index, biweekly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
+        ax1.plot(biweekly_mean_neu.index, biweekly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
+        ax1.plot(biweekly_mean_pos.index, biweekly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
+        ax1.tick_params(axis='y')
+        ax1.legend(loc='upper left')
+        ax1.grid(True)
 
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Percentage of Not Recommended Reviews')
-    ax2.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
-    ax2.tick_params(axis='y')
-    ax2.legend(loc='upper right')
+        ax2 = ax1.twinx()
+        ax2.set_ylabel('Percentage of Not Recommended Reviews')
+        ax2.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
+        ax2.tick_params(axis='y')
+        ax2.legend(loc='upper right')
 
-    plt.title('Biweekly Mean Sentiment Scores and Percentage of Not Recommended Reviews for GTA V in 2017')
-    fig.tight_layout()
-    plt.savefig('biweekly_mean_sentiment_scores_and_percentage_not_recommended_gta_v_2017.png')
+        plt.title(f'Biweekly Mean Sentiment Scores and Percentage of Not Recommended Reviews for {game} in 2017')
+        fig.tight_layout()
+        plt.savefig(f'biweekly_mean_sentiment_scores_and_percentage_not_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
 
 
 if __name__ == "__main__":
