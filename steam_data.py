@@ -550,34 +550,34 @@ def main_10():
 
     for game in games:
         game_reviews = df[df['app_name'] == game]
-        game_reviews['biweekly'] = (game_reviews['timestamp'] // (one_week_unix * 2)) * (one_week_unix * 2)
-        biweekly_reviews = game_reviews.groupby('biweekly').size()
-        biweekly_not_recommended = game_reviews[game_reviews['recommended'] == False].groupby('biweekly').size()
-        biweekly_percentage_not_recommended = (biweekly_not_recommended / biweekly_reviews)
-        biweekly_mean_neg = game_reviews.groupby('biweekly')['neg'].mean()
-        biweekly_mean_neu = game_reviews.groupby('biweekly')['neu'].mean()
-        biweekly_mean_pos = game_reviews.groupby('biweekly')['pos'].mean()
+        game_reviews['monthly'] = (game_reviews['timestamp'] // (one_week_unix * 4)) * (one_week_unix * 4)
+        monthly_reviews = game_reviews.groupby('monthly').size()
+        monthly_not_recommended = game_reviews[game_reviews['recommended'] == False].groupby('monthly').size()
+        monthly_percentage_not_recommended = (monthly_not_recommended / monthly_reviews)
+        monthly_mean_neg = game_reviews.groupby('monthly')['neg'].mean()
+        monthly_mean_neu = game_reviews.groupby('monthly')['neu'].mean()
+        monthly_mean_pos = game_reviews.groupby('monthly')['pos'].mean()
 
         fig, ax1 = plt.subplots(figsize=(18, 6))
 
-        ax1.set_xlabel('Biweekly Period')
+        ax1.set_xlabel('Monthly Period')
         ax1.set_ylabel('Mean Sentiment Scores')
-        ax1.plot(biweekly_mean_neg.index, biweekly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
-        ax1.plot(biweekly_mean_neu.index, biweekly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
-        ax1.plot(biweekly_mean_pos.index, biweekly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
+        ax1.plot(monthly_mean_neg.index, monthly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
+        ax1.plot(monthly_mean_neu.index, monthly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
+        ax1.plot(monthly_mean_pos.index, monthly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
         ax1.tick_params(axis='y')
         ax1.legend(loc='upper left')
         ax1.grid(True)
 
         ax2 = ax1.twinx()
         ax2.set_ylabel('Percentage of Not Recommended Reviews')
-        ax2.plot(biweekly_percentage_not_recommended.index, biweekly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
+        ax2.plot(monthly_percentage_not_recommended.index, monthly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
         ax2.tick_params(axis='y')
         ax2.legend(loc='upper right')
 
-        plt.title(f'Biweekly Mean Sentiment Scores and Percentage of Not Recommended Reviews for {game} in 2017')
+        plt.title(f'Monthly Mean Sentiment Scores and Percentage of Not Recommended Reviews for {game} in 2017')
         fig.tight_layout()
-        plt.savefig(f'biweekly_mean_sentiment_scores_and_percentage_not_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
+        plt.savefig(f'monthly_mean_sentiment_scores_and_percentage_not_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
 
 
 if __name__ == "__main__":
