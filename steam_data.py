@@ -552,8 +552,8 @@ def main_10():
         game_reviews = df[df['app_name'] == game]
         game_reviews['monthly'] = (game_reviews['timestamp'] // (one_week_unix * 4)) * (one_week_unix * 4)
         monthly_reviews = game_reviews.groupby('monthly').size()
-        monthly_not_recommended = game_reviews[game_reviews['recommended'] == False].groupby('monthly').size()
-        monthly_percentage_not_recommended = (monthly_not_recommended / monthly_reviews)
+        monthly_recommended = game_reviews[game_reviews['recommended'] == True].groupby('monthly').size()
+        monthly_percentage_recommended = (monthly_recommended / monthly_reviews)
         monthly_mean_neg = game_reviews.groupby('monthly')['neg'].mean()
 
         fig, ax1 = plt.subplots(figsize=(18, 6))
@@ -567,13 +567,13 @@ def main_10():
 
         ax2 = ax1.twinx()
         ax2.set_ylabel('Percentage of Not Recommended Reviews')
-        ax2.plot(monthly_percentage_not_recommended.index, monthly_percentage_not_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
+        ax2.plot(monthly_percentage_recommended.index, monthly_percentage_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
         ax2.tick_params(axis='y')
         ax2.legend(loc='upper right')
 
-        plt.title(f'Monthly Mean Sentiment Scores and Percentage of Not Recommended Reviews for {game} in 2017')
+        plt.title(f'Monthly Mean Sentiment Scores and Percentage of Recommended Reviews for {game} in 2017')
         fig.tight_layout()
-        plt.savefig(f'monthly_mean_sentiment_scores_and_percentage_not_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
+        plt.savefig(f'monthly_mean_sentiment_scores_and_percentage_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
 
 
 if __name__ == "__main__":
