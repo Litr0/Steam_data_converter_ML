@@ -537,6 +537,9 @@ def main_9():
 def main_10():
     df = pd.read_csv('data/steam_reviews_all_2017_new.csv')
 
+    # Only keep the reviews from 2017
+    df = df[(df['timestamp'] >= 1483228800) & (df['timestamp'] <= 1514764799)]
+
     # Plot the number of the reviews of 7 games
     games = ['Grand Theft Auto V', 'Firewatch', 'Sonic Mania', 
              'PLAYERUNKNOWN\'S BATTLEGROUNDS', 'Doki Doki Literature Club', 
