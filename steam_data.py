@@ -567,7 +567,7 @@ def main_10():
 
         ax2 = ax1.twinx()
         ax2.set_ylabel('Percentage of Not Recommended Reviews')
-        ax2.plot(monthly_percentage_recommended.index, monthly_percentage_recommended, marker='o', linestyle='-', label='Percentage of Not Recommended Reviews', color='tab:orange')
+        ax2.plot(monthly_percentage_recommended.index, monthly_percentage_recommended, marker='o', linestyle='-', label='Percentage of Recommended Reviews', color='tab:blue')
         ax2.tick_params(axis='y')
         ax2.legend(loc='upper right')
 
