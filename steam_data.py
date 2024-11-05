@@ -568,6 +568,15 @@ def main_10():
         ax1.legend(loc='upper left')
         ax1.grid(True)
 
+        if game == 'Grand Theft Auto V':
+            ax1.axvspan(1496268000, 1501538399, color='red', alpha=0.3)
+
+        if game == 'Firewatch':
+            ax1.axvspan(1504224000, 1506815999, color='red', alpha=0.3)
+        
+        if game == 'Sonic Mania':
+            ax1.axvspan(1501545600, 1504223999, color='red', alpha=0.3)
+
         ax2 = ax1.twinx()
         ax2.set_ylabel('Percentage of Not Recommended Reviews')
         ax2.plot(biweekly_percentage_recommended.index, biweekly_percentage_recommended, marker='o', linestyle='-', label='Percentage of Recommended Reviews', color='tab:blue')
