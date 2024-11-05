@@ -541,9 +541,7 @@ def main_10():
     df = df[(df['timestamp'] >= 1483228800) & (df['timestamp'] <= 1514764799)]
 
     # Plot the number of the reviews of 7 games
-    games = ['Grand Theft Auto V', 'Firewatch', 'Sonic Mania', 
-             'PLAYERUNKNOWN\'S BATTLEGROUNDS', 'Doki Doki Literature Club', 
-             'Tom Clancy\'s Rainbow Six Siege', 'Rocket League']
+    games = ['Grand Theft Auto V', 'Firewatch', 'Sonic Mania']
     
     seven_games = df[df['app_name'].isin(games)]
 
