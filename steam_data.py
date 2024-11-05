@@ -555,16 +555,12 @@ def main_10():
         monthly_not_recommended = game_reviews[game_reviews['recommended'] == False].groupby('monthly').size()
         monthly_percentage_not_recommended = (monthly_not_recommended / monthly_reviews)
         monthly_mean_neg = game_reviews.groupby('monthly')['neg'].mean()
-        monthly_mean_neu = game_reviews.groupby('monthly')['neu'].mean()
-        monthly_mean_pos = game_reviews.groupby('monthly')['pos'].mean()
 
         fig, ax1 = plt.subplots(figsize=(18, 6))
 
         ax1.set_xlabel('Monthly Period')
         ax1.set_ylabel('Mean Sentiment Scores')
         ax1.plot(monthly_mean_neg.index, monthly_mean_neg, marker='o', linestyle='-', label='Mean Negative Score', color='tab:red')
-        ax1.plot(monthly_mean_neu.index, monthly_mean_neu, marker='o', linestyle='-', label='Mean Neutral Score', color='tab:blue')
-        ax1.plot(monthly_mean_pos.index, monthly_mean_pos, marker='o', linestyle='-', label='Mean Positive Score', color='tab:green')
         ax1.tick_params(axis='y')
         ax1.legend(loc='upper left')
         ax1.grid(True)
