@@ -21,7 +21,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples
 import time
-import hdbscan
+import hdbscan  # type: ignore
 
 
 
