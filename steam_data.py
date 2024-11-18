@@ -616,5 +616,5 @@ def main_11():
     print(f"Number of unique games with state label 1: {unique_state_label_1_games}")
     
 if __name__ == "__main__":
-    main_10()
+    main_11()
 
