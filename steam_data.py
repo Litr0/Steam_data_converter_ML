@@ -587,7 +587,34 @@ def main_10():
         fig.tight_layout()
         plt.savefig(f'biweekly_mean_sentiment_scores_and_percentage_recommended_{game.replace(" ", "_").replace("\'", "")}_2017.png')
 
+def main_11():
+    df = pd.read_csv('data/steam_2017_new.csv')
 
+    # Print the size of the dataset
+    print(f"Number of rows in the dataset: {df.shape[0]}")
+
+    # Get the number of unique users
+    unique_users = df['user_id'].nunique()
+    print(f"Number of unique users: {unique_users}")
+
+    # Get the number of unique games
+    unique_games = df['item_id'].nunique()
+    print(f"Number of unique games: {unique_games}")
+
+    # Get the number of user with state_label 1
+    state_label_1 = df[df['state_label'] == 1]
+    unique_state_label_1 = state_label_1['user_id'].nunique()
+    print(f"Number of unique users with state label 1: {unique_state_label_1}")
+
+    # Get the number of user with state_label 0 excluding if the user has state_label 1
+    state_label_0 = df[(df['state_label'] == 0) & (~df['user_id'].isin(state_label_1['user_id']))]
+    unique_state_label_0 = state_label_0['user_id'].nunique()
+    print(f"Number of unique users with state label 0: {unique_state_label_0}")
+
+    # Get the number of games with state_label 1
+    unique_state_label_1_games = state_label_1['item_id'].nunique()
+    print(f"Number of unique games with state label 1: {unique_state_label_1_games}")
+    
 if __name__ == "__main__":
     main_10()
 
