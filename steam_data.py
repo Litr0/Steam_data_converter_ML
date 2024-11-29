@@ -666,5 +666,6 @@ def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     df.to_csv('data/steam_2017_new_modified.csv', index=False)
     
 if __name__ == "__main__":
+    main_12()
     main_13()
 
