@@ -654,18 +654,16 @@ def main_12(file_name = '/home/bigdama/projects/tgn/results/tgn-attn'):
 def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     df = pd.read_csv(path)
 
-    # Print the number of items
-    num_items = df['item_id'].nunique()
-    print(f"Number of items: {num_items}")
+    # Add two and a half months to the timestamp of the reviews with state_label 1 and item_id 14 (GTA V)
+    df.loc[(df['state_label'] == 1) & (df['item_id'] == 14), 'timestamp'] += 5443200
 
-    # Print the number of each state label
-    state_label_counts = df['state_label'].value_counts()
-    print(f"Number of each state label:\n{state_label_counts}")
+    # Substract one and a half months to the timestamp of the reviews with state_label 1 and item_id 15 (Firewatch)
+    df.loc[(df['state_label'] == 1) & (df['item_id'] == 15), 'timestamp'] -= 3888000
 
-    # Print the number of state labels = 1 with its associated item
-    state_label_1_items = df[df['state_label'] == 1]['item_id'].value_counts()
-    print(f"Number of state labels = 1 with its associated item:\n{state_label_1_items}")
-    return
+    # Sort the reviews by timestamp
+    df = df.sort_values(by=['timestamp'], ascending=[True])
+
+    df.to_csv('data/steam_2017_new_modified.csv', index=False)
     
 if __name__ == "__main__":
     main_13()
