@@ -661,6 +661,10 @@ def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     # Print the number of each state label
     state_label_counts = df['state_label'].value_counts()
     print(f"Number of each state label:\n{state_label_counts}")
+
+    # Print the number of state labels = 1 with its associated item
+    state_label_1_items = df[df['state_label'] == 1]['item_id'].value_counts()
+    print(f"Number of state labels = 1 with its associated item:\n{state_label_1_items}")
     return
     
 if __name__ == "__main__":
