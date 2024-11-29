@@ -657,9 +657,32 @@ def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     # Add two and a half months to the timestamp of the reviews with state_label 1 and item_id 14 (GTA V)
     df.loc[(df['state_label'] == 1) & (df['item_id'] == 14), 'timestamp'] += 5443200
 
+    # Get how many reviews have been modified
+    modified_reviews = df[(df['state_label'] == 1) & (df['item_id'] == 14)]
+    print(f"Number of modified reviews: {modified_reviews.shape[0]}")
+
+    # Get the range of the timestamps of the modified reviews
+    print(f"Range of the timestamps of the modified reviews: {modified_reviews['timestamp'].min()} - {modified_reviews['timestamp'].max()}")
+
+    # Move two and a half months the same amount of modified reviews from the reviews with state_label 0 and item_id 14 (GTA V) in the same range of timestamps
+    df.loc[(df['state_label'] == 0) & (df['item_id'] == 14) & (df['timestamp'] >= modified_reviews['timestamp'].min()) & 
+           (df['timestamp'] <= modified_reviews['timestamp'].max()), 'timestamp'] -= 5443200
+
+
     # Substract one and a half months to the timestamp of the reviews with state_label 1 and item_id 15 (Firewatch)
     df.loc[(df['state_label'] == 1) & (df['item_id'] == 15), 'timestamp'] -= 3888000
 
+    # Get how many reviews have been modified
+    modified_reviews = df[(df['state_label'] == 1) & (df['item_id'] == 15)]
+    print(f"Number of modified reviews: {modified_reviews.shape[0]}")
+
+    # Get the range of the timestamps of the modified reviews
+    print(f"Range of the timestamps of the modified reviews: {modified_reviews['timestamp'].min()} - {modified_reviews['timestamp'].max()}")
+
+    # Move two and a half months the same amount of modified reviews from the reviews with state_label 0 and item_id 15 (Firewatch) in the same range of timestamps
+    df.loc[(df['state_label'] == 0) & (df['item_id'] == 15) & (df['timestamp'] >= modified_reviews['timestamp'].min()) &
+              (df['timestamp'] <= modified_reviews['timestamp'].max()), 'timestamp'] += 3888000
+    
     # Sort the reviews by timestamp
     df = df.sort_values(by=['timestamp'], ascending=[True])
 
