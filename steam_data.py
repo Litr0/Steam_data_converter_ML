@@ -694,6 +694,6 @@ def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     print("Data saved to '/home/bigdama/projects/bidyn/data/steam_2017_new_modified.csv'")
     
 if __name__ == "__main__":
-    main_12()
+    # main_12()
     main_13()
 
