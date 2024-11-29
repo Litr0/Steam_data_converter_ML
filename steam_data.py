@@ -664,6 +664,8 @@ def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
     df = df.sort_values(by=['timestamp'], ascending=[True])
 
     df.to_csv('data/steam_2017_new_modified.csv', index=False)
+    df.to_csv('/home/bigdama/projects/tgn/data/steam_2017_new_modified.csv', index=False)
+    df.to_csv('/home/bigdama/projects/bidyn/data/steam_2017_new_modified.csv', index=False)
     
 if __name__ == "__main__":
     main_12()
