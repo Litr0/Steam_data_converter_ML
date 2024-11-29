@@ -22,6 +22,8 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_samples
 import time
 import hdbscan  # type: ignore
+#Results analysis
+import pickle
 
 
 
@@ -614,7 +616,41 @@ def main_11():
     # Get the number of games with state_label 1
     unique_state_label_1_games = state_label_1['item_id'].nunique()
     print(f"Number of unique games with state label 1: {unique_state_label_1_games}")
+
+def main_12(file_name = '/home/bigdama/projects/tgn/results/tgn-attn'):
+
+    files_tgn = [file_name + '.pkl', file_name + '_1.pkl', file_name + '_2.pkl', file_name +
+                  '_3.pkl', file_name + '_4.pkl', file_name + '_5.pkl', file_name + '_6.pkl', 
+                  file_name + '_7.pkl', file_name + '_8.pkl', file_name + '_9.pkl']
+    
+    results = []
+    for file in files_tgn:
+        with open(file, 'rb') as f:
+            results.append(pickle.load(f))
+
+    keys = results[0].keys()
+    results
+
+    # Initialize a dictionary to store the means
+    means = {key: [] for key in keys}
+
+    # Loop through each result and calculate the mean for each key
+    for result in results:
+        for key in keys:
+            means[key].append(np.mean(result[key]))
+
+    # Calculate the overall mean for each key
+    overall_means = {key: np.mean(means[key]) for key in keys}
+
+    # Calculate the overall mean plus/minus variation for each key
+    overall_means_variation = {key: (np.mean(means[key]), np.std(means[key])) for key in keys}
+
+    # Transform the val_aps and test_ap into percentage format
+    overall_means_variation['val_aps'] = (overall_means_variation['val_aps'][0] * 100, overall_means_variation['val_aps'][1] * 100)
+    overall_means_variation['test_ap'] = (overall_means_variation['test_ap'][0] * 100, overall_means_variation['test_ap'][1] * 100)
+
+    print(overall_means_variation)
     
 if __name__ == "__main__":
-    main_11()
+    main_12()
 
