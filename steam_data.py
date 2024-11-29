@@ -650,7 +650,19 @@ def main_12(file_name = '/home/bigdama/projects/tgn/results/tgn-attn'):
     overall_means_variation['test_ap'] = (overall_means_variation['test_ap'][0] * 100, overall_means_variation['test_ap'][1] * 100)
 
     print(overall_means_variation)
+
+def main_13(path = '/home/bigdama/projects/tgn/data/steam_2017_new.csv'):
+    df = pd.read_csv(path)
+
+    # Print the number of items
+    num_items = df['item_id'].nunique()
+    print(f"Number of items: {num_items}")
+
+    # Print the number of each state label
+    state_label_counts = df['state_label'].value_counts()
+    print(f"Number of each state label:\n{state_label_counts}")
+    return
     
 if __name__ == "__main__":
-    main_12()
+    main_13()
 
