@@ -705,7 +705,8 @@ def main_14():
     df = df[['user_id', 'item_id'] + [col for col in df.columns if col not in ['user_id', 'item_id']]]
 
     print(f"First 30 rows of the data after the swap:\n {df[['user_id', 'item_id', 'timestamp', 'state_label']].head(30)}")
-    
+
+    df.to_csv('data/steam_2017_new_swapped.csv', index=False)
 if __name__ == "__main__":
     main_14()
 
