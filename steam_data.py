@@ -697,6 +697,8 @@ def main_14():
 
     df = pd.read_csv('data/steam_2017_new_modified.csv')
 
+    print(f"First 5 rows of the data before the swap:\n {df[['user_id', 'item_id', 'timestamp', 'state_label']].head()}")
+
     # swap the columns user_id and item_id
     df.rename(columns={'user_id': 'item_id', 'item_id': 'user_id'}, inplace=True)
 
