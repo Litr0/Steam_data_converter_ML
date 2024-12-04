@@ -617,7 +617,7 @@ def main_11():
     unique_state_label_1_games = state_label_1['item_id'].nunique()
     print(f"Number of unique games with state label 1: {unique_state_label_1_games}")
 
-def main_12(file_name = '/home/bigdama/projects/tgn/results/jodie_rnn'):
+def main_12(file_name = '/home/bigdama/projects/tgn/results/tgn-attn-steam'):
 
     files_tgn = [file_name + '.pkl', file_name + '_1.pkl', file_name + '_2.pkl', file_name +
                   '_3.pkl', file_name + '_4.pkl', file_name + '_5.pkl', file_name + '_6.pkl', 
