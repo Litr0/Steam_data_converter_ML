@@ -708,5 +708,5 @@ def main_14():
 
     df.to_csv('data/steam_2017_new_swapped.csv', index=False)
 if __name__ == "__main__":
-    main_14()
+    main_12()
 
