@@ -715,7 +715,7 @@ def main_15():
 
     file_names = [path + str(i) + ".pt" for i in range(0, 4634)]
 
-    first_file = torch.load(file_names[0])
+    first_file = torch.load(file_names[1])
 
     print(first_file)
 
