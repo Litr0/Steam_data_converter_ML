@@ -184,6 +184,7 @@ def print_data_info(data):
     print("Number of classes:", data.num_classes if hasattr(data, 'num_classes') else 'N/A')
     print("Edge index:", data.edge_index)
     print("Node features:", data.x)
+    print("Length of node features:", data.x.size(1) if data.x is not None else 'N/A')
     print("Edge features:", data.edge_attr if hasattr(data, 'edge_attr') else 'N/A')
     print("Labels:", data.y)
 
