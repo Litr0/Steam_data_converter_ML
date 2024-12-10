@@ -26,6 +26,7 @@ import hdbscan  # type: ignore
 import pickle
 # PhishGNN
 import torch
+from torch_geometric.data import Data
 
 
 
@@ -717,7 +718,21 @@ def main_15():
 
     first_file = torch.load(file_names[1])
 
-    print(type(first_file))
+    print(first_file)
+    def print_data_info(data):
+        print("Data object information:")
+        print(data)
+        print("Number of nodes:", data.num_nodes)
+        print("Number of edges:", data.num_edges)
+        print("Number of features per node:", data.num_node_features)
+        print("Number of features per edge:", data.num_edge_features)
+        print("Number of classes:", data.num_classes if hasattr(data, 'num_classes') else 'N/A')
+        print("Edge index:", data.edge_index)
+        print("Node features:", data.x)
+        print("Edge features:", data.edge_attr if hasattr(data, 'edge_attr') else 'N/A')
+        print("Labels:", data.y)
+
+    print_data_info(first_file)
 
 if __name__ == "__main__":
     main_15()
