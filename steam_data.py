@@ -24,6 +24,8 @@ import time
 import hdbscan  # type: ignore
 #Results analysis
 import pickle
+# PhishGNN
+import torch
 
 
 
@@ -707,6 +709,16 @@ def main_14():
     print(f"First 30 rows of the data after the swap:\n {df[['user_id', 'item_id', 'timestamp', 'state_label']].head(30)}")
 
     df.to_csv('data/steam_2017_new_swapped.csv', index=False)
+
+def main_15():
+    path = "/home/bigdama/projects/Steam_data_converter_ML/data/data/train/processed/data_"
+
+    file_names = [path + str(i) + ".pt" for i in range(0, 4634)]
+
+    first_file = torch.load(file_names[0])
+
+    print(first_file)
+
 if __name__ == "__main__":
-    main_12()
+    main_15()
 
