@@ -717,7 +717,7 @@ def main_15():
 
     first_file = torch.load(file_names[1])
 
-    print(first_file)
+    print(type(first_file))
 
 if __name__ == "__main__":
     main_15()
