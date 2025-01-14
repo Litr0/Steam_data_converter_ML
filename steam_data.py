@@ -726,15 +726,10 @@ def main_14():
     df.to_csv('data/steam_2017_new_swapped.csv', index=False)
 
 def main_15():
-    path = "/home/bigdama/projects/Steam_data_converter_ML/data/data/train/processed/data_"
+    steam_reviews = pd.read_csv('data/steam_reviews_all_2017_new.csv')
 
-    file_names = [path + str(i) + ".pt" for i in range(0, 4634)]
-
-    first_file = torch.load(file_names[1])
-
-    print(first_file)
-
-    print_data_info(first_file)
+    # Print the columns of the data
+    print(f"Columns in the data: {steam_reviews.columns.tolist()}")
 
 if __name__ == "__main__":
     main_15()
