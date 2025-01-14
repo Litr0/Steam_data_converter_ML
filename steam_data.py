@@ -747,6 +747,10 @@ def main_15():
     ax.set_ylabel('Mean Sentiment Score')
 
     plt.title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
+
+    # Save the plot as a PNG file
+    plt.savefig('mean_sentiment_scores_review_bombing_v_non_review_bombing.png')
+
 if __name__ == "__main__":
     main_15()
 
