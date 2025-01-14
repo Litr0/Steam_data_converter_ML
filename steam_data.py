@@ -741,12 +741,18 @@ def main_15():
     # Save an histogram of the scores
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    ax.bar(['Negative', 'Neutral', 'Positive'], review_bombing_mean, label='Review Bombing', color='red', alpha=0.7)
-    ax.bar(['Negative', 'Neutral', 'Positive'], non_review_bombing_mean, label='Non Review Bombing', color='blue', alpha=0.7)
+    bar_width = 0.35
+    index = np.arange(3)
 
+    ax.bar(index, review_bombing_mean, bar_width, label='Review Bombing', color='red', alpha=0.7)
+    ax.bar(index + bar_width, non_review_bombing_mean, bar_width, label='Non Review Bombing', color='blue', alpha=0.7)
+
+    ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
-
-    plt.title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
+    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
+    ax.set_xticks(index + bar_width / 2)
+    ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
+    ax.legend()
 
     # Save the plot as a PNG file
     plt.savefig('mean_sentiment_scores_review_bombing_v_non_review_bombing.png')
