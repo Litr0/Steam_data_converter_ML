@@ -738,9 +738,15 @@ def main_15():
     review_bombing_mean = review_bombing_users[['neg', 'neu', 'pos']].mean()
     non_review_bombing_mean = non_review_bombing_users[['neg', 'neu', 'pos']].mean()
 
-    print(f"Mean sentiment scores for review bombing users:\n {review_bombing_mean}")
-    print(f"Mean sentiment scores for non review bombing users:\n {non_review_bombing_mean}")
+    # Save an histogram of the scores
+    fig, ax = plt.subplots(figsize=(12, 6))
 
+    ax.bar(['Negative', 'Neutral', 'Positive'], review_bombing_mean, label='Review Bombing', color='red', alpha=0.7)
+    ax.bar(['Negative', 'Neutral', 'Positive'], non_review_bombing_mean, label='Non Review Bombing', color='blue', alpha=0.7)
+
+    ax.set_ylabel('Mean Sentiment Score')
+
+    plt.title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
 if __name__ == "__main__":
     main_15()
 
