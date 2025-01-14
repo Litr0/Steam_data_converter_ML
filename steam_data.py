@@ -728,8 +728,18 @@ def main_14():
 def main_15():
     steam_reviews = pd.read_csv('data/steam_reviews_all_2017_new.csv')
 
-    # Print the columns of the data
-    print(f"Columns in the data: {steam_reviews.columns.tolist()}")
+    # Get the users were review_bombing is 1
+    review_bombing_users = steam_reviews[steam_reviews['review_bombing'] == 1]
+
+    # Get the users were review_bombing is 0
+    non_review_bombing_users = steam_reviews[steam_reviews['review_bombing'] == 0]
+
+    # Get the mean for the negative, neutral and positive sentiment scores for the review
+    review_bombing_mean = review_bombing_users[['neg', 'neu', 'pos']].mean()
+    non_review_bombing_mean = non_review_bombing_users[['neg', 'neu', 'pos']].mean()
+
+    print(f"Mean sentiment scores for review bombing users:\n {review_bombing_mean}")
+    print(f"Mean sentiment scores for non review bombing users:\n {non_review_bombing_mean}")
 
 if __name__ == "__main__":
     main_15()
