@@ -803,11 +803,36 @@ def main_16():
     test_preds_vals = extract_highest_probability_val(test_preds)
 
     train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
+    val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
+    test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
 
-    print(f"Train predictions with features: {train_preds_with_features[:5]}")
+    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
+    preds_zero = [pred for pred, features in all_preds if pred == 0]
+    preds_one = [pred for pred, features in all_preds if pred == 1]
 
+    # Calculate the mean of the features for predictions 0 and 1
+    features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
+    features_one_mean = np.mean([features for pred, features in all_preds if pred == 1], axis=0)
 
+    # Plot the histogram of the mean features
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bar_width = 0.35
+    index = np.arange(len(features_zero_mean))
+
+    ax.bar(index, features_one_mean, bar_width, label='Review Bombing', color='red', alpha=0.7)
+    ax.bar(index + bar_width, features_zero_mean, bar_width, label='Non Review Bombing', color='blue', alpha=0.7)
+
+    ax.set_xlabel('Feature')
+    ax.set_ylabel('Mean Feature Value')
+    ax.set_title('Mean Feature Values for Predictions 0 and 1')
+    ax.set_xticks(index + bar_width / 2)
+    ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
+    ax.legend()
+
+    # Save the plot as a PNG file
+    plt.savefig('mean_feature_values_predictions.png')
 
 if __name__ == "__main__":
     main_16()
