@@ -826,7 +826,7 @@ def main_16():
 
     ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
-    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
+    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user after predictions from the model')
     ax.set_xticks(index + bar_width / 2)
     ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
     ax.legend()
