@@ -779,10 +779,10 @@ def main_16():
     print(f"Val labels: {val_labels}")
     print(f"Test logp: {test_logp}")
     print(f"Test labels: {test_labels}")
-    print(f"Edge features: {edge_features}")
-    print(f"Train features: {train_feats}")
-    print(f"Val features: {val_feats}")
-    print(f"Test features: {test_feats}")
+    print(f"Edge features: {edge_features[:5]}")
+    print(f"Train features: {train_feats[:5]}")
+    print(f"Val features: {val_feats[:5]}")
+    print(f"Test features: {test_feats[:5]}")
 
 
 if __name__ == "__main__":
