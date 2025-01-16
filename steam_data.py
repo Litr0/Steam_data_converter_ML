@@ -802,7 +802,14 @@ def main_16():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
-    train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
+    all_feats = train_feats + val_feats + test_feats
+
+    # Check for duplicates in all_feats
+    unique_feats = set(tuple(feat) for feat in all_feats)
+    duplicates = len(all_feats) - len(unique_feats)
+    print(f"Number of duplicate feature sets: {duplicates}")
+
+    """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
 
@@ -835,7 +842,7 @@ def main_16():
     ax.legend()
 
     # Save the plot as a PNG file
-    plt.savefig('mean_feature_values_predictions.png')
+    plt.savefig('mean_feature_values_predictions.png') """
 
 if __name__ == "__main__":
     main_16()
