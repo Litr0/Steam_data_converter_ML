@@ -757,6 +757,34 @@ def main_15():
     # Save the plot as a PNG file
     plt.savefig('mean_sentiment_scores_review_bombing_v_non_review_bombing.png')
 
+def main_16():
+    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+
+    with open(path, "rb") as f:
+        preds = pickle.load(f)
+        train_logp = preds["train_logp"]
+        train_labels = preds["train_labels"]
+        val_logp = preds["val_logp"]
+        val_labels = preds["val_labels"]
+        test_logp = preds["test_logp"]
+        test_labels = preds["test_labels"]
+        edge_features = preds["edge_features"]
+        train_feats = preds["train_feats"]
+        val_feats = preds["val_feats"]
+        test_feats = preds["test_feats"]
+
+    print(f"Train logp: {train_logp}")
+    print(f"Train labels: {train_labels}")
+    print(f"Val logp: {val_logp}")
+    print(f"Val labels: {val_labels}")
+    print(f"Test logp: {test_logp}")
+    print(f"Test labels: {test_labels}")
+    print(f"Edge features: {edge_features}")
+    print(f"Train features: {train_feats}")
+    print(f"Val features: {val_feats}")
+    print(f"Test features: {test_feats}")
+
+
 if __name__ == "__main__":
-    main_15()
+    main_16()
 
