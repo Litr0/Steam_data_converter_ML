@@ -803,7 +803,7 @@ def main_16():
     test_preds_vals = extract_highest_probability_val(test_preds)
 
     train_features = torch.tensor(train_feats)
-    train_preds_with_features = torch.cat((train_features, torch.tensor(train_preds_vals).unsqueeze(1)), dim=1)
+    train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_features)]
 
     print(f"Train predictions with features: {train_preds_with_features[:5]}")
 
