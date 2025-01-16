@@ -798,15 +798,19 @@ def main_16():
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
 
-    train_preds_vals = extract_highest_probability_val(train_preds)
-    val_preds_vals = extract_highest_probability_val(val_preds)
-    test_preds_vals = extract_highest_probability_val(test_preds)
+    #train_preds_vals = extract_highest_probability_val(train_preds)
+    #val_preds_vals = extract_highest_probability_val(val_preds)
+    #test_preds_vals = extract_highest_probability_val(test_preds)
+
+    train_preds_vals = train_labels
+    val_preds_vals = val_labels
+    test_preds_vals = test_labels
 
     train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
 
-    all_preds = val_preds_with_features + test_preds_with_features
+    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
     # Calculate the mean of the features for predictions 0 and 1
     features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
