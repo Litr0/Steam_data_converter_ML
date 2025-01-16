@@ -773,7 +773,7 @@ def main_16():
         val_feats = preds["val_feats"]
         test_feats = preds["test_feats"]
 
-    train_pred = torch.sigmoid(train_logp).detach().numpy()
+    train_pred = torch.sigmoid(torch.tensor(train_logp)).detach().numpy()
 
     print(train_pred)
 
