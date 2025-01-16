@@ -806,7 +806,7 @@ def main_16():
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
 
-    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
+    all_preds = val_preds_with_features + test_preds_with_features
 
     # Calculate the mean of the features for predictions 0 and 1
     features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
