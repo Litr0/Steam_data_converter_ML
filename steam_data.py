@@ -784,6 +784,10 @@ def main_16():
     print(f"Val features: {val_feats[:5]}")
     print(f"Test features: {test_feats[:5]}")
 
+    train_probs = np.exp(train_logp)
+
+    print(f"Train probs: {train_probs[:5]}")
+
 
 if __name__ == "__main__":
     main_16()
