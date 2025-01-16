@@ -799,11 +799,13 @@ def main_16():
     test_preds = torch.exp(torch.tensor(test_logp))
 
     train_preds_vals = extract_highest_probability_val(train_preds)
+    val_preds_vals = extract_highest_probability_val(val_preds)
+    test_preds_vals = extract_highest_probability_val(test_preds)
 
-    print(f"Train preds vals: {train_preds_vals}")
-    # Print the count of different values in train_preds_vals
-    train_preds_vals_count = pd.Series(train_preds_vals).value_counts()
-    print(f"Count of different values in train_preds_vals: {train_preds_vals_count}")
+    train_features = torch.tensor(train_feats)
+    train_preds_with_features = torch.cat((train_features, torch.tensor(train_preds_vals).unsqueeze(1)), dim=1)
+
+    print(f"Train predictions with features: {train_preds_with_features[:5]}")
 
 
 
