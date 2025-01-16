@@ -773,16 +773,16 @@ def main_16():
         val_feats = preds["val_feats"]
         test_feats = preds["test_feats"]
 
-    print(f"Train logp: {train_logp}")
-    print(f"Train labels: {train_labels}")
-    print(f"Val logp: {val_logp}")
-    print(f"Val labels: {val_labels}")
-    print(f"Test logp: {test_logp}")
-    print(f"Test labels: {test_labels}")
-    print(f"Edge features: {edge_features[:5]}")
-    print(f"Train features: {train_feats[:5]}")
-    print(f"Val features: {val_feats[:5]}")
-    print(f"Test features: {test_feats[:5]}")
+    print(f"Train logp type: {type(train_logp)}")
+    print(f"Train labels type: {type(train_labels)}")
+    print(f"Val logp type: {type(val_logp)}")
+    print(f"Val labels type: {type(val_labels)}")
+    print(f"Test logp type: {type(test_logp)}")
+    print(f"Test labels type: {type(test_labels)}")
+    print(f"Edge features type: {type(edge_features)}")
+    print(f"Train features type: {type(train_feats)}")
+    print(f"Val features type: {type(val_feats)}")
+    print(f"Test features type: {type(test_feats)}")
 
 
 if __name__ == "__main__":
