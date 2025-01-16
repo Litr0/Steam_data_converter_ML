@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -187,6 +188,15 @@ def print_data_info(data):
     print("Length of node features:", data.x.size(1) if data.x is not None else 'N/A')
     print("Edge features:", data.edge_attr if hasattr(data, 'edge_attr') else 'N/A')
     print("Labels:", data.y)
+
+def extract_highest_probability_val(preds):
+    pred_vals = []
+    for pred in preds:
+        if pred[0] > pred[1]:
+            pred_vals.append(0)
+        else:
+            pred_vals.append(1)
+    return pred_vals
 
 def main():
     # Load data
@@ -784,9 +794,18 @@ def main_16():
     print(f"Val features: {val_feats[:5]}")
     print(f"Test features: {test_feats[:5]}")
 
-    train_probs = torch.exp(torch.tensor(train_logp))
+    train_preds = torch.exp(torch.tensor(train_logp))
+    val_preds = torch.exp(torch.tensor(val_logp))
+    test_preds = torch.exp(torch.tensor(test_logp))
 
-    print(f"Train probs: {train_probs[:5]}")
+    train_preds_vals = extract_highest_probability_val(train_preds)
+
+    print(f"Train preds vals: {train_preds_vals}")
+    # Print the count of different values in train_preds_vals
+    train_preds_vals_count = pd.Series(train_preds_vals).value_counts()
+    print(f"Count of different values in train_preds_vals: {train_preds_vals_count}")
+
+
 
 
 if __name__ == "__main__":
