@@ -773,9 +773,16 @@ def main_16():
         val_feats = preds["val_feats"]
         test_feats = preds["test_feats"]
 
-    train_pred = torch.sigmoid(torch.tensor(train_logp)).detach().numpy()
-
-    print(train_pred)
+    print(f"Train logp: {train_logp}")
+    print(f"Train labels: {train_labels}")
+    print(f"Val logp: {val_logp}")
+    print(f"Val labels: {val_labels}")
+    print(f"Test logp: {test_logp}")
+    print(f"Test labels: {test_labels}")
+    print(f"Edge features: {edge_features[:5]}")
+    print(f"Train features: {train_feats[:5]}")
+    print(f"Val features: {val_feats[:5]}")
+    print(f"Test features: {test_feats[:5]}")
 
 
 if __name__ == "__main__":
