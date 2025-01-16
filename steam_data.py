@@ -824,9 +824,9 @@ def main_16():
     ax.bar(index, features_one_mean, bar_width, label='Review Bombing', color='red', alpha=0.7)
     ax.bar(index + bar_width, features_zero_mean, bar_width, label='Non Review Bombing', color='blue', alpha=0.7)
 
-    ax.set_xlabel('Feature')
-    ax.set_ylabel('Mean Feature Value')
-    ax.set_title('Mean Feature Values for Predictions 0 and 1')
+    ax.set_xlabel('Sentiment')
+    ax.set_ylabel('Mean Sentiment Score')
+    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
     ax.set_xticks(index + bar_width / 2)
     ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
     ax.legend()
