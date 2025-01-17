@@ -827,6 +827,15 @@ def main_16():
 
     print(f"Test Accuracy: {test_accuracy:.2f}")
 
+    print(f"Train labels == 1:  {sum(train_labels)}")
+    print(f"Train preds == 1:  {sum(train_preds_vals)}")
+    print(f"Val labels == 1:  {sum(val_labels)}")
+    print(f"Val preds == 1:  {sum(val_preds_vals)}")
+    print(f"Test labels == 1:  {sum(test_labels)}")
+    print(f"Test preds == 1:  {sum(test_preds_vals)}")
+
+    print(f"Total labels == 1:  {sum(train_labels) + sum(val_labels) + sum(test_labels)}")
+
     i = 0
     train_preds_with_features = []
     for feat in train_feats:
