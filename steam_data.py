@@ -846,7 +846,7 @@ def main_16():
             test_preds_with_features.append((test_preds_vals[i], feat))
             i += 1
     
-    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
+    all_preds = val_preds_with_features
 
     preds_zero = [pred for pred, features in all_preds if pred == 0]
     preds_one = [pred for pred, features in all_preds if pred == 1]
