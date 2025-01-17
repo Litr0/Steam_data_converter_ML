@@ -802,12 +802,10 @@ def main_16():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
-    all_feats = train_feats + val_feats + test_feats
+    print(f"Train feats: {train_feats[:5]}")
+    print(f"Val feats: {val_feats[:5]}")
+    print(f"Test feats: {test_feats[:5]}")
 
-    # Check for duplicates in all_feats
-    unique_feats = set(tuple(feat) for feat in all_feats)
-    duplicates = len(all_feats) - len(unique_feats)
-    print(f"Number of duplicate feature sets: {duplicates}")
 
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
@@ -819,9 +817,9 @@ def main_16():
     preds_one = [pred for pred, features in all_preds if pred == 1]
 
     print(f"Number of predictions 0: {len(preds_zero)}")
-    print(f"Number of predictions 1: {len(preds_one)}")
+    print(f"Number of predictions 1: {len(preds_one)}") """
 
-    # Calculate the mean of the features for predictions 0 and 1
+    """ # Calculate the mean of the features for predictions 0 and 1
     features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
     features_one_mean = np.mean([features for pred, features in all_preds if pred == 1], axis=0)
 
