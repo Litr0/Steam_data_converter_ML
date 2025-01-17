@@ -808,7 +808,6 @@ def main_16():
 
     # Compare train_preds_vals and train_labels
     train_correct = sum(p == l for p, l in zip(train_preds_vals, train_labels))
-    print(train_correct)
     train_total = len(train_labels)
     train_accuracy = train_correct / train_total
 
