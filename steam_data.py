@@ -843,10 +843,10 @@ def main_16():
     features_zero_mean = [np.mean(features, axis=0) for features in features_zero]
     features_one_mean = [np.mean(features, axis=0) for features in features_one]
 
-    print(f"features_zero_mean: {len(features_zero_mean)}")
-    print(f"features_one_mean: {len(features_one_mean)}")
+    features_zero_mean = np.mean(features_zero_mean, axis=0)
+    features_one_mean = np.mean(features_one_mean, axis=0)
 
-    """ # Plot the histogram of the mean features
+    # Plot the histogram of the mean features
     fig, ax = plt.subplots(figsize=(12, 6))
 
     bar_width = 0.35
@@ -863,7 +863,7 @@ def main_16():
     ax.legend()
 
     # Save the plot as a PNG file
-    plt.savefig('mean_feature_values_predictions.png') """
+    plt.savefig('mean_feature_values_predictions.png')
 
 if __name__ == "__main__":
     main_16()
