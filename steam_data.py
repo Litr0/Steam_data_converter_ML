@@ -840,6 +840,12 @@ def main_16():
     print(f"features_zero: {features_zero[:5]}")
     print(f"features_one: {features_one[:5]}")
 
+    features_zero_mean = [np.mean(features, axis=0) for features in features_zero]
+    features_one_mean = [np.mean(features, axis=0) for features in features_one]
+
+    print(f"features_zero_mean: {features_zero_mean[:5]}")
+    print(f"features_one_mean: {features_one_mean[:5]}")
+
     """ # Plot the histogram of the mean features
     fig, ax = plt.subplots(figsize=(12, 6))
 
