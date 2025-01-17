@@ -804,6 +804,27 @@ def main_16():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
+    # Compare train_preds_vals and train_labels
+    train_correct = sum(p == l for p, l in zip(train_preds_vals, train_labels))
+    train_total = len(train_labels)
+    train_accuracy = train_correct / train_total
+
+    print(f"Train Accuracy: {train_accuracy:.2f}")
+
+    # Compare val_preds_vals and val_labels
+    val_correct = sum(p == l for p, l in zip(val_preds_vals, val_labels))
+    val_total = len(val_labels)
+    val_accuracy = val_correct / val_total
+
+    print(f"Val Accuracy: {val_accuracy:.2f}")
+
+    # Compare test_preds_vals and test_labels
+    test_correct = sum(p == l for p, l in zip(test_preds_vals, test_labels))
+    test_total = len(test_labels)
+    test_accuracy = test_correct / test_total
+
+    print(f"Test Accuracy: {test_accuracy:.2f}")
+
 
     i = 0
     train_preds_with_features = []
