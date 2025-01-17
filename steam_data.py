@@ -828,15 +828,13 @@ def main_16():
     
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
-    print(f"All predictions: {all_preds[:5]}")
-
     preds_zero = [pred for pred, features in all_preds if pred == 0]
     preds_one = [pred for pred, features in all_preds if pred == 1]
 
     print(f"Number of predictions 0: {len(preds_zero)}")
     print(f"Number of predictions 1: {len(preds_one)}")
 
-    """ # Calculate the mean of the features for predictions 0 and 1
+    # Calculate the mean of the features for predictions 0 and 1
     features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
     features_one_mean = np.mean([features for pred, features in all_preds if pred == 1], axis=0)
 
@@ -851,13 +849,13 @@ def main_16():
 
     ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
-    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user after predictions from the model')
+    ax.set_title('Mean Sentiment Scores for Abusive users v/s Non Abusive user after predictions from the model')
     ax.set_xticks(index + bar_width / 2)
     ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
     ax.legend()
 
     # Save the plot as a PNG file
-    plt.savefig('mean_feature_values_predictions.png') """
+    plt.savefig('mean_feature_values_predictions.png')
 
 if __name__ == "__main__":
     main_16()
