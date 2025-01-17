@@ -837,10 +837,10 @@ def main_16():
     features_zero = [features for pred, features in all_preds if pred == 0]
     features_one = [features for pred, features in all_preds if pred == 1]
 
-    print(f"Number of features 0: {len(features_zero)}")
-    print(f"Number of features 1: {len(features_one)}")
+    print(f"features_zero: {features_zero[:5]}")
+    print(f"features_one: {features_one[:5]}")
 
-    # Plot the histogram of the mean features
+    """ # Plot the histogram of the mean features
     fig, ax = plt.subplots(figsize=(12, 6))
 
     bar_width = 0.35
@@ -857,7 +857,7 @@ def main_16():
     ax.legend()
 
     # Save the plot as a PNG file
-    plt.savefig('mean_feature_values_predictions.png')
+    plt.savefig('mean_feature_values_predictions.png') """
 
 if __name__ == "__main__":
     main_16()
