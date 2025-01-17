@@ -819,15 +819,23 @@ def main_16():
 
     # Compare val_preds_vals and val_labels
     val_correct = sum(p == l for p, l in zip(val_preds_vals, val_labels))
+    print(f"Number of correct predictions: {val_correct}")
     val_total = len(val_labels)
     val_accuracy = val_correct / val_total
+
+    val_incorrect = sum(p != l for p, l in zip(val_preds_vals, val_labels))
+    print(f"Number of incorrect predictions: {val_incorrect}")
 
     print(f"Val Accuracy: {val_accuracy:.2f}")
 
     # Compare test_preds_vals and test_labels
     test_correct = sum(p == l for p, l in zip(test_preds_vals, test_labels))
+    print(f"Number of correct predictions: {test_correct}")
     test_total = len(test_labels)
     test_accuracy = test_correct / test_total
+
+    test_incorrect = sum(p != l for p, l in zip(test_preds_vals, test_labels))
+    print(f"Number of incorrect predictions: {test_incorrect}")
 
     print(f"Test Accuracy: {test_accuracy:.2f}")
 
