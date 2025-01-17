@@ -804,7 +804,7 @@ def main_16():
     test_preds_vals = extract_highest_probability_val(test_preds)
 
     for feat in val_feats:
-        if is_empty(feat):
+        if len(feat) == 0:
             print("Empty")
 
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
