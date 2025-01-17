@@ -1,4 +1,5 @@
 import re
+from networkx import is_empty
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -802,10 +803,9 @@ def main_16():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
-    print(f"Train feats: {train_feats[:5]}")
-    print(f"Val feats: {val_feats[:5]}")
-    print(f"Test feats: {test_feats[:5]}")
-
+    for feat in val_feats:
+        if is_empty(feat):
+            print("Empty")
 
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
