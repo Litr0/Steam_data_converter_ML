@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 import plotly.express as px
+import test
 from transformers import pipeline
 from tqdm import tqdm
 #Vader
@@ -809,11 +810,21 @@ def main_16():
     for feat in train_feats:
         if len(feat) > 0:
             train_preds_with_features.append((train_preds_vals[i], feat))
-            if train_preds_vals[i] == 1:
-                print(f"Abusive user")
             i += 1
     
-    print(f"train_preds_with_features: {train_preds_with_features[:5]}")
+    i = 0
+    val_preds_with_features = []
+    for feat in val_feats:
+        if len(feat) > 0:
+            val_preds_with_features.append((val_preds_vals[i], feat))
+            i += 1
+    
+    i = 0
+    test_preds_with_features = []
+    for feat in test_feats:
+        if len(feat) > 0:
+            test_preds_with_features.append((test_preds_vals[i], feat))
+            i += 1
 
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
