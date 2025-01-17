@@ -834,9 +834,11 @@ def main_16():
     print(f"Number of predictions 0: {len(preds_zero)}")
     print(f"Number of predictions 1: {len(preds_one)}")
 
-    # Calculate the mean of the features for predictions 0 and 1
-    features_zero_mean = np.mean([features for pred, features in all_preds if pred == 0], axis=0)
-    features_one_mean = np.mean([features for pred, features in all_preds if pred == 1], axis=0)
+    features_zero = [features for pred, features in all_preds if pred == 0]
+    features_one = [features for pred, features in all_preds if pred == 1]
+
+    print(f"Number of features 0: {len(features_zero)}")
+    print(f"Number of features 1: {len(features_one)}")
 
     # Plot the histogram of the mean features
     fig, ax = plt.subplots(figsize=(12, 6))
