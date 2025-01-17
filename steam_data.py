@@ -825,7 +825,6 @@ def main_16():
 
     print(f"Test Accuracy: {test_accuracy:.2f}")
 
-
     i = 0
     train_preds_with_features = []
     for feat in train_feats:
