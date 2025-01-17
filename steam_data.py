@@ -743,6 +743,8 @@ def main_15():
     # Get the users were review_bombing is 1
     review_bombing_users = steam_reviews[steam_reviews['review_bombing'] == 1]
 
+    print(f"Number of review bombing users: {review_bombing_users.shape[0]}")
+
     # Get the users were review_bombing is 0
     non_review_bombing_users = steam_reviews[steam_reviews['review_bombing'] == 0]
 
@@ -886,5 +888,5 @@ def main_16():
     plt.savefig('mean_feature_values_predictions.png')
 
 if __name__ == "__main__":
-    main_16()
+    main_15()
 
