@@ -803,11 +803,16 @@ def main_16():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
-    for feat in val_feats:
-        if len(feat) == 0:
-            print("Empty")
-        else:
-            print(feat)
+
+    i = 0
+    train_preds_with_features = []
+    for feat in train_feats:
+        if len(feat) > 0:
+            train_preds_with_features.append((train_preds_vals[i], feat))
+            i += 1
+    
+    print(f"train_preds_with_features: {train_preds_with_features[:5]}")
+    
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
