@@ -809,10 +809,12 @@ def main_16():
     for feat in train_feats:
         if len(feat) > 0:
             train_preds_with_features.append((train_preds_vals[i], feat))
+            if train_preds_vals[i] == 1:
+                print(f"Abusive user")
             i += 1
     
     print(f"train_preds_with_features: {train_preds_with_features[:5]}")
-    
+
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
