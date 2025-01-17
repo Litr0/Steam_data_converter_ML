@@ -806,7 +806,8 @@ def main_16():
     for feat in val_feats:
         if len(feat) == 0:
             print("Empty")
-
+        else:
+            print(feat)
     """ train_preds_with_features = [(pred, features) for pred, features in zip(train_preds_vals, train_feats)]
     val_preds_with_features = [(pred, features) for pred, features in zip(val_preds_vals, val_feats)]
     test_preds_with_features = [(pred, features) for pred, features in zip(test_preds_vals, test_feats)]
