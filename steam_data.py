@@ -828,6 +828,8 @@ def main_16():
     
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
+    print(f"All predictions: {all_preds[:5]}")
+
     preds_zero = [pred for pred, features in all_preds if pred == 0]
     preds_one = [pred for pred, features in all_preds if pred == 1]
 
