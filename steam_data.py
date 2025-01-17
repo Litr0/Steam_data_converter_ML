@@ -838,6 +838,9 @@ def main_16():
     features_zero_mean = np.mean([np.mean(features) for pred, features in all_preds if pred == 0], axis=0)
     features_one_mean = np.mean([np.mean(features) for pred, features in all_preds if pred == 1], axis=0)
 
+    print(f"Mean of the features for predictions 0: {features_zero_mean}")
+    print(f"Mean of the features for predictions 1: {features_one_mean}")
+
     # Plot the histogram of the mean features
     fig, ax = plt.subplots(figsize=(12, 6))
 
