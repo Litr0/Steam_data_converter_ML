@@ -837,6 +837,9 @@ def main_16():
     print(f"Total labels == 1:  {sum(train_labels) + sum(val_labels) + sum(test_labels)}")
     print(f"Total preds == 1:  {sum(train_preds_vals) + sum(val_preds_vals) + sum(test_preds_vals)}")
 
+    print(f"Total labels:  {len(train_labels) + len(val_labels) + len(test_labels)}")
+    print(f"Total preds:  {len(train_preds_vals) + len(val_preds_vals) + len(test_preds_vals)}")
+
     i = 0
     train_preds_with_features = []
     for feat in train_feats:
