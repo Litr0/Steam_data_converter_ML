@@ -775,8 +775,11 @@ def main_16():
     path = "/home/bigdama/projects/bidyn/out/embs.pt"
 
     def persistent_load(saved_id):
-        print(f"Persistent load called with id: {saved_id}")
-        return None
+        if isinstance(saved_id, str):
+            print(f"Persistent load called with id: {saved_id}")
+            return None
+        else:
+            raise pickle.UnpicklingError("persistent IDs in protocol 0 must be ASCII strings")
 
     with open(path, 'rb') as f:
         unpickler = pickle.Unpickler(f)
