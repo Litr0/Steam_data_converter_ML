@@ -774,19 +774,9 @@ def main_15():
 def main_16():
     path = "/home/bigdama/projects/bidyn/out/embs.pt"
 
-    def persistent_load(saved_id):
-        if isinstance(saved_id, str):
-            print(f"Persistent load called with id: {saved_id}")
-            return None
-        else:
-            raise pickle.UnpicklingError("persistent IDs in protocol 0 must be ASCII strings")
+    data = torch.load(path)
 
-    with open(path, 'rb') as f:
-        unpickler = pickle.Unpickler(f)
-        unpickler.persistent_load = persistent_load
-        embs = unpickler.load()
-
-    print(f"Loaded embeddings: {embs}")
+    print_data_info(data)
 
 if __name__ == "__main__":
     main_16()
