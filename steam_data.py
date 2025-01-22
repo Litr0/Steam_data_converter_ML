@@ -780,6 +780,18 @@ def main_16():
 
     print_data_info(Data(x=data[1]))
 
+    def describe_node_features(data):
+        print("Describing node features:")
+        if data.x is not None:
+            print(f"Node features shape: {data.x.shape}")
+            print(f"Node features sample:\n{data.x[:5]}")
+            print(f"Node features statistics:\n{pd.DataFrame(data.x.numpy()).describe()}")
+        else:
+            print("No node features available.")
+
+    describe_node_features(Data(x=data[0]))
+    describe_node_features(Data(x=data[1]))
+
 if __name__ == "__main__":
     main_16()
 
