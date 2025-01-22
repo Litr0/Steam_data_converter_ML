@@ -778,6 +778,8 @@ def main_16():
 
     print_data_info(Data(x=data[0]))
 
+    print_data_info(Data(x=data[1]))
+
 if __name__ == "__main__":
     main_16()
 
