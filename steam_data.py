@@ -776,7 +776,7 @@ def main_16():
 
     data = torch.load(path)
 
-    print_data_info(data)
+    print_data_info(data[0])
 
 if __name__ == "__main__":
     main_16()
