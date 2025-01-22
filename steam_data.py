@@ -774,8 +774,14 @@ def main_15():
 def main_16():
     path = "/home/bigdama/projects/bidyn/out/embs.pt"
 
+    def persistent_load(saved_id):
+        print(f"Persistent load called with id: {saved_id}")
+        return None
+
     with open(path, 'rb') as f:
-        embs = pickle.load(f)
+        unpickler = pickle.Unpickler(f)
+        unpickler.persistent_load = persistent_load
+        embs = unpickler.load()
 
     print(f"Loaded embeddings: {embs}")
 
