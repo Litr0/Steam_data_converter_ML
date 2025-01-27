@@ -780,6 +780,29 @@ def main_16():
 
     print_data_info(Data(x=data[1]))
 
+def main_17():
+    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+
+    with open(path, "rb") as f:
+        preds = pickle.load(f)
+        mean_abusive = preds['mean_abusive']
+        std_abusive = preds['std_abusive']
+        mean_non_abusive = preds['mean_non_abusive']
+        std_non_abusive = preds['std_non_abusive']
+        cos_sim_abusive = preds['cos_sim_abusive']
+        mean_sim_abusive = preds['mean_sim_abusive']
+        cos_sim_non_abusive = preds['cos_sim_non_abusive']
+        mean_sim_non_abusive = preds['mean_sim_non_abusive']
+    
+    print(f"Mean abusive: {mean_abusive}")
+    print(f"Std abusive: {std_abusive}")
+    print(f"Mean non abusive: {mean_non_abusive}")
+    print(f"Std non abusive: {std_non_abusive}")
+    print(f"Cos sim abusive: {cos_sim_abusive}")
+    print(f"Mean sim abusive: {mean_sim_abusive}")
+    print(f"Cos sim non abusive: {cos_sim_non_abusive}")
+    print(f"Mean sim non abusive: {mean_sim_non_abusive}")
+
 if __name__ == "__main__":
-    main_16()
+    main_17()
 
