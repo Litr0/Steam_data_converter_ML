@@ -800,8 +800,8 @@ def main_17():
     print(f"Std non abusive: {std_non_abusive}")
     print(f"Cos sim abusive: {cos_sim_abusive}")
     print(f"Mean sim abusive: {mean_sim_abusive}")
-    print(f"Cos sim non abusive: {cos_sim_non_abusive}")
     time.sleep(20)
+    print(f"Cos sim non abusive: {cos_sim_non_abusive}")
     print(f"Mean sim non abusive: {mean_sim_non_abusive}")
 
 if __name__ == "__main__":
