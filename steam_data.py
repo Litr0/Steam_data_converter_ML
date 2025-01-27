@@ -825,7 +825,7 @@ def main_17():
     # Delete the original .txt file
     os.remove(output_path)
 
-    print(f"Summary written to {output_path}")
+    print(f"Summary written to {zip_path}")
 
 if __name__ == "__main__":
     main_17()
