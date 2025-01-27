@@ -30,6 +30,8 @@ import pickle
 # PhishGNN
 import torch
 from torch_geometric.data import Data
+import os
+
 
 
 
@@ -814,6 +816,14 @@ def main_17():
         f.write(f"Mean sim abusive: {mean_sim_abusive}\n")
         f.write(f"Cos sim non abusive: {cos_sim_non_abusive}\n")
         f.write(f"Mean sim non abusive: {mean_sim_non_abusive}\n")
+
+    # Create a zip file
+    zip_path = "/home/bigdama/projects/Steam_data_converter_ML/data/pred_summary.zip"
+    with zipfile.ZipFile(zip_path, 'w') as zipf:
+        zipf.write(output_path, arcname="pred_summary.txt")
+
+    # Delete the original .txt file
+    os.remove(output_path)
 
     print(f"Summary written to {output_path}")
 
