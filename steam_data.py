@@ -802,6 +802,7 @@ def main_17():
     print(f"Mean sim abusive: {mean_sim_abusive}")
     print(f"Cos sim non abusive: {cos_sim_non_abusive}")
     print(f"Mean sim non abusive: {mean_sim_non_abusive}")
+    print(len(cos_sim_abusive))
 
     # Write the values to a text file
     output_path = "/home/bigdama/projects/Steam_data_converter_ML/data/pred_summary.txt"
