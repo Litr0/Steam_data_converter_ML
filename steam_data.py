@@ -811,7 +811,7 @@ def main_17():
         f.write(f"Std abusive: {std_abusive}\n")
         f.write(f"Mean non abusive: {mean_non_abusive}\n")
         f.write(f"Std non abusive: {std_non_abusive}\n")
-        f.write(f"Cos sim abusive: {cos_sim_abusive}\n")
+        f.write(f"Cos sim abusive: {cos_sim_abusive.tolist()}\n")
         f.write(f"Mean sim abusive: {mean_sim_abusive}\n")
         f.write(f"Cos sim non abusive: {cos_sim_non_abusive}\n")
         f.write(f"Mean sim non abusive: {mean_sim_non_abusive}\n")
