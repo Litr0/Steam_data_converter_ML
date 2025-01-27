@@ -800,9 +800,22 @@ def main_17():
     print(f"Std non abusive: {std_non_abusive}")
     print(f"Cos sim abusive: {cos_sim_abusive}")
     print(f"Mean sim abusive: {mean_sim_abusive}")
-    time.sleep(20)
     print(f"Cos sim non abusive: {cos_sim_non_abusive}")
     print(f"Mean sim non abusive: {mean_sim_non_abusive}")
+
+    # Write the values to a text file
+    output_path = "/home/bigdama/projects/Steam_data_converter_ML/data/pred_summary.txt"
+    with open(output_path, "w") as f:
+        f.write(f"Mean abusive: {mean_abusive}\n")
+        f.write(f"Std abusive: {std_abusive}\n")
+        f.write(f"Mean non abusive: {mean_non_abusive}\n")
+        f.write(f"Std non abusive: {std_non_abusive}\n")
+        f.write(f"Cos sim abusive: {cos_sim_abusive}\n")
+        f.write(f"Mean sim abusive: {mean_sim_abusive}\n")
+        f.write(f"Cos sim non abusive: {cos_sim_non_abusive}\n")
+        f.write(f"Mean sim non abusive: {mean_sim_non_abusive}\n")
+
+    print(f"Summary written to {output_path}")
 
 if __name__ == "__main__":
     main_17()
