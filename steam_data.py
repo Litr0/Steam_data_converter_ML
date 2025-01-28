@@ -835,7 +835,8 @@ def main_17():
     cluster_centroids = kmeans.cluster_centers_
     euclidean_distances = np.linalg.norm(cluster_centroids - mean_non_abusive, axis=1)
 
-    print(f"Euclidean distances between each cluster centroid and the mean embedding of non-abusive users:\n {euclidean_distances}")
+    for i, distance in enumerate(euclidean_distances):
+        print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
 if __name__ == "__main__":
     main_17()
 
