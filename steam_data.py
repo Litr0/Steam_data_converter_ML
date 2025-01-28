@@ -835,12 +835,6 @@ def main_17():
     for i, distance in enumerate(euclidean_distances):
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
 
-    cluster_cos_sim_to_non_abusive_mean = sklearn_cosine_similarity(cluster_centroids, mean_non_abusive.reshape(1, -1))
-    
-    for i, cos_sim in enumerate(cluster_cos_sim_to_non_abusive_mean):
-        print(f"Cosine similarity between cluster {i} centroid and the mean embedding of non-abusive users: {cos_sim[0]}")
-
-
 if __name__ == "__main__":
     main_17()
 
