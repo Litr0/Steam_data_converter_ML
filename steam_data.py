@@ -808,9 +808,10 @@ def main_17():
     print(f"Mean sim abusive: {mean_sim_abusive}")
     print(f"Cos sim non abusive: {cos_sim_non_abusive}")
     print(f"Mean sim non abusive: {mean_sim_non_abusive}")
-    print_data_info(Data(x=u_embs_abusive))
-
-    
+    print(f"First 5 user embeddings: {u_embs[:5]}")
+    print(f"First 5 user embeddings numpy: {u_embs_np[:5]}")
+    print(f"First 5 user embeddings abusive: {u_embs_abusive[:5]}")
+    print(f"First 5 user embeddings non abusive: {u_embs_non_abusive[:5]}")
 
 if __name__ == "__main__":
     main_17()
