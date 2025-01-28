@@ -31,6 +31,7 @@ import pickle
 import torch
 from torch_geometric.data import Data
 import os
+from sklearn.cluster import KMeans
 
 
 
@@ -819,6 +820,16 @@ def main_17():
     std_cos_sim_non_abusive = np.std(cos_sim_non_abusive)
     print(f"Standard deviation of cosine similarity within abusive users: {std_cos_sim_abusive}")
     print(f"Standard deviation of cosine similarity within non-abusive users: {std_cos_sim_non_abusive}")
+
+    # Perform clustering on abusive users using their 64 features
+    kmeans = KMeans(n_clusters=5, random_state=42)
+    abusive_clusters = kmeans.fit_predict(u_embs_abusive)
+
+    # Add cluster labels to the abusive user embeddings
+    abusive_user_clusters = pd.DataFrame(u_embs_abusive, columns=[f'feature_{i}' for i in range(u_embs_abusive.shape[1])])
+    abusive_user_clusters['cluster'] = abusive_clusters
+
+    print(f"Cluster labels for abusive users:\n {abusive_user_clusters['cluster'].value_counts()}")
 if __name__ == "__main__":
     main_17()
 
