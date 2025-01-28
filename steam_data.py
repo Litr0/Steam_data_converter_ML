@@ -799,17 +799,22 @@ def main_17():
         mean_sim_abusive = preds['mean_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
-    
-    print(f"Mean abusive: {mean_abusive}")
-    print(f"Std abusive: {std_abusive}")
-    print(f"Mean non abusive: {mean_non_abusive}")
-    print(f"Std non abusive: {std_non_abusive}")
-    print(f"Cos sim abusive: {cos_sim_abusive}")
-    print(f"Mean sim abusive: {mean_sim_abusive}")
-    print(f"Cos sim non abusive: {cos_sim_non_abusive}")
-    print(f"Mean sim non abusive: {mean_sim_non_abusive}")
-    print(f"First 5 user embeddings abusive: {u_embs_abusive[:5]}")
 
+    # Compare the features between abusive users
+    print("Mean of abusive users' embeddings:", mean_abusive)
+    print("Standard deviation of abusive users' embeddings:", std_abusive)
+    print("Mean of non-abusive users' embeddings:", mean_non_abusive)
+    print("Standard deviation of non-abusive users' embeddings:", std_non_abusive)
+    print("Mean cosine similarity of abusive users' embeddings:", mean_sim_abusive)
+    print("Mean cosine similarity of non-abusive users' embeddings:", mean_sim_non_abusive)
+    # Calculate additional metrics
+    mean_diff = np.mean(mean_abusive - mean_non_abusive)
+    std_diff = np.mean(std_abusive - std_non_abusive)
+    mean_cos_sim_diff = mean_sim_abusive - mean_sim_non_abusive
+
+    print("Difference in mean embeddings between abusive and non-abusive users:", mean_diff)
+    print("Difference in standard deviation of embeddings between abusive and non-abusive users:", std_diff)
+    print("Difference in mean cosine similarity between abusive and non-abusive users:", mean_cos_sim_diff)
 if __name__ == "__main__":
     main_17()
 
