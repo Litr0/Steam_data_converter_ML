@@ -800,21 +800,19 @@ def main_17():
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
 
-    # Compare the features between abusive users
-    print("Mean of abusive users' embeddings:", mean_abusive)
-    print("Standard deviation of abusive users' embeddings:", std_abusive)
-    print("Mean of non-abusive users' embeddings:", mean_non_abusive)
-    print("Standard deviation of non-abusive users' embeddings:", std_non_abusive)
-    print("Mean cosine similarity of abusive users' embeddings:", mean_sim_abusive)
-    print("Mean cosine similarity of non-abusive users' embeddings:", mean_sim_non_abusive)
-    # Calculate additional metrics
-    mean_diff = np.mean(mean_abusive - mean_non_abusive)
-    std_diff = np.mean(std_abusive - std_non_abusive)
-    mean_cos_sim_diff = mean_sim_abusive - mean_sim_non_abusive
+    # Calculate the Euclidean distance between the mean embeddings of abusive and non-abusive users
+    euclidean_distance = np.linalg.norm(mean_abusive - mean_non_abusive)
+    print(f"Euclidean distance between mean embeddings of abusive and non-abusive users: {euclidean_distance}")
 
-    print("Difference in mean embeddings between abusive and non-abusive users:", mean_diff)
-    print("Difference in standard deviation of embeddings between abusive and non-abusive users:", std_diff)
-    print("Difference in mean cosine similarity between abusive and non-abusive users:", mean_cos_sim_diff)
+    # Calculate the cosine similarity between the mean embeddings of abusive and non-abusive users
+    cosine_similarity = np.dot(mean_abusive, mean_non_abusive) / (np.linalg.norm(mean_abusive) * np.linalg.norm(mean_non_abusive))
+    print(f"Cosine similarity between mean embeddings of abusive and non-abusive users: {cosine_similarity}")
+
+    # Calculate the average cosine similarity within abusive and non-abusive users
+    avg_cos_sim_abusive = np.mean(cos_sim_abusive)
+    avg_cos_sim_non_abusive = np.mean(cos_sim_non_abusive)
+    print(f"Average cosine similarity within abusive users: {avg_cos_sim_abusive}")
+    print(f"Average cosine similarity within non-abusive users: {avg_cos_sim_non_abusive}")
 if __name__ == "__main__":
     main_17()
 
