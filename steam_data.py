@@ -813,6 +813,12 @@ def main_17():
     avg_cos_sim_non_abusive = np.mean(cos_sim_non_abusive)
     print(f"Average cosine similarity within abusive users: {avg_cos_sim_abusive}")
     print(f"Average cosine similarity within non-abusive users: {avg_cos_sim_non_abusive}")
+
+    # Calculate the standard deviation of the cosine similarities within abusive and non-abusive users
+    std_cos_sim_abusive = np.std(cos_sim_abusive)
+    std_cos_sim_non_abusive = np.std(cos_sim_non_abusive)
+    print(f"Standard deviation of cosine similarity within abusive users: {std_cos_sim_abusive}")
+    print(f"Standard deviation of cosine similarity within non-abusive users: {std_cos_sim_non_abusive}")
 if __name__ == "__main__":
     main_17()
 
