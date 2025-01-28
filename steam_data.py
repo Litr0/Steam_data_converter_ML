@@ -823,7 +823,7 @@ def main_17():
     print(f"Standard deviation of cosine similarity within non-abusive users: {std_cos_sim_non_abusive}")
 
     # Perform clustering on abusive users using their 64 features
-    kmeans = KMeans(n_clusters=10, random_state=42)
+    kmeans = KMeans(n_clusters=8, random_state=42)
     abusive_clusters = kmeans.fit_predict(u_embs_abusive)
 
     # Add cluster labels to the abusive user embeddings
