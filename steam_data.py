@@ -32,7 +32,7 @@ import torch
 from torch_geometric.data import Data
 import os
 from sklearn.cluster import KMeans
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity as sklearn_cosine_similarity
 
 
 
@@ -837,7 +837,7 @@ def main_17():
     cluster_cos_similarities = {}
     for cluster in abusive_user_clusters['cluster'].unique():
         cluster_users = abusive_user_clusters[abusive_user_clusters['cluster'] == cluster].drop(columns=['cluster'])
-        cos_sim_matrix = cosine_similarity(cluster_users)
+        cos_sim_matrix = sklearn_cosine_similarity(cluster_users)
         avg_cos_sim = np.mean(cos_sim_matrix)
         cluster_cos_similarities[cluster] = avg_cos_sim
 
