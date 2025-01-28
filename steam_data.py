@@ -802,37 +802,26 @@ def main_17():
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
 
-    # Calculate the Euclidean distance between the mean embeddings of abusive and non-abusive users
-    euclidean_distance = np.linalg.norm(mean_abusive - mean_non_abusive)
-    print(f"Euclidean distance between mean embeddings of abusive and non-abusive users: {euclidean_distance}")
-
-    # Calculate the cosine similarity between the mean embeddings of abusive and non-abusive users
     cosine_similarity = np.dot(mean_abusive, mean_non_abusive) / (np.linalg.norm(mean_abusive) * np.linalg.norm(mean_non_abusive))
     print(f"Cosine similarity between mean embeddings of abusive and non-abusive users: {cosine_similarity}")
 
-    # Calculate the average cosine similarity within abusive and non-abusive users
     avg_cos_sim_abusive = np.mean(cos_sim_abusive)
     avg_cos_sim_non_abusive = np.mean(cos_sim_non_abusive)
     print(f"Average cosine similarity within abusive users: {avg_cos_sim_abusive}")
     print(f"Average cosine similarity within non-abusive users: {avg_cos_sim_non_abusive}")
 
-    # Calculate the standard deviation of the cosine similarities within abusive and non-abusive users
     std_cos_sim_abusive = np.std(cos_sim_abusive)
     std_cos_sim_non_abusive = np.std(cos_sim_non_abusive)
     print(f"Standard deviation of cosine similarity within abusive users: {std_cos_sim_abusive}")
     print(f"Standard deviation of cosine similarity within non-abusive users: {std_cos_sim_non_abusive}")
 
-    # Perform clustering on abusive users using their 64 features
     kmeans = KMeans(n_clusters=5, random_state=42)
     abusive_clusters = kmeans.fit_predict(u_embs_abusive)
 
-    # Add cluster labels to the abusive user embeddings
     abusive_user_clusters = pd.DataFrame(u_embs_abusive, columns=[f'feature_{i}' for i in range(u_embs_abusive.shape[1])])
     abusive_user_clusters['cluster'] = abusive_clusters
 
-    print(f"Cluster labels for abusive users:\n {abusive_user_clusters['cluster'].value_counts()}")
-
-    # Calculate the cosine similarity between users of the same cluster
+    print(f"Cluster labels for abusive users:\n {abusive_user_clusters['cluster'].value_counts()}")r
 
     cluster_cos_similarities = {}
     for cluster in abusive_user_clusters['cluster'].unique():
@@ -842,6 +831,11 @@ def main_17():
         cluster_cos_similarities[cluster] = avg_cos_sim
 
     print(f"Cosine similarity between users of the same cluster:\n {cluster_cos_similarities}")
+
+    cluster_centroids = kmeans.cluster_centers_
+    euclidean_distances = np.linalg.norm(cluster_centroids - mean_non_abusive, axis=1)
+
+    print(f"Euclidean distances between each cluster centroid and the mean embedding of non-abusive users:\n {euclidean_distances}")
 if __name__ == "__main__":
     main_17()
 
