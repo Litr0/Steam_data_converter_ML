@@ -821,7 +821,7 @@ def main_17():
     abusive_user_clusters = pd.DataFrame(u_embs_abusive, columns=[f'feature_{i}' for i in range(u_embs_abusive.shape[1])])
     abusive_user_clusters['cluster'] = abusive_clusters
 
-    print(f"Cluster labels for abusive users:\n {abusive_user_clusters['cluster'].value_counts()}")r
+    print(f"Cluster labels for abusive users:\n {abusive_user_clusters['cluster'].value_counts()}")
 
     cluster_cos_similarities = {}
     for cluster in abusive_user_clusters['cluster'].unique():
