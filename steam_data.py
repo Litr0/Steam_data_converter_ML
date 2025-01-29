@@ -789,18 +789,10 @@ def main_17():
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
-        u_embs = preds['u_embs']
-        u_embs_np = preds['u_embs_np']
         u_embs_abusive = preds['u_embs_abusive']
-        u_embs_non_abusive = preds['u_embs_non_abusive']
-        mean_abusive = preds['mean_abusive']
-        std_abusive = preds['std_abusive']
         mean_non_abusive = preds['mean_non_abusive']
-        std_non_abusive = preds['std_non_abusive']
         cos_sim_abusive = preds['cos_sim_abusive']
-        mean_sim_abusive = preds['mean_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
-        mean_sim_non_abusive = preds['mean_sim_non_abusive']
 
     avg_cos_sim_abusive = np.mean(cos_sim_abusive)
     avg_cos_sim_non_abusive = np.mean(cos_sim_non_abusive)
