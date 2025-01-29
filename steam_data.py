@@ -760,6 +760,9 @@ def main_15():
     review_bombing_std = review_bombing_users[['neg', 'neu', 'pos']].std()
     non_review_bombing_std = non_review_bombing_users[['neg', 'neu', 'pos']].std()
 
+    print(f"STD of the negative, neutral and positive sentiment scores for review bombing users:\n {review_bombing_std}")
+    print(f"STD of the negative, neutral and positive sentiment scores for non review bombing users:\n {non_review_bombing_std}")
+
     # Save an histogram of the scores
     fig, ax = plt.subplots(figsize=(12, 6))
 
