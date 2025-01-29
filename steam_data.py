@@ -756,14 +756,18 @@ def main_15():
     review_bombing_mean = review_bombing_users[['neg', 'neu', 'pos']].mean()
     non_review_bombing_mean = non_review_bombing_users[['neg', 'neu', 'pos']].mean()
 
+    # Get the standard deviation for the negative, neutral and positive sentiment scores for the review
+    review_bombing_std = review_bombing_users[['neg', 'neu', 'pos']].std()
+    non_review_bombing_std = non_review_bombing_users[['neg', 'neu', 'pos']].std()
+
     # Save an histogram of the scores
     fig, ax = plt.subplots(figsize=(12, 6))
 
     bar_width = 0.35
     index = np.arange(3)
 
-    ax.bar(index, review_bombing_mean, bar_width, label='Review Bombing', color='red', alpha=0.7)
-    ax.bar(index + bar_width, non_review_bombing_mean, bar_width, label='Non Review Bombing', color='blue', alpha=0.7)
+    ax.bar(index, review_bombing_mean, bar_width, yerr=review_bombing_std, label='Review Bombing', color='red', alpha=0.7, capsize=5)
+    ax.bar(index + bar_width, non_review_bombing_mean, bar_width, yerr=non_review_bombing_std, label='Non Review Bombing', color='blue', alpha=0.7, capsize=5)
 
     ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
