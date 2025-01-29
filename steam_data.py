@@ -832,5 +832,5 @@ def main_17():
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
 
 if __name__ == "__main__":
-    main_17()
+    main_15()
 
