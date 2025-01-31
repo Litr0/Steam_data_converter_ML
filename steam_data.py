@@ -853,7 +853,45 @@ def main_18():
         cos_sim_abusive = preds['cos_sim_abusive']
         mean_sim_abusive = preds['mean_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
-        mean_sim_non_abusive = preds['mean_sim_non_abusive']    
+        mean_sim_non_abusive = preds['mean_sim_non_abusive']
+
+    train_preds = torch.exp(torch.tensor(train_logp))
+    val_preds = torch.exp(torch.tensor(val_logp))
+    test_preds = torch.exp(torch.tensor(test_logp))
+
+    train_preds_vals = extract_highest_probability_val(train_preds)
+    val_preds_vals = extract_highest_probability_val(val_preds)
+    test_preds_vals = extract_highest_probability_val(test_preds)
+
+
+    i = 0
+    train_preds_with_features = []
+    for feat in train_feats:
+        if len(feat) > 0:
+            train_preds_with_features.append((train_preds_vals[i], feat))
+            i += 1
+    
+    i = 0
+    val_preds_with_features = []
+    for feat in val_feats:
+        if len(feat) > 0:
+            val_preds_with_features.append((val_preds_vals[i], feat))
+            i += 1
+    
+    i = 0
+    test_preds_with_features = []
+    for feat in test_feats:
+        if len(feat) > 0:
+            test_preds_with_features.append((test_preds_vals[i], feat))
+            i += 1
+    
+    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
+
+    preds_zero = [pred for pred, features in all_preds if pred == 0]
+    preds_one = [pred for pred, features in all_preds if pred == 1]
+
+    print(f"Number of predictions 0: {len(preds_zero)}")
+    print(f"Number of predictions 1: {len(preds_one)}")    
 
 if __name__ == "__main__":
     main_18()
