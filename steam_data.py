@@ -857,14 +857,6 @@ def main_18():
 
     print(f"u_embs_abusive length: {len(u_embs_abusive)}")
 
-    train_labels_counts = pd.Series(train_labels).value_counts()
-    val_labels_counts = pd.Series(val_labels).value_counts()
-    test_labels_counts = pd.Series(test_labels).value_counts()
-
-    print(f"Train labels value counts:\n{train_labels_counts}")
-    print(f"Validation labels value counts:\n{val_labels_counts}")
-    print(f"Test labels value counts:\n{test_labels_counts}")
-
     train_preds = torch.exp(torch.tensor(train_logp))
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
@@ -878,7 +870,7 @@ def main_18():
     train_preds_with_features = []
     for feat in train_feats:
         if len(feat) > 0:
-            train_preds_with_features.append((train_preds_vals[i], feat))
+            train_preds_with_features.append((train_labels[i], feat))
             i += 1
     
     print(f"train_preds_with_features length: {len(train_preds_with_features)}")
@@ -887,7 +879,7 @@ def main_18():
     val_preds_with_features = []
     for feat in val_feats:
         if len(feat) > 0:
-            val_preds_with_features.append((val_preds_vals[i], feat))
+            val_preds_with_features.append((val_labels[i], feat))
             i += 1
     
     print(f"val_preds_with_features length: {len(val_preds_with_features)}")
@@ -896,7 +888,7 @@ def main_18():
     test_preds_with_features = []
     for feat in test_feats:
         if len(feat) > 0:
-            test_preds_with_features.append((test_preds_vals[i], feat))
+            test_preds_with_features.append((test_labels[i], feat))
             i += 1
 
     print(f"test_preds_with_features length: {len(test_preds_with_features)}")
