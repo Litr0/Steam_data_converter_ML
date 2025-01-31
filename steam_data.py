@@ -907,8 +907,8 @@ def main_18():
     zero_features = np.array(zero_features)
     one_features = np.array(one_features)
 
-    print(f"zero_features mean: {np.mean(zero_features)}")
-    print(f"one_features mean: {np.mean(one_features)}")    
+    print(f"zero_features shape: {zero_features.shape}")
+    print(f"one_features shape: {one_features.shape}")  
 
 if __name__ == "__main__":
     main_18()
