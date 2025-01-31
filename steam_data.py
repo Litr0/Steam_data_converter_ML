@@ -855,6 +855,8 @@ def main_18():
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
 
+    print(f"u_embs_abusive length: {len(u_embs_abusive)}")
+
     train_preds = torch.exp(torch.tensor(train_logp))
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
