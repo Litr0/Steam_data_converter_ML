@@ -865,6 +865,13 @@ def main_18():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
+    train_labels_counts = pd.Series(train_labels).value_counts()
+    val_labels_counts = pd.Series(val_labels).value_counts()
+    test_labels_counts = pd.Series(test_labels).value_counts()
+
+    print(f"Train labels value counts:\n{train_labels_counts}")
+    print(f"Validation labels value counts:\n{val_labels_counts}")
+    print(f"Test labels value counts:\n{test_labels_counts}")
 
     i = 0
     train_preds_with_features = []
