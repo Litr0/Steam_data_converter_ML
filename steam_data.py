@@ -904,11 +904,8 @@ def main_18():
     zero_features = [features for pred, features in all_preds if pred == 0]
     one_features = [features for pred, features in all_preds if pred == 1]
 
-    zero_features = np.array(zero_features)
-    one_features = np.array(one_features)
-
-    print(f"zero_features shape: {zero_features.shape}")
-    print(f"one_features shape: {one_features.shape}")  
+    print(f"Firt 5 features of predictions 0: {zero_features[:5]}")
+    print(f"Firt 5 features of predictions 1: {one_features[:5]}")
 
 if __name__ == "__main__":
     main_18()
