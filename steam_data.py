@@ -854,16 +854,6 @@ def main_18():
         mean_sim_abusive = preds['mean_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']    
-    
-    print(f"u_embs length: {len(u_embs)}")
-    print(f"u_embs_np length: {len(u_embs_np)}")
-
-    print(f"train_logp length: {len(train_logp)}")
-    print(f"train_labels length: {len(train_labels)}")
-    print(f"val_logp length: {len(val_logp)}")
-    print(f"val_labels length: {len(val_labels)}")
-    print(f"test_logp length: {len(test_logp)}")
-    print(f"test_labels length: {len(test_labels)}")
 
 if __name__ == "__main__":
     main_18()
