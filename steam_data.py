@@ -857,6 +857,10 @@ def main_18():
 
     print(f"u_embs_abusive length: {len(u_embs_abusive)}")
 
+    print(f"train_logp length: {len(train_logp)}")
+    print(f"val_logp length: {len(val_logp)}")
+    print(f"test_logp length: {len(test_logp)}")
+
     train_preds = torch.exp(torch.tensor(train_logp))
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
