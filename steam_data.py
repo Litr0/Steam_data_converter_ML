@@ -899,7 +899,16 @@ def main_18():
     preds_one = [pred for pred, features in all_preds if pred == 1]
 
     print(f"Number of predictions 0: {len(preds_zero)}")
-    print(f"Number of predictions 1: {len(preds_one)}")    
+    print(f"Number of predictions 1: {len(preds_one)}")
+
+    zero_features = [features for pred, features in all_preds if pred == 0]
+    one_features = [features for pred, features in all_preds if pred == 1]
+
+    zero_features = np.array(zero_features)
+    one_features = np.array(one_features)
+
+    print(f"zero_features mean: {np.mean(zero_features)}")
+    print(f"one_features mean: {np.mean(one_features)}")    
 
 if __name__ == "__main__":
     main_18()
