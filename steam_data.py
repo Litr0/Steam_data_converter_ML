@@ -904,8 +904,11 @@ def main_18():
     zero_features = [features for pred, features in all_preds if pred == 0]
     one_features = [features for pred, features in all_preds if pred == 1]
 
-    print(f"Firt 5 features of predictions 0: {zero_features[:5]}")
-    print(f"Firt 5 features of predictions 1: {one_features[:5]}")
+    mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
+    mean_one_features = [np.mean(features, axis=0) for features in one_features]
+
+    print(f"mean features of predictions 0: {mean_zero_features}")
+    print(f"mean features of predictions 1: {mean_one_features}")
 
 if __name__ == "__main__":
     main_18()
