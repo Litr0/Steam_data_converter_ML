@@ -857,9 +857,13 @@ def main_18():
 
     print(f"u_embs_abusive length: {len(u_embs_abusive)}")
 
-    print(f"train_logp first 5 elements: {train_logp[:5]}")
-    print(f"val_logp first 5 elements: {val_logp[:5]}")
-    print(f"test_logp first 5 elements: {test_logp[:5]}")
+    train_labels_counts = pd.Series(train_labels).value_counts()
+    val_labels_counts = pd.Series(val_labels).value_counts()
+    test_labels_counts = pd.Series(test_labels).value_counts()
+
+    print(f"Train labels value counts:\n{train_labels_counts}")
+    print(f"Validation labels value counts:\n{val_labels_counts}")
+    print(f"Test labels value counts:\n{test_labels_counts}")
 
     train_preds = torch.exp(torch.tensor(train_logp))
     val_preds = torch.exp(torch.tensor(val_logp))
