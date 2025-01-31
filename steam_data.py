@@ -873,16 +873,12 @@ def main_18():
             train_preds_with_features.append((train_labels[i], feat))
             i += 1
     
-    print(f"train_preds_with_features length: {len(train_preds_with_features)}")
-    
     i = 0
     val_preds_with_features = []
     for feat in val_feats:
         if len(feat) > 0:
             val_preds_with_features.append((val_labels[i], feat))
             i += 1
-    
-    print(f"val_preds_with_features length: {len(val_preds_with_features)}")
 
     i = 0
     test_preds_with_features = []
@@ -891,8 +887,6 @@ def main_18():
             test_preds_with_features.append((test_labels[i], feat))
             i += 1
 
-    print(f"test_preds_with_features length: {len(test_preds_with_features)}")
-    
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
     preds_zero = [pred for pred, features in all_preds if pred == 0]
@@ -907,8 +901,11 @@ def main_18():
     mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
     mean_one_features = [np.mean(features, axis=0) for features in one_features]
 
-    print(f"First 5 mean features of predictions 0: {mean_zero_features[:5]}")
-    print(f"First 5 mean features of predictions 1: {mean_one_features[:5]}")
+    mean_zero_features = np.mean(mean_zero_features, axis=0)
+    mean_one_features = np.mean(mean_one_features, axis=0)
+
+    print(f"Mean features for predictions 0: {mean_zero_features}")
+    print(f"Mean features for predictions 1: {mean_one_features}")
 
 if __name__ == "__main__":
     main_18()
