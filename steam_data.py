@@ -827,6 +827,44 @@ def main_17():
     for i, distance in enumerate(euclidean_distances):
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
 
+def main_18():
+    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+
+    with open(path, "rb") as f:
+        preds = pickle.load(f)
+        train_logp = preds['train_logp']
+        train_labels = preds['train_labels']
+        val_logp = preds['val_logp']
+        val_labels = preds['val_labels']
+        test_logp = preds['test_logp']
+        test_labels = preds['test_labels']
+        edge_features = preds['edge_features']
+        train_feats = preds['train_feats']
+        val_feats = preds['val_feats']
+        test_feats = preds['test_feats']
+        u_embs = preds['u_embs']
+        u_embs_np = preds['u_embs_np']
+        u_embs_abusive = preds['u_embs_abusive']
+        u_embs_non_abusive = preds['u_embs_non_abusive']
+        mean_abusive = preds['mean_abusive']
+        std_abusive = preds['std_abusive']
+        mean_non_abusive = preds['mean_non_abusive']
+        std_non_abusive = preds['std_non_abusive']
+        cos_sim_abusive = preds['cos_sim_abusive']
+        mean_sim_abusive = preds['mean_sim_abusive']
+        cos_sim_non_abusive = preds['cos_sim_non_abusive']
+        mean_sim_non_abusive = preds['mean_sim_non_abusive']    
+    
+    print(f"u_embs length: {len(u_embs)}")
+    print(f"u_embs_np length: {len(u_embs_np)}")
+
+    print(f"train_logp length: {len(train_logp)}")
+    print(f"train_labels length: {len(train_labels)}")
+    print(f"val_logp length: {len(val_logp)}")
+    print(f"val_labels length: {len(val_labels)}")
+    print(f"test_logp length: {len(test_logp)}")
+    print(f"test_labels length: {len(test_labels)}")
+
 if __name__ == "__main__":
-    main_17()
+    main_18()
 
