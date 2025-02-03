@@ -944,9 +944,9 @@ def main_19():
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
     
     # Check for duplicate values between train_feats, val_feats, and test_feats
-    train_feats_set = set(map(tuple, train_feats))
-    val_feats_set = set(map(tuple, val_feats))
-    test_feats_set = set(map(tuple, test_feats))
+    train_feats_set = set(map(lambda x: tuple(map(tuple, x)), train_feats))
+    val_feats_set = set(map(lambda x: tuple(map(tuple, x)), val_feats))
+    test_feats_set = set(map(lambda x: tuple(map(tuple, x)), test_feats))
 
     duplicates_train_val = train_feats_set.intersection(val_feats_set)
     duplicates_train_test = train_feats_set.intersection(test_feats_set)
