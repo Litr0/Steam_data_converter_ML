@@ -943,7 +943,10 @@ def main_19():
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
     
-    # Check for duplicate values between train_feats, val_feats, and test_feats
+    print(f"Number of train features: {len(train_feats)}")
+    print(f"Number of validation features: {len(val_feats)}")   
+    print(f"Number of test features: {len(test_feats)}")
+
     train_feats_set = set(map(lambda x: tuple(map(tuple, x)), train_feats))
     val_feats_set = set(map(lambda x: tuple(map(tuple, x)), val_feats))
     test_feats_set = set(map(lambda x: tuple(map(tuple, x)), test_feats))
