@@ -957,11 +957,11 @@ def main_19():
     print(f"Number of duplicate features between val and test: {len(duplicates_val_test)}")
 
     if duplicates_train_val:
-        print(f"Duplicate features between train and val: {duplicates_train_val}")
+        print(f"Duplicate features between train and val: {list(duplicates_train_val)[:5]}")
     if duplicates_train_test:
-        print(f"Duplicate features between train and test: {duplicates_train_test}")
+        print(f"Duplicate features between train and test: {list(duplicates_train_test)[:5]}")
     if duplicates_val_test:
-        print(f"Duplicate features between val and test: {duplicates_val_test}")
+        print(f"Duplicate features between val and test: {list(duplicates_val_test)[:5]}")
     
 
 
