@@ -854,6 +854,8 @@ def main_18():
         mean_sim_abusive = preds['mean_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
+        bad_edges = preds['bad_edges']
+        bad_edges_feats = preds['bad_edges_feats']
 
     print(f"u_embs_abusive length: {len(u_embs_abusive)}")
 
