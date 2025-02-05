@@ -828,7 +828,7 @@ def main_17():
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
 
 def main_18():
-    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+    path = "/home/bigdama/projects/bidyn/out/preds.pt"
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
