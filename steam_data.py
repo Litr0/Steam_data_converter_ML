@@ -785,7 +785,7 @@ def main_16():
     print_data_info(Data(x=data[1]))
 
 def main_17():
-    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+    path = "/home/bigdama/projects/bidyn/out/preds.pt"
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
