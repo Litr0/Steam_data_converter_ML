@@ -879,22 +879,28 @@ def main_18():
     train_preds_with_features = []
     for feat in train_feats:
         if len(feat) > 0:
-            train_preds_with_features.append((train_labels[i], feat))
-            i += 1
+            if feat in bad_edges_feats:
+                train_preds_with_features.append((1, feat))
+            else:
+                train_preds_with_features.append((0, feat))
     
     i = 0
     val_preds_with_features = []
     for feat in val_feats:
         if len(feat) > 0:
-            val_preds_with_features.append((val_labels[i], feat))
-            i += 1
+            if feat in bad_edges_feats:
+                val_preds_with_features.append((1, feat))
+            else:
+                val_preds_with_features.append((0, feat))
 
     i = 0
     test_preds_with_features = []
     for feat in test_feats:
         if len(feat) > 0:
-            test_preds_with_features.append((test_labels[i], feat))
-            i += 1
+            if feat in bad_edges_feats:
+                test_preds_with_features.append((1, feat))
+            else:
+                test_preds_with_features.append((0, feat))
 
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
