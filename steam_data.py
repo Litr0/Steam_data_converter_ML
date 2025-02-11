@@ -923,5 +923,5 @@ def main_18():
     print(f"Mean features for predictions 1: {mean_one_features}")
 
 if __name__ == "__main__":
-    main_17()
+    main_18()
 
