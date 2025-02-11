@@ -877,7 +877,7 @@ def main_18():
 
     i = 0
     train_preds_with_features = []
-    for feat in train_feats:
+    for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
         if len(feat) > 0:
             if feat in bad_edges_feats:
                 train_preds_with_features.append((1, feat))
@@ -886,7 +886,7 @@ def main_18():
     
     i = 0
     val_preds_with_features = []
-    for feat in val_feats:
+    for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
         if len(feat) > 0:
             if feat in bad_edges_feats:
                 val_preds_with_features.append((1, feat))
@@ -895,7 +895,7 @@ def main_18():
 
     i = 0
     test_preds_with_features = []
-    for feat in test_feats:
+    for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
         if len(feat) > 0:
             if feat in bad_edges_feats:
                 test_preds_with_features.append((1, feat))
