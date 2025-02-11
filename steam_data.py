@@ -804,7 +804,7 @@ def main_17():
     print(f"Standard deviation of cosine similarity within abusive users: {std_cos_sim_abusive}")
     print(f"Standard deviation of cosine similarity within non-abusive users: {std_cos_sim_non_abusive}")
 
-    kmeans = KMeans(n_clusters=5, random_state=42)
+    kmeans = KMeans(n_clusters=7, random_state=42)
     abusive_clusters = kmeans.fit_predict(u_embs_abusive)
 
     abusive_user_clusters = pd.DataFrame(u_embs_abusive, columns=[f'feature_{i}' for i in range(u_embs_abusive.shape[1])])
