@@ -883,7 +883,7 @@ def main_18():
                 train_preds_with_features.append((1, feat, train_preds_vals[i], train_labels[i]))
             else:
                 train_preds_with_features.append((0, feat, train_preds_vals[i], train_labels[i]))
-        i += 1
+            i += 1
     
     i = 0
     val_preds_with_features = []
@@ -893,7 +893,7 @@ def main_18():
                 val_preds_with_features.append((1, feat, val_preds_vals[i], val_labels[i]))
             else:
                 val_preds_with_features.append((0, feat, val_preds_vals[i], val_labels[i]))
-        i += 1
+            i += 1
     i = 0
     test_preds_with_features = []
     for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
@@ -902,7 +902,7 @@ def main_18():
                 test_preds_with_features.append((1, feat, test_preds_vals[i], test_labels[i]))
             else:
                 test_preds_with_features.append((0, feat, test_preds_vals[i], test_labels[i]))
-        i += 1
+            i += 1
 
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
