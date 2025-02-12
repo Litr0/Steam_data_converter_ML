@@ -914,6 +914,18 @@ def main_18():
     accuracy = correct_predictions / len(train_preds_vals)
     print(f"Accuracy of train_preds_with_features compared to train_preds_vals: {accuracy:.2f}")
 
+    correct = 0
+    incorrect_one = 0
+    for i, (pred, _, _, _) in enumerate(train_preds_with_features):
+        if pred == train_labels[i]:
+            correct += 1
+        elif pred == 1:
+            incorrect_one += 1
+    
+    accuracy = correct / len(train_labels)
+    print(f"Accuracy of train_preds_with_features compared to train_labels: {accuracy:.2f}")
+    print(f"Number of incorrect predictions 1: {incorrect_one}")
+
     correct_predictions = 0
     for i, (pred, _, _, _) in enumerate(val_preds_with_features):
         if pred == val_preds_vals[i]:
@@ -922,6 +934,18 @@ def main_18():
     accuracy = correct_predictions / len(val_preds_vals)
     print(f"Accuracy of val_preds_with_features compared to val_preds_vals: {accuracy:.2f}")
 
+    correct = 0
+    incorrect_one = 0
+    for i, (pred, _, _, _) in enumerate(val_preds_with_features):
+        if pred == val_labels[i]:
+            correct += 1
+        elif pred == 1:
+            incorrect_one += 1
+    
+    accuracy = correct / len(val_labels)
+    print(f"Accuracy of val_preds_with_features compared to val_labels: {accuracy:.2f}")
+    print(f"Number of incorrect predictions 1: {incorrect_one}")
+
     correct_predictions = 0
     for i, (pred, _, _, _) in enumerate(test_preds_with_features):
         if pred == test_preds_vals[i]:
@@ -929,6 +953,18 @@ def main_18():
     
     accuracy = correct_predictions / len(test_preds_vals)
     print(f"Accuracy of test_preds_with_features compared to test_preds_vals: {accuracy:.2f}")
+
+    correct = 0
+    incorrect_one = 0
+    for i, (pred, _, _, _) in enumerate(test_preds_with_features):
+        if pred == test_labels[i]:
+            correct += 1
+        elif pred == 1:
+            incorrect_one += 1
+    
+    accuracy = correct / len(test_labels)
+    print(f"Accuracy of test_preds_with_features compared to test_labels: {accuracy:.2f}")
+    print(f"Number of incorrect predictions 1: {incorrect_one}")
 
     preds_zero = [pred for pred, features, _, _ in all_preds if pred == 0]
     preds_one = [pred for pred, features, _, _ in all_preds if pred == 1]
