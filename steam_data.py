@@ -880,9 +880,9 @@ def main_18():
     for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
         if len(feat) > 0:
             if any(bad_feat in bad_edges_feats for bad_feat in feat):
-                train_preds_with_features.append((1, feat, train_preds_vals[i]))
+                train_preds_with_features.append((1, feat, train_preds_vals[i], train_labels[i]))
             else:
-                train_preds_with_features.append((0, feat, train_preds_vals[i]))
+                train_preds_with_features.append((0, feat, train_preds_vals[i], train_labels[i]))
         i += 1
     
     i = 0
@@ -890,24 +890,24 @@ def main_18():
     for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
         if len(feat) > 0:
             if any(bad_feat in bad_edges_feats for bad_feat in feat):
-                val_preds_with_features.append((1, feat, val_preds_vals[i]))
+                val_preds_with_features.append((1, feat, val_preds_vals[i], val_labels[i]))
             else:
-                val_preds_with_features.append((0, feat, val_preds_vals[i]))
+                val_preds_with_features.append((0, feat, val_preds_vals[i], val_labels[i]))
         i += 1
     i = 0
     test_preds_with_features = []
     for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
         if len(feat) > 0:
             if any(bad_feat in bad_edges_feats for bad_feat in feat):
-                test_preds_with_features.append((1, feat, test_preds_vals[i]))
+                test_preds_with_features.append((1, feat, test_preds_vals[i], test_labels[i]))
             else:
-                test_preds_with_features.append((0, feat, test_preds_vals[i]))
+                test_preds_with_features.append((0, feat, test_preds_vals[i], test_labels[i]))
         i += 1
 
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
 
     correct_predictions = 0
-    for i, (pred, _) in enumerate(train_preds_with_features):
+    for i, (pred, _, _, _) in enumerate(train_preds_with_features):
         if pred == train_preds_vals[i]:
             correct_predictions += 1
 
@@ -915,7 +915,7 @@ def main_18():
     print(f"Accuracy of train_preds_with_features compared to train_preds_vals: {accuracy:.2f}")
 
     correct_predictions = 0
-    for i, (pred, _) in enumerate(val_preds_with_features):
+    for i, (pred, _, _, _) in enumerate(val_preds_with_features):
         if pred == val_preds_vals[i]:
             correct_predictions += 1
     
@@ -923,21 +923,21 @@ def main_18():
     print(f"Accuracy of val_preds_with_features compared to val_preds_vals: {accuracy:.2f}")
 
     correct_predictions = 0
-    for i, (pred, _) in enumerate(test_preds_with_features):
+    for i, (pred, _, _, _) in enumerate(test_preds_with_features):
         if pred == test_preds_vals[i]:
             correct_predictions += 1
     
     accuracy = correct_predictions / len(test_preds_vals)
     print(f"Accuracy of test_preds_with_features compared to test_preds_vals: {accuracy:.2f}")
 
-    preds_zero = [pred for pred, features, _ in all_preds if pred == 0]
-    preds_one = [pred for pred, features, _ in all_preds if pred == 1]
+    preds_zero = [pred for pred, features, _, _ in all_preds if pred == 0]
+    preds_one = [pred for pred, features, _, _ in all_preds if pred == 1]
 
     print(f"Number of predictions 0: {len(preds_zero)}")
     print(f"Number of predictions 1: {len(preds_one)}")
 
-    zero_features = [features for pred, features, _ in all_preds if pred == 0]
-    one_features = [features for pred, features, _ in all_preds if pred == 1]
+    zero_features = [features for pred, features, _, _ in all_preds if pred == 0]
+    one_features = [features for pred, features, _, _ in all_preds if pred == 1]
 
     mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
     mean_one_features = [np.mean(features, axis=0) for features in one_features]
@@ -948,14 +948,32 @@ def main_18():
     print(f"Mean features for predictions 0: {mean_zero_features}")
     print(f"Mean features for predictions 1: {mean_one_features}")
 
-    preds_zero = [pred for _, _, pred in all_preds if pred == 0]
-    preds_one = [pred for _, _, pred in all_preds if pred == 1]
+    preds_zero = [pred for _, _, pred, _ in all_preds if pred == 0]
+    preds_one = [pred for _, _, pred, _ in all_preds if pred == 1]
 
     print(f"Numbre of predictions 0: {len(preds_zero)}")
     print(f"Number of predictions 1: {len(preds_one)}")
 
-    zero_features = [features for _, features, pred in all_preds if pred == 0]
-    one_features = [features for _, features, pred in all_preds if pred == 1]
+    zero_features = [features for _, features, pred, _ in all_preds if pred == 0]
+    one_features = [features for _, features, pred, _ in all_preds if pred == 1]
+
+    mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
+    mean_one_features = [np.mean(features, axis=0) for features in one_features]
+
+    mean_zero_features = np.mean(mean_zero_features, axis=0)
+    mean_one_features = np.mean(mean_one_features, axis=0)
+
+    print(f"Mean features for predictions 0: {mean_zero_features}")
+    print(f"Mean features for predictions 1: {mean_one_features}")
+
+    preds_zero = [pred for _, _, _, pred in all_preds if pred == 0]
+    preds_one = [pred for _, _, _, pred in all_preds if pred == 1]
+
+    print(f"Number of predictions 0: {len(preds_zero)}")
+    print(f"Number of predictions 1: {len(preds_one)}")
+
+    zero_features = [features for _, features, _, pred in all_preds if pred == 0]
+    one_features = [features for _, features, _, pred in all_preds if pred == 1]
 
     mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
     mean_one_features = [np.mean(features, axis=0) for features in one_features]
