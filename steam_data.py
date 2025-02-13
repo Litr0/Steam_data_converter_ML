@@ -1052,10 +1052,20 @@ def main_19():
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
         bad_edges = preds['bad_edges']
         bad_edges_feats = preds['bad_edges_feats']
-
     
+    train_preds = torch.exp(torch.tensor(train_logp))
+    val_preds = torch.exp(torch.tensor(val_logp))
+    test_preds = torch.exp(torch.tensor(test_logp))
 
-    
+    train_preds_vals = extract_highest_probability_val(train_preds)
+    val_preds_vals = extract_highest_probability_val(val_preds)
+    test_preds_vals = extract_highest_probability_val(test_preds)
+
+    print("u_to_idx length:", len(u_to_idx))
+    print("u_labels length:", len(u_labels))
+    print("d_labels length:", len(d_labels))
+    print("train_feats length:", len(train_feats))
+        
 if __name__ == "__main__":
     main_18()
 
