@@ -1065,7 +1065,46 @@ def main_19():
     print("u_labels length:", len(u_labels))
     print("d_labels length:", len(d_labels))
     print("train_feats length:", len(train_feats))
+
+    new_train_labels = [[] for _ in range(len(train_feats))]
+    for u, i in u_to_idx.items():
+        if len(train_feats[i]) > 0:
+            new_train_labels[i] = d_labels[u]
+    
+    new_val_labels = [[] for _ in range(len(val_feats))]
+    for u, i in u_to_idx.items():
+        if len(val_feats[i]) > 0:
+            new_val_labels[i] = d_labels[u]
+    
+    new_test_labels = [[] for _ in range(len(test_feats))]
+    for u, i in u_to_idx.items():
+        if len(test_feats[i]) > 0:
+            new_test_labels[i] = d_labels[u]
+
+    new_u_labels = []
+    for train_label, val_label, test_label in zip(new_train_labels, new_val_labels, new_test_labels):
+        if train_label != []:
+            new_u_labels.append(train_label)
         
+        elif val_label != []:
+            new_u_labels.append(val_label)
+        
+        elif test_label != []:
+            new_u_labels.append(test_label)
+
+    # Compare u_labels and new_u_labels
+    u_labels_set = set(u_labels)
+    new_u_labels_set = set(new_u_labels)
+
+    # Check if the sets are equal
+    if u_labels_set == new_u_labels_set:
+        print("u_labels and new_u_labels are equal.")
+    else:
+        print("u_labels and new_u_labels are not equal.")
+
+    # Print the differences
+    print("Labels in u_labels but not in new_u_labels:", u_labels_set - new_u_labels_set)
+    print("Labels in new_u_labels but not in u_labels:", new_u_labels_set - u_labels_set)
 if __name__ == "__main__":
     main_18()
 
