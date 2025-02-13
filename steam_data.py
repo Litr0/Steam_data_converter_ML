@@ -1106,5 +1106,5 @@ def main_19():
     print("Labels in u_labels but not in new_u_labels:", u_labels_set - new_u_labels_set)
     print("Labels in new_u_labels but not in u_labels:", new_u_labels_set - u_labels_set)
 if __name__ == "__main__":
-    main_18()
+    main_19()
 
