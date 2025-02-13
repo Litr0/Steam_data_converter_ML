@@ -1025,6 +1025,9 @@ def main_19():
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
+        u_labels = preds['u_labels']
+        u_to_idx = preds['u_to_idx']
+        d_labels = preds['d_labels']
         train_logp = preds['train_logp']
         train_labels = preds['train_labels']
         val_logp = preds['val_logp']
@@ -1049,10 +1052,10 @@ def main_19():
         mean_sim_non_abusive = preds['mean_sim_non_abusive']
         bad_edges = preds['bad_edges']
         bad_edges_feats = preds['bad_edges_feats']
+
     
-    print(f"First 5 u_embs_np: {u_embs_np[:5]}")
 
     
 if __name__ == "__main__":
-    main_19()
+    main_18()
 
