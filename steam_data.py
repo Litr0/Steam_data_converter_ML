@@ -1019,7 +1019,40 @@ def main_18():
 
     print(f"Mean features for predictions 0: {mean_zero_features}")
     print(f"Mean features for predictions 1: {mean_one_features}")
+
+def main_19():
+    path = "/home/bigdama/projects/bidyn/out/preds.pt"
+
+    with open(path, "rb") as f:
+        preds = pickle.load(f)
+        train_logp = preds['train_logp']
+        train_labels = preds['train_labels']
+        val_logp = preds['val_logp']
+        val_labels = preds['val_labels']
+        test_logp = preds['test_logp']
+        test_labels = preds['test_labels']
+        edge_features = preds['edge_features']
+        train_feats = preds['train_feats']
+        val_feats = preds['val_feats']
+        test_feats = preds['test_feats']
+        u_embs = preds['u_embs']
+        u_embs_np = preds['u_embs_np']
+        u_embs_abusive = preds['u_embs_abusive']
+        u_embs_non_abusive = preds['u_embs_non_abusive']
+        mean_abusive = preds['mean_abusive']
+        std_abusive = preds['std_abusive']
+        mean_non_abusive = preds['mean_non_abusive']
+        std_non_abusive = preds['std_non_abusive']
+        cos_sim_abusive = preds['cos_sim_abusive']
+        mean_sim_abusive = preds['mean_sim_abusive']
+        cos_sim_non_abusive = preds['cos_sim_non_abusive']
+        mean_sim_non_abusive = preds['mean_sim_non_abusive']
+        bad_edges = preds['bad_edges']
+        bad_edges_feats = preds['bad_edges_feats']
+    
+    print(f"First 5 u_embs_np: {u_embs_np[:5]}")
+
     
 if __name__ == "__main__":
-    main_18()
+    main_19()
 
