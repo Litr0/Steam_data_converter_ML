@@ -1085,13 +1085,13 @@ def main_19():
 
     new_u_labels = []
     for train_label, val_label, test_label in zip(new_train_labels, new_val_labels, new_test_labels):
-        if is_empty(train_label):
+        if not train_label:
             new_u_labels.append(train_label)
         
-        elif is_empty(val_label):
+        elif not val_label:
             new_u_labels.append(val_label)
         
-        elif is_empty(test_label):
+        elif not test_label:
             new_u_labels.append(test_label)
 
     print("First 10 u_labels:", u_labels[:10])
