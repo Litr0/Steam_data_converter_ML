@@ -1066,33 +1066,26 @@ def main_19():
     print("d_labels length:", len(d_labels))
     print("train_feats length:", len(train_feats))
 
+
+    new_u_labels = [[] for _ in range(len(train_feats))]
     new_train_labels = [[] for _ in range(len(train_feats))]
     for u, i in u_to_idx.items():
         if len(train_feats[i]) > 0:
             new_train_labels[i] = d_labels[u]
+            new_u_labels[i] = d_labels[u]
     
     new_val_labels = [[] for _ in range(len(val_feats))]
     for u, i in u_to_idx.items():
         if len(val_feats[i]) > 0:
             new_val_labels[i] = d_labels[u]
+            new_u_labels[i] = d_labels[u]
+
     
     new_test_labels = [[] for _ in range(len(test_feats))]
     for u, i in u_to_idx.items():
         if len(test_feats[i]) > 0:
             new_test_labels[i] = d_labels[u]
-
-    print("")
-
-    new_u_labels = []
-    for train_label, val_label, test_label in zip(new_train_labels, new_val_labels, new_test_labels):
-        if not train_label:
-            new_u_labels.append(train_label)
-        
-        elif not val_label:
-            new_u_labels.append(val_label)
-        
-        elif not test_label:
-            new_u_labels.append(test_label)
+            new_u_labels[i] = d_labels[u]
 
     print("First 10 u_labels:", u_labels[:10])
     print("First 10 new_u_labels:", new_u_labels[:10])
