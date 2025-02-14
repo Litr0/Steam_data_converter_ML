@@ -1027,6 +1027,10 @@ def main_19():
         preds = pickle.load(f)
         u_labels = preds['u_labels']
         u_to_idx = preds['u_to_idx']
+        train_us = preds['train_us']
+        u_train_mask = preds['u_train_mask']
+        u_val_mask = preds['u_val_mask']
+        u_test_mask = preds['u_test_mask']
         d_labels = preds['d_labels']
         train_logp = preds['train_logp']
         train_labels = preds['train_labels']
@@ -1093,7 +1097,6 @@ def main_19():
     comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
 
     print(f"Are all elements of u_labels and new_u_labels equal? {comparison_result}")
-
 
     new_train_labels = [label for label in new_train_labels if isinstance(label, np.int64)]
     new_val_labels = [label for label in new_val_labels if isinstance(label, np.int64)]
