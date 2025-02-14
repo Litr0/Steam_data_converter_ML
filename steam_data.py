@@ -1090,6 +1090,14 @@ def main_19():
     print("First 10 u_labels:", u_labels[:10])
     print("First 10 new_u_labels:", new_u_labels[:10])
 
+    u_labels = u_labels.tolist()
+
+    # Compare all elements of u_labels and new_u_labels
+    comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
+
+    print(f"Are all elements of u_labels and new_u_labels equal? {comparison_result}")
+
+
 if __name__ == "__main__":
     main_19()
 
