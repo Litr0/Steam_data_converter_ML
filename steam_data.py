@@ -1081,30 +1081,22 @@ def main_19():
         if len(test_feats[i]) > 0:
             new_test_labels[i] = d_labels[u]
 
+    print("")
+
     new_u_labels = []
     for train_label, val_label, test_label in zip(new_train_labels, new_val_labels, new_test_labels):
-        if train_label != []:
+        if is_empty(train_label):
             new_u_labels.append(train_label)
         
-        elif val_label != []:
+        elif is_empty(val_label):
             new_u_labels.append(val_label)
         
-        elif test_label != []:
+        elif is_empty(test_label):
             new_u_labels.append(test_label)
 
-    # Compare u_labels and new_u_labels
-    u_labels_set = set(u_labels)
-    new_u_labels_set = set(new_u_labels)
+    print("First 10 u_labels:", u_labels[:10])
+    print("First 10 new_u_labels:", new_u_labels[:10])
 
-    # Check if the sets are equal
-    if u_labels_set == new_u_labels_set:
-        print("u_labels and new_u_labels are equal.")
-    else:
-        print("u_labels and new_u_labels are not equal.")
-
-    # Print the differences
-    print("Labels in u_labels but not in new_u_labels:", u_labels_set - new_u_labels_set)
-    print("Labels in new_u_labels but not in u_labels:", new_u_labels_set - u_labels_set)
 if __name__ == "__main__":
     main_19()
 
