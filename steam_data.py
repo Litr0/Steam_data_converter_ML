@@ -1065,37 +1065,62 @@ def main_19():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
-    print("u_train_mask length:", len(u_train_mask))
-    print("First 5 elements of u_train_mask:", u_train_mask[:5])
-
-    print("train_preds length:", len(train_preds))
-    print("val_preds length:", len(val_preds))
-    print("test_preds length:", len(test_preds))
-
     print("u_to_idx length:", len(u_to_idx))
     print("u_labels length:", len(u_labels))
     print("d_labels length:", len(d_labels))
     print("train_feats length:", len(train_feats))
 
+    train_mask = [None for _ in range(len(u_train_mask))]
+    for u, i in u_to_idx.items():
+        train_mask[u] = u_train_mask[i]
+    
+    val_mask = [None for _ in range(len(u_val_mask))]
+    for u, i in u_to_idx.items():
+        val_mask[u] = u_val_mask[i]
 
+    test_mask = [None for _ in range(len(u_test_mask))]
+    for u, i in u_to_idx.items():
+        test_mask[u] = u_test_mask[i]
+
+    i = 0
+    train_preds_labels = [None for _ in range(len(train_mask))]
+    for bool_val in train_mask:
+        if bool_val:
+            train_preds_labels[i] = train_preds_vals[i]
+        i += 1
+    
+    i = 0
+    val_preds_labels = [None for _ in range(len(val_mask))]
+    for bool_val in val_mask:
+        if bool_val:
+            val_preds_labels[i] = val_preds_vals[i]
+        i += 1
+    
+    i = 0
+    test_preds_labels = [None for _ in range(len(test_mask))]
+    for bool_val in test_mask:
+        if bool_val:
+            test_preds_labels[i] = test_preds_vals[i]
+        i += 1
+        
     new_u_labels = [[] for _ in range(len(train_feats))]
     new_train_labels = [[] for _ in range(len(train_feats))]
     for u, i in u_to_idx.items():
         if len(train_feats[i]) > 0:
-            new_train_labels[i] = d_labels[u]
+            new_train_labels[i] = train_preds_labels[u]
             new_u_labels[i] = d_labels[u]
     
     new_val_labels = [[] for _ in range(len(val_feats))]
     for u, i in u_to_idx.items():
         if len(val_feats[i]) > 0:
-            new_val_labels[i] = d_labels[u]
+            new_val_labels[i] = val_preds_labels[u]
             new_u_labels[i] = d_labels[u]
 
     
     new_test_labels = [[] for _ in range(len(test_feats))]
     for u, i in u_to_idx.items():
         if len(test_feats[i]) > 0:
-            new_test_labels[i] = d_labels[u]
+            new_test_labels[i] = test_preds_labels[u]
             new_u_labels[i] = d_labels[u]
 
     u_labels = u_labels.tolist()
