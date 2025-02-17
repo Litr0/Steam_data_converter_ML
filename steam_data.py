@@ -1088,7 +1088,7 @@ def main_19():
     train_preds_labels = [[] for _ in range(len(train_mask))]
     for bool_val in u_train_mask:
         if bool_val:
-            train_preds_labels[i] = train_preds_vals[j]
+            train_preds_labels[i] = train_labels[j]
             j += 1
         i += 1
     
@@ -1097,7 +1097,7 @@ def main_19():
     val_preds_labels = [[] for _ in range(len(val_mask))]
     for bool_val in u_val_mask:
         if bool_val:
-            val_preds_labels[i] = val_preds_vals[j]
+            val_preds_labels[i] = val_labels[j]
             j += 1
         i += 1
     
@@ -1106,7 +1106,7 @@ def main_19():
     test_preds_labels = [[] for _ in range(len(test_mask))]
     for bool_val in u_test_mask:
         if bool_val:
-            test_preds_labels[i] = test_preds_vals[j]
+            test_preds_labels[i] = test_labels[j]
             j += 1
         i += 1
         
@@ -1114,20 +1114,20 @@ def main_19():
     new_train_labels = [[] for _ in range(len(train_feats))]
     for u, i in u_to_idx.items():
         if len(train_feats[i]) > 0:
-            new_train_labels[i] = d_labels[u]
+            new_train_labels[i] = train_preds_labels[u]
             new_u_labels[i] = d_labels[u]
     
     new_val_labels = [[] for _ in range(len(val_feats))]
     for u, i in u_to_idx.items():
         if len(val_feats[i]) > 0:
-            new_val_labels[i] = d_labels[u]
+            new_val_labels[i] = val_preds_labels[u]
             new_u_labels[i] = d_labels[u]
 
     
     new_test_labels = [[] for _ in range(len(test_feats))]
     for u, i in u_to_idx.items():
         if len(test_feats[i]) > 0:
-            new_test_labels[i] = d_labels[u]
+            new_test_labels[i] = test_preds_vals[u]
             new_u_labels[i] = d_labels[u]
 
     u_labels = u_labels.tolist()
