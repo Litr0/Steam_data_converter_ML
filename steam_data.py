@@ -1073,15 +1073,15 @@ def main_19():
 
     train_mask = [[] for _ in range(len(u_train_mask))]
     for u, i in u_to_idx.items():
-        train_mask[i] = u_train_mask[u]
+        train_mask[u] = u_train_mask[i]
     
     val_mask = [[] for _ in range(len(u_val_mask))]
     for u, i in u_to_idx.items():
-        val_mask[i] = u_val_mask[u]
+        val_mask[u] = u_val_mask[i]
 
     test_mask = [[] for _ in range(len(u_test_mask))]
     for u, i in u_to_idx.items():
-        test_mask[i] = u_test_mask[u]
+        test_mask[u] = u_test_mask[i]
 
     i = 0
     j = 0
@@ -1114,20 +1114,20 @@ def main_19():
     new_train_labels = [[] for _ in range(len(train_feats))]
     for u, i in u_to_idx.items():
         if len(train_feats[i]) > 0:
-            new_train_labels[i] = d_labels[u]
+            new_train_labels[i] = train_preds_labels[u]
             new_u_labels[i] = d_labels[u]
     
     new_val_labels = [[] for _ in range(len(val_feats))]
     for u, i in u_to_idx.items():
         if len(val_feats[i]) > 0:
-            new_val_labels[i] = d_labels[u]
+            new_val_labels[i] = val_preds_labels[u]
             new_u_labels[i] = d_labels[u]
 
     
     new_test_labels = [[] for _ in range(len(test_feats))]
     for u, i in u_to_idx.items():
         if len(test_feats[i]) > 0:
-            new_test_labels[i] = d_labels[u]
+            new_test_labels[i] = test_preds_labels[u]
             new_u_labels[i] = d_labels[u]
 
     u_labels = u_labels.tolist()
@@ -1143,24 +1143,30 @@ def main_19():
 
     i = 0    
     train_preds_with_features = []
-    for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
+    for u, i in u_to_idx.items():
+        train_preds_with_features.append((train_feats[i], d_labels[u]))
+    """ for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
         if len(feat) > 0:
             train_preds_with_features.append((feat, new_train_labels[i]))
-            i += 1
+            i += 1 """
     
     i = 0
     val_preds_with_features = []
-    for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
+    for u, i in u_to_idx.items():
+        val_preds_with_features.append((val_feats[i], d_labels[u]))
+    """ for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
         if len(feat) > 0:
             val_preds_with_features.append((feat, new_val_labels[i]))
-            i += 1
+            i += 1 """
 
     i = 0
     test_preds_with_features = []
-    for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
+    for u, i in u_to_idx.items():
+        test_preds_with_features.append((test_feats[i], d_labels[u]))
+    """ for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
         if len(feat) > 0:
             test_preds_with_features.append((feat, new_test_labels[i]))
-            i += 1
+            i += 1 """
 
     
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
