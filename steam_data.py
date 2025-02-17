@@ -1145,9 +1145,9 @@ def main_19():
 
     print(f"Are all elements of u_labels and new_u_labels equal? {comparison_result}")
 
-    new_train_labels = [label for label in new_train_labels if isinstance(label, int64)]
-    new_val_labels = [label for label in new_val_labels if isinstance(label, int64)]
-    new_test_labels = [label for label in new_test_labels if isinstance(label, int64)]
+    new_train_labels = [label for label in new_train_labels if label == 0 or label == 1]
+    new_val_labels = [label for label in new_val_labels if label == 0 or label == 1]
+    new_test_labels = [label for label in new_test_labels if label == 0 or label == 1]
     print(f"Number of new train labels: {len(new_train_labels)}")
     print(f"Number of new validation labels: {len(new_val_labels)}")
     print(f"Number of new test labels: {len(new_test_labels)}")
