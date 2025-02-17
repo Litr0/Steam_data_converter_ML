@@ -786,16 +786,19 @@ def main_16():
     print_data_info(Data(x=data[1]))
 
 def main_17():
-    path = "/home/bigdama/projects/bidyn/out/pred.pt"
+    path = "/home/bigdama/projects/bidyn/out/preds_1.pt"
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
         u_embs = preds['u_embs']
         u_embs_np = preds['u_embs_np']
+        u_labels = preds['u_labels']
         u_embs_abusive = preds['u_embs_abusive']
         mean_non_abusive = preds['mean_non_abusive']
         cos_sim_abusive = preds['cos_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
+
+    u_labels_np = u_labels.numpy()
 
     avg_cos_sim_abusive = np.mean(cos_sim_abusive)
     avg_cos_sim_non_abusive = np.mean(cos_sim_non_abusive)
@@ -834,9 +837,14 @@ def main_17():
     user_clusters = k_means_all.fit_predict(u_embs_np)
 
     user_clusters_df = pd.DataFrame(u_embs_np, columns=[f'feature_{i}' for i in range(u_embs_np.shape[1])])
+    user_clusters_df['u_labels'] = u_labels_np
     user_clusters_df['cluster'] = user_clusters
 
     print(f"Cluster labels for all users:\n {user_clusters_df['cluster'].value_counts()}")
+
+    for cluster in user_clusters_df['cluster'].unique():
+        cluster_labels = user_clusters_df[user_clusters_df['cluster'] == cluster]['u_labels']
+        print(f"Cluster {cluster} labels count:\n {cluster_labels.value_counts()}")
 
     cluster_cos_similarities_all = {}
     for cluster in user_clusters_df['cluster'].unique():
