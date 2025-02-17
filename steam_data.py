@@ -1108,6 +1108,10 @@ def main_19():
             test_preds_labels[i] = test_preds_vals[j]
             j += 1
         i += 1
+    
+    print("value counts of train_preds_labels:", pd.Series(train_preds_labels).value_counts())
+    print("value counts of val_preds_labels:", pd.Series(val_preds_labels).value_counts())
+    print("value counts of test_preds_labels:", pd.Series(test_preds_labels).value_counts())
         
     new_u_labels = [[] for _ in range(len(train_feats))]
     new_train_labels = [[] for _ in range(len(train_feats))]
