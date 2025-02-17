@@ -1073,15 +1073,15 @@ def main_19():
 
     train_mask = [[] for _ in range(len(u_train_mask))]
     for u, i in u_to_idx.items():
-        train_mask[u] = u_train_mask[i]
+        train_mask[i] = u_train_mask[u]
     
     val_mask = [[] for _ in range(len(u_val_mask))]
     for u, i in u_to_idx.items():
-        val_mask[u] = u_val_mask[i]
+        val_mask[i] = u_val_mask[u]
 
     test_mask = [[] for _ in range(len(u_test_mask))]
     for u, i in u_to_idx.items():
-        test_mask[u] = u_test_mask[i]
+        test_mask[i] = u_test_mask[u]
 
     i = 0
     j = 0
@@ -1109,10 +1109,6 @@ def main_19():
             test_preds_labels[i] = test_preds_vals[j]
             j += 1
         i += 1
-    
-    print("value counts of train_preds_labels:", pd.Series(train_preds_labels).value_counts())
-    print("value counts of val_preds_labels:", pd.Series(val_preds_labels).value_counts())
-    print("value counts of test_preds_labels:", pd.Series(test_preds_labels).value_counts())
         
     new_u_labels = [[] for _ in range(len(train_feats))]
     new_train_labels = [[] for _ in range(len(train_feats))]
@@ -1136,10 +1132,6 @@ def main_19():
 
     u_labels = u_labels.tolist()
 
-    print(f"Value counts of new_train_labels: {pd.Series(new_train_labels).value_counts()}")
-    print(f"Value counts of new_val_labels: {pd.Series(new_val_labels).value_counts()}")
-    print(f"Value counts of new_test_labels: {pd.Series(new_test_labels).value_counts()}")
-
     # Compare all elements of u_labels and new_u_labels
     comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
 
@@ -1148,9 +1140,6 @@ def main_19():
     new_train_labels = [label for label in new_train_labels if label == 0 or label == 1]
     new_val_labels = [label for label in new_val_labels if label == 0 or label == 1]
     new_test_labels = [label for label in new_test_labels if label == 0 or label == 1]
-    print(f"Number of new train labels: {len(new_train_labels)}")
-    print(f"Number of new validation labels: {len(new_val_labels)}")
-    print(f"Number of new test labels: {len(new_test_labels)}")
 
     i = 0    
     train_preds_with_features = []
