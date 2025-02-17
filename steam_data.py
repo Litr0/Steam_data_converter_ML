@@ -1141,26 +1141,32 @@ def main_19():
     new_val_labels = [label for label in new_val_labels if label == 0 or label == 1]
     new_test_labels = [label for label in new_test_labels if label == 0 or label == 1]
 
-    i = 0    
+    #i = 0    
     train_preds_with_features = []
-    for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
+    for u, i in u_to_idx.items():
+        train_preds_with_features.append((train_feats[i], d_labels[u]))
+    """ for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
         if len(feat) > 0:
             train_preds_with_features.append((feat, new_train_labels[i]))
-            i += 1
+            i += 1 """
     
-    i = 0
+    #i = 0
     val_preds_with_features = []
-    for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
+    for u, i in u_to_idx.items():
+        val_preds_with_features.append((val_feats[i], d_labels[u]))
+    """ for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
         if len(feat) > 0:
             val_preds_with_features.append((feat, new_val_labels[i]))
-            i += 1
+            i += 1 """
 
-    i = 0
+    #i = 0
     test_preds_with_features = []
-    for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
+    for u, i in u_to_idx.items():
+        test_preds_with_features.append((test_feats[i], d_labels[u]))
+    """ for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
         if len(feat) > 0:
             test_preds_with_features.append((feat, new_test_labels[i]))
-            i += 1
+            i += 1 """
 
     
     all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
