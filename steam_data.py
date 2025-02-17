@@ -1021,7 +1021,7 @@ def main_18():
     print(f"Mean features for predictions 1: {mean_one_features}")
 
 def main_19():
-    path = "/home/bigdama/projects/bidyn/out/preds.pt"
+    path = "/home/bigdama/projects/bidyn/out/preds_1.pt"
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
