@@ -1070,21 +1070,21 @@ def main_19():
     print("d_labels length:", len(d_labels))
     print("train_feats length:", len(train_feats))
 
-    train_mask = [None for _ in range(len(u_train_mask))]
+    train_mask = [[] for _ in range(len(u_train_mask))]
     for u, i in u_to_idx.items():
         train_mask[u] = u_train_mask[i]
     
-    val_mask = [None for _ in range(len(u_val_mask))]
+    val_mask = [[] for _ in range(len(u_val_mask))]
     for u, i in u_to_idx.items():
         val_mask[u] = u_val_mask[i]
 
-    test_mask = [None for _ in range(len(u_test_mask))]
+    test_mask = [[] for _ in range(len(u_test_mask))]
     for u, i in u_to_idx.items():
         test_mask[u] = u_test_mask[i]
 
     i = 0
     j = 0
-    train_preds_labels = [None for _ in range(len(train_mask))]
+    train_preds_labels = [[] for _ in range(len(train_mask))]
     for bool_val in train_mask:
         if bool_val:
             train_preds_labels[i] = train_preds_vals[j]
@@ -1093,7 +1093,7 @@ def main_19():
     
     i = 0
     j = 0
-    val_preds_labels = [None for _ in range(len(val_mask))]
+    val_preds_labels = [[] for _ in range(len(val_mask))]
     for bool_val in val_mask:
         if bool_val:
             val_preds_labels[i] = val_preds_vals[j]
@@ -1102,7 +1102,7 @@ def main_19():
     
     i = 0
     j = 0
-    test_preds_labels = [None for _ in range(len(test_mask))]
+    test_preds_labels = [[] for _ in range(len(test_mask))]
     for bool_val in test_mask:
         if bool_val:
             test_preds_labels[i] = test_preds_vals[j]
