@@ -1088,7 +1088,7 @@ def main_19():
     train_preds_labels = [[] for _ in range(len(train_mask))]
     for bool_val in u_train_mask:
         if bool_val:
-            train_preds_labels[i] = train_labels[j]
+            train_preds_labels[i] = train_preds_vals[j]
             j += 1
         i += 1
     
@@ -1097,7 +1097,7 @@ def main_19():
     val_preds_labels = [[] for _ in range(len(val_mask))]
     for bool_val in u_val_mask:
         if bool_val:
-            val_preds_labels[i] = val_labels[j]
+            val_preds_labels[i] = val_preds_vals[j]
             j += 1
         i += 1
     
@@ -1106,7 +1106,7 @@ def main_19():
     test_preds_labels = [[] for _ in range(len(test_mask))]
     for bool_val in u_test_mask:
         if bool_val:
-            test_preds_labels[i] = test_labels[j]
+            test_preds_labels[i] = test_preds_vals[j]
             j += 1
         i += 1
         
