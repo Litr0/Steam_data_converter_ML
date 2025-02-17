@@ -1083,24 +1083,30 @@ def main_19():
         test_mask[u] = u_test_mask[i]
 
     i = 0
+    j = 0
     train_preds_labels = [None for _ in range(len(train_mask))]
     for bool_val in train_mask:
         if bool_val:
-            train_preds_labels[i] = train_preds_vals[i]
+            train_preds_labels[i] = train_preds_vals[j]
+            j += 1
         i += 1
     
     i = 0
+    j = 0
     val_preds_labels = [None for _ in range(len(val_mask))]
     for bool_val in val_mask:
         if bool_val:
-            val_preds_labels[i] = val_preds_vals[i]
+            val_preds_labels[i] = val_preds_vals[j]
+            j += 1
         i += 1
     
     i = 0
+    j = 0
     test_preds_labels = [None for _ in range(len(test_mask))]
     for bool_val in test_mask:
         if bool_val:
-            test_preds_labels[i] = test_preds_vals[i]
+            test_preds_labels[i] = test_preds_vals[j]
+            j += 1
         i += 1
         
     new_u_labels = [[] for _ in range(len(train_feats))]
