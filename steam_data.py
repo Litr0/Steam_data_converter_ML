@@ -1136,7 +1136,9 @@ def main_19():
 
     u_labels = u_labels.tolist()
 
-    print(type(new_train_labels[0]))
+    print(f"Value counts of new_train_labels: {pd.Series(new_train_labels).value_counts()}")
+    print(f"Value counts of new_val_labels: {pd.Series(new_val_labels).value_counts()}")
+    print(f"Value counts of new_test_labels: {pd.Series(new_test_labels).value_counts()}")
 
     # Compare all elements of u_labels and new_u_labels
     comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
