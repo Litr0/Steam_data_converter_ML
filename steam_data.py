@@ -1136,7 +1136,7 @@ def main_19():
 
     u_labels = u_labels.tolist()
 
-    print(new_train_labels[:10])
+    print(type(new_train_labels[0]))
 
     # Compare all elements of u_labels and new_u_labels
     comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
