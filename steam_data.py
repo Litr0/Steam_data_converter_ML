@@ -790,6 +790,8 @@ def main_17():
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
+        u_embs = preds['u_embs']
+        u_embs_np = preds['u_embs_np']
         u_embs_abusive = preds['u_embs_abusive']
         mean_non_abusive = preds['mean_non_abusive']
         cos_sim_abusive = preds['cos_sim_abusive']
@@ -827,6 +829,23 @@ def main_17():
 
     for i, distance in enumerate(euclidean_distances):
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
+    
+    k_means_all = KMeans(n_clusters=5, random_state=45)
+    user_clusters = k_means_all.fit_predict(u_embs_np)
+
+    user_clusters_df = pd.DataFrame(u_embs_np, columns=[f'feature_{i}' for i in range(u_embs_np.shape[1])])
+    user_clusters_df['cluster'] = user_clusters
+
+    print(f"Cluster labels for all users:\n {user_clusters_df['cluster'].value_counts()}")
+
+    cluster_cos_similarities_all = {}
+    for cluster in user_clusters_df['cluster'].unique():
+        cluster_users = user_clusters_df[user_clusters_df['cluster'] == cluster].drop(columns=['cluster'])
+        cos_sim_matrix = sklearn_cosine_similarity(cluster_users)
+        avg_cos_sim = np.mean(cos_sim_matrix)
+        cluster_cos_similarities_all[cluster] = avg_cos_sim
+    
+    print(f"Cosine similarity between users of the same cluster:\n {cluster_cos_similarities_all}")
 
 def main_18():
     path = "/home/bigdama/projects/bidyn/out/preds.pt"
@@ -1184,5 +1203,5 @@ def main_19():
     print(f"Mean features for predictions 1: {mean_one_features}")
     
 if __name__ == "__main__":
-    main_19()
+    main_17()
 
