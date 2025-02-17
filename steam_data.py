@@ -833,7 +833,7 @@ def main_17():
     for i, distance in enumerate(euclidean_distances):
         print(f"Euclidean distance between cluster {i} centroid and the mean embedding of non-abusive users: {distance}")
     
-    k_means_all = KMeans(n_clusters=5, random_state=45)
+    k_means_all = KMeans(n_clusters=10, random_state=45)
     user_clusters = k_means_all.fit_predict(u_embs_np)
 
     user_clusters_df = pd.DataFrame(u_embs_np, columns=[f'feature_{i}' for i in range(u_embs_np.shape[1])])
