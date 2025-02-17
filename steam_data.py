@@ -1065,6 +1065,10 @@ def main_19():
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
 
+    print("train_preds length:", len(train_preds))
+    print("val_preds length:", len(val_preds))
+    print("test_preds length:", len(test_preds))
+
     print("u_to_idx length:", len(u_to_idx))
     print("u_labels length:", len(u_labels))
     print("d_labels length:", len(d_labels))
