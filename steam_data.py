@@ -1027,7 +1027,6 @@ def main_19():
         preds = pickle.load(f)
         u_labels = preds['u_labels']
         u_to_idx = preds['u_to_idx']
-        train_us = preds['train_us']
         u_train_mask = preds['u_train_mask']
         u_val_mask = preds['u_val_mask']
         u_test_mask = preds['u_test_mask']
