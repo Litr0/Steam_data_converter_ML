@@ -1114,20 +1114,20 @@ def main_19():
     new_train_labels = [[] for _ in range(len(train_feats))]
     for u, i in u_to_idx.items():
         if len(train_feats[i]) > 0:
-            new_train_labels[i] = train_preds_labels[u]
+            new_train_labels[i] = train_preds_labels[i]
             new_u_labels[i] = d_labels[u]
     
     new_val_labels = [[] for _ in range(len(val_feats))]
     for u, i in u_to_idx.items():
         if len(val_feats[i]) > 0:
-            new_val_labels[i] = val_preds_labels[u]
+            new_val_labels[i] = val_preds_labels[i]
             new_u_labels[i] = d_labels[u]
 
     
     new_test_labels = [[] for _ in range(len(test_feats))]
     for u, i in u_to_idx.items():
         if len(test_feats[i]) > 0:
-            new_test_labels[i] = test_preds_labels[u]
+            new_test_labels[i] = test_preds_labels[i]
             new_u_labels[i] = d_labels[u]
 
     u_labels = u_labels.tolist()
