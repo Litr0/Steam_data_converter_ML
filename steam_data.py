@@ -1143,6 +1143,9 @@ def main_19():
     new_train_labels = [label for label in new_train_labels if isinstance(label, np.int64)]
     new_val_labels = [label for label in new_val_labels if isinstance(label, np.int64)]
     new_test_labels = [label for label in new_test_labels if isinstance(label, np.int64)]
+    print(f"Number of new train labels: {len(new_train_labels)}")
+    print(f"Number of new validation labels: {len(new_val_labels)}")
+    print(f"Number of new test labels: {len(new_test_labels)}")
 
     i = 0    
     train_preds_with_features = []
