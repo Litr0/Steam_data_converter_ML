@@ -1073,15 +1073,15 @@ def main_19():
 
     train_mask = [[] for _ in range(len(u_train_mask))]
     for u, i in u_to_idx.items():
-        train_mask[u] = u_train_mask[i]
+        train_mask[i] = u_train_mask[u]
     
     val_mask = [[] for _ in range(len(u_val_mask))]
     for u, i in u_to_idx.items():
-        val_mask[u] = u_val_mask[i]
+        val_mask[i] = u_val_mask[u]
 
     test_mask = [[] for _ in range(len(u_test_mask))]
     for u, i in u_to_idx.items():
-        test_mask[u] = u_test_mask[i]
+        test_mask[i] = u_test_mask[u]
 
     i = 0
     j = 0
