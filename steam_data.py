@@ -786,17 +786,22 @@ def main_16():
     print_data_info(Data(x=data[1]))
 
 def main_17():
-    path = "/home/bigdama/projects/bidyn/out/preds_1.pt"
+    path_1 = "/home/bigdama/projects/bidyn/out/pred.pt"
 
-    with open(path, "rb") as f:
+    with open(path_1, "rb") as f:
         preds = pickle.load(f)
         u_embs = preds['u_embs']
         u_embs_np = preds['u_embs_np']
-        u_labels = preds['u_labels']
         u_embs_abusive = preds['u_embs_abusive']
         mean_non_abusive = preds['mean_non_abusive']
         cos_sim_abusive = preds['cos_sim_abusive']
         cos_sim_non_abusive = preds['cos_sim_non_abusive']
+
+    path_2 = "/home/bigdama/projects/bidyn/out/preds_1.pt"
+
+    with open(path_2, "rb") as f:
+        preds_1 = pickle.load(f)
+        u_labels = preds_1['u_labels']
 
     u_labels_np = u_labels.numpy()
 
@@ -845,15 +850,6 @@ def main_17():
     for cluster in user_clusters_df['cluster'].unique():
         cluster_labels = user_clusters_df[user_clusters_df['cluster'] == cluster]['u_labels']
         print(f"Cluster {cluster} labels count:\n {cluster_labels.value_counts()}")
-
-    cluster_cos_similarities_all = {}
-    for cluster in user_clusters_df['cluster'].unique():
-        cluster_users = user_clusters_df[user_clusters_df['cluster'] == cluster].drop(columns=['cluster'])
-        cos_sim_matrix = sklearn_cosine_similarity(cluster_users)
-        avg_cos_sim = np.mean(cos_sim_matrix)
-        cluster_cos_similarities_all[cluster] = avg_cos_sim
-    
-    print(f"Cosine similarity between users of the same cluster:\n {cluster_cos_similarities_all}")
 
 def main_18():
     path = "/home/bigdama/projects/bidyn/out/preds.pt"
