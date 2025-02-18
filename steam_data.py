@@ -828,7 +828,7 @@ def main_17():
     plt.plot(range(2, 11), abusive_inertia, marker='o')
     plt.xlabel('Number of clusters')
     plt.ylabel('Inertia')
-    plt.title('Inertia For Optimal Number of Clusters for Abusive Users')
+    plt.title('Elbow Method For Optimal Number of Clusters Abusive Users')
     plt.grid(True)
     plt.savefig('data/inertia_abusive_users.png')
 
@@ -867,7 +867,7 @@ def main_17():
     plt.plot(range(4, 21), inertia, marker='o')
     plt.xlabel('Number of clusters')
     plt.ylabel('Inertia')
-    plt.title('Elbow Method For Optimal Number of Clusters')
+    plt.title('Elbow Method For Optimal Number of Clusters for all Users')
     plt.grid(True)
     plt.savefig('data/elbow_method.png')
 
