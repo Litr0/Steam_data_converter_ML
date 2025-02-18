@@ -841,6 +841,22 @@ def main_17():
     k_means_all = KMeans(n_clusters=10, random_state=45)
     user_clusters = k_means_all.fit_predict(u_embs_np)
 
+    # Determine the optimal number of clusters using the elbow method
+    inertia = []
+    for n_clusters in range(4, 21):
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        kmeans.fit(u_embs_np)
+        inertia.append(kmeans.inertia_)
+
+    # Plot the elbow curve
+    plt.figure(figsize=(10, 6))
+    plt.plot(range(4, 21), inertia, marker='o')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Inertia')
+    plt.title('Elbow Method For Optimal Number of Clusters')
+    plt.grid(True)
+    plt.savefig('data/elbow_method.png')
+
     user_clusters_df = pd.DataFrame(u_embs_np, columns=[f'feature_{i}' for i in range(u_embs_np.shape[1])])
     user_clusters_df['u_labels'] = u_labels_np
     user_clusters_df['cluster'] = user_clusters
