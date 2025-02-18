@@ -818,6 +818,20 @@ def main_17():
     kmeans = KMeans(n_clusters=5, random_state=42)
     abusive_clusters = kmeans.fit_predict(u_embs_abusive)
 
+    abusive_inertia = []
+    for n_clusters in range(2, 11):
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        kmeans.fit(u_embs_abusive)
+        abusive_inertia.append(kmeans.inertia_)
+    
+    plt.figure(figsize=(10, 6))
+    plt.plot(range(2, 11), abusive_inertia, marker='o')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Inertia')
+    plt.title('Inertia For Optimal Number of Clusters for Abusive Users')
+    plt.grid(True)
+    plt.savefig('data/inertia_abusive_users.png')
+
     abusive_user_clusters = pd.DataFrame(u_embs_abusive, columns=[f'feature_{i}' for i in range(u_embs_abusive.shape[1])])
     abusive_user_clusters['cluster'] = abusive_clusters
 
