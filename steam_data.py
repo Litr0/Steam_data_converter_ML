@@ -820,9 +820,9 @@ def main_17():
 
     abusive_inertia = []
     for n_clusters in range(2, 11):
-        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-        kmeans.fit(u_embs_abusive)
-        abusive_inertia.append(kmeans.inertia_)
+        kmeans_abusive = KMeans(n_clusters=n_clusters, random_state=42)
+        kmeans_abusive.fit(u_embs_abusive)
+        abusive_inertia.append(kmeans_abusive.inertia_)
     
     plt.figure(figsize=(10, 6))
     plt.plot(range(2, 11), abusive_inertia, marker='o')
