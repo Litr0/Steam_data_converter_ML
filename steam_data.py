@@ -1138,6 +1138,10 @@ def main_19():
         new_val_labels.append(labels[val_mask])
         new_test_labels.append(labels[test_mask])
     
+    print("Number of train labels:", len(new_train_labels))
+    print("Number of val labels:", len(new_val_labels))
+    print("Number of test labels:", len(new_test_labels))
+    
     # Compare train_labels with new_train_labels
     mismatch_count = 0
     for i, (old_labels, new_labels) in enumerate(zip(train_labels, new_train_labels)):
