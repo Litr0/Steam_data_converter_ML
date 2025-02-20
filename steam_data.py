@@ -1139,11 +1139,11 @@ def main_19():
         labels = u_labels[batch_idxs]
         for idx in batch_idxs:
             if len(train_feats[idx]) > 0:
-                new_train_feats.append(train_feats[idx])
+                new_train_feats.append((train_feats[idx], u_labels[idx]))
             if len(val_feats[idx]) > 0:
-                new_val_feats.append(val_feats[idx])
+                new_val_feats.append((val_feats[idx], u_labels[idx]))
             if len(test_feats[idx]) > 0:
-                new_test_feats.append(test_feats[idx])
+                new_test_feats.append((test_feats[idx], u_labels[idx]))
         new_train_labels.append(labels[train_mask])
         new_val_labels.append(labels[val_mask])
         new_test_labels.append(labels[test_mask])
