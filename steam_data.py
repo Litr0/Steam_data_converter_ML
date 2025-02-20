@@ -1075,13 +1075,14 @@ def main_18():
     print(f"Mean features for predictions 1: {mean_one_features}")
 
 def main_19():
-    path = "/home/bigdama/projects/bidyn/out/preds_1.pt"
+    path = "/home/bigdama/projects/bidyn/out/preds_2.pt"
 
     with open(path, "rb") as f:
         preds = pickle.load(f)
         u_labels = preds['u_labels']
         u_to_idx = preds['u_to_idx']
         train_us = preds['train_us']
+        batch_idxs_array = preds['batch_idxs_array']
         u_train_mask = preds['u_train_mask']
         u_val_mask = preds['u_val_mask']
         u_test_mask = preds['u_test_mask']
@@ -1124,118 +1125,40 @@ def main_19():
     print("d_labels length:", len(d_labels))
     print("train_feats length:", len(train_feats))
 
-    train_mask = [[] for _ in range(len(u_train_mask))]
-    for u, i in u_to_idx.items():
-        train_mask[i] = u_train_mask[u]
+
+    new_train_labels = []
+    new_val_labels = []
+    new_test_labels = []
+    for batch_idxs in batch_idxs_array:
+        train_mask = u_train_mask[batch_idxs]
+        val_mask = u_val_mask[batch_idxs]
+        test_mask = u_test_mask[batch_idxs]
+        labels = u_labels[batch_idxs]
+        new_train_labels.append(labels[train_mask])
+        new_val_labels.append(labels[val_mask])
+        new_test_labels.append(labels[test_mask])
     
-    val_mask = [[] for _ in range(len(u_val_mask))]
-    for u, i in u_to_idx.items():
-        val_mask[i] = u_val_mask[u]
+    # Compare train_labels with new_train_labels
+    mismatch_count = 0
+    for i, (old_labels, new_labels) in enumerate(zip(train_labels, new_train_labels)):
+        if not np.array_equal(old_labels, new_labels):
+            mismatch_count += 1
+    print(f"Number of mismatches: {mismatch_count}")
 
-    test_mask = [[] for _ in range(len(u_test_mask))]
-    for u, i in u_to_idx.items():
-        test_mask[i] = u_test_mask[u]
+    # Compare val_labels with new_val_labels
+    mismatch_count = 0
+    for i, (old_labels, new_labels) in enumerate(zip(val_labels, new_val_labels)):
+        if not np.array_equal(old_labels, new_labels):
+            mismatch_count += 1
+    print(f"Number of mismatches: {mismatch_count}")
 
-    i = 0
-    j = 0
-    train_preds_labels = [[] for _ in range(len(train_mask))]
-    for bool_val in u_train_mask:
-        if bool_val:
-            train_preds_labels[i] = train_labels[j]
-            j += 1
-        i += 1
-    
-    i = 0
-    j = 0
-    val_preds_labels = [[] for _ in range(len(val_mask))]
-    for bool_val in u_val_mask:
-        if bool_val:
-            val_preds_labels[i] = val_labels[j]
-            j += 1
-        i += 1
-    
-    i = 0
-    j = 0
-    test_preds_labels = [[] for _ in range(len(test_mask))]
-    for bool_val in u_test_mask:
-        if bool_val:
-            test_preds_labels[i] = test_labels[j]
-            j += 1
-        i += 1
-        
-    new_u_labels = [[] for _ in range(len(train_feats))]
-    new_train_labels = [[] for _ in range(len(train_feats))]
-    for u, i in u_to_idx.items():
-        if len(train_feats[i]) > 0:
-            new_train_labels[i] = d_labels[u]
-            new_u_labels[i] = d_labels[u]
-    
-    new_val_labels = [[] for _ in range(len(val_feats))]
-    for u, i in u_to_idx.items():
-        if len(val_feats[i]) > 0:
-            new_val_labels[i] = d_labels[u]
-            new_u_labels[i] = d_labels[u]
-
-    
-    new_test_labels = [[] for _ in range(len(test_feats))]
-    for u, i in u_to_idx.items():
-        if len(test_feats[i]) > 0:
-            new_test_labels[i] = d_labels[u]
-            new_u_labels[i] = d_labels[u]
-
-    u_labels = u_labels.tolist()
-
-    # Compare all elements of u_labels and new_u_labels
-    comparison_result = all(ul == nul for ul, nul in zip(u_labels, new_u_labels))
-
-    print(f"Are all elements of u_labels and new_u_labels equal? {comparison_result}")
-
-    new_train_labels = [label for label in new_train_labels if label == 0 or label == 1]
-    new_val_labels = [label for label in new_val_labels if label == 0 or label == 1]
-    new_test_labels = [label for label in new_test_labels if label == 0 or label == 1]
-
-    i = 0    
-    train_preds_with_features = []
-    for feat in tqdm(train_feats, desc="Train", total=len(train_feats)):
-        if len(feat) > 0:
-            train_preds_with_features.append((feat, new_train_labels[i]))
-            i += 1
-    
-    i = 0
-    val_preds_with_features = []
-    for feat in tqdm(val_feats, desc="Validation", total=len(val_feats)):
-        if len(feat) > 0:
-            val_preds_with_features.append((feat, new_val_labels[i]))
-            i += 1
-
-    i = 0
-    test_preds_with_features = []
-    for feat in tqdm(test_feats, desc="Test", total=len(test_feats)):
-        if len(feat) > 0:
-            test_preds_with_features.append((feat, new_test_labels[i]))
-            i += 1
-
-    
-    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
-
-    preds_zero = [pred for _, pred in all_preds if pred == 0]
-    preds_one = [pred for _, pred in all_preds if pred == 1]
-
-    print(f"Number of predictions 0: {len(preds_zero)}")
-    print(f"Number of predictions 1: {len(preds_one)}")
-
-    zero_features = [features for features, pred in all_preds if pred == 0]
-    one_features = [features for features, pred in all_preds if pred == 1]
-
-    mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
-    mean_one_features = [np.mean(features, axis=0) for features in one_features]
-
-    mean_zero_features = np.mean(mean_zero_features, axis=0)
-    mean_one_features = np.mean(mean_one_features, axis=0)
-
-    print(f"Mean features for predictions 0: {mean_zero_features}")
-    print(f"Mean features for predictions 1: {mean_one_features}")
+    # Compare test_labels with new_test_labels
+    mismatch_count = 0
+    for i, (old_labels, new_labels) in enumerate(zip(test_labels, new_test_labels)):
+        if not np.array_equal(old_labels, new_labels):
+            mismatch_count += 1
+    print(f"Number of mismatches: {mismatch_count}")    
     
 if __name__ == "__main__":
-    main_17()
+    main_19()
 
