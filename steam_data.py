@@ -1157,8 +1157,6 @@ def main_19():
     print("Number of new train feats:", len(new_train_feats))
     print("Number of new val feats:", len(new_val_feats))
     print("Number of new test feats:", len(new_test_feats))
-    print(new_test_labels[0])
-    print(test_labels[:75])
     
     # Compare train_labels with new_train_labels
     mismatch_count = 0
