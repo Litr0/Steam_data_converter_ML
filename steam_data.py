@@ -1117,10 +1117,6 @@ def main_19():
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
 
-    print("First 5 train feats:", train_feats[:5])
-    print("First 5 val feats:", val_feats[:5])
-    print("First 5 test feats:", test_feats[:5])
-
     train_preds_vals = extract_highest_probability_val(train_preds)
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
@@ -1133,6 +1129,7 @@ def main_19():
     new_test_feats = []
     for batch_idxs, group, side_name in batch_idxs_array:
         if side_name == 'u':
+            print(f"Batch idxs: {batch_idxs}")
             train_mask = u_train_mask[batch_idxs]
             val_mask = u_val_mask[batch_idxs]
             test_mask = u_test_mask[batch_idxs]
