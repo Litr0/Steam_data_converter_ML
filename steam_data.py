@@ -1133,9 +1133,13 @@ def main_19():
     new_train_feats = []
     new_val_feats = []
     new_test_feats = []
+    i = 0
     for batch_idxs, group, side_name in batch_idxs_array:
         if side_name == 'u':
             train_mask = u_train_mask[batch_idxs]
+            if i == 0:
+                print("Train mask: ", train_mask)
+                i = -1
             val_mask = u_val_mask[batch_idxs]
             test_mask = u_test_mask[batch_idxs]
             labels = u_labels[batch_idxs]
