@@ -1189,8 +1189,8 @@ def main_19():
     bar_width = 0.35
     index = np.arange(3)
 
-    ax.bar(index + bar_width, mean_one_features, bar_width, label='Abusive Users', color='red', alpha=0.7)
-    ax.bar(index, mean_zero_features, bar_width, label='Non-abusive users', color='blue', alpha=0.7)
+    ax.bar(index, mean_one_features, bar_width, label='Abusive Users', color='red', alpha=0.7)
+    ax.bar(index + bar_width, mean_zero_features, bar_width, label='Non-abusive users', color='blue', alpha=0.7)
 
     ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
