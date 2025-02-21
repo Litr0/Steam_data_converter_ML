@@ -1130,6 +1130,8 @@ def main_19():
     for batch_idxs, group, side_name in batch_idxs_array:
         if side_name == 'u':
             print(f"Batch idxs: {batch_idxs}")
+            print(f"Group: {group}")
+            print(f"Batcn idxs type: {type(batch_idxs)}")
             train_mask = u_train_mask[batch_idxs]
             val_mask = u_val_mask[batch_idxs]
             test_mask = u_test_mask[batch_idxs]
