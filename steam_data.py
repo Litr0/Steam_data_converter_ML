@@ -1183,6 +1183,25 @@ def main_19():
     print(f"Mean features for predictions 0: {mean_zero_features}")
     print(f"Mean features for predictions 1: {mean_one_features}")
 
+    # Save a histogram of the features
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bar_width = 0.35
+    index = np.arange(3)
+
+    ax.bar(index, mean_zero_features, bar_width, label='Non-abusive users', color='blue', alpha=0.7)
+    ax.bar(index + bar_width, mean_one_features, bar_width, label='Abusive Users', color='red', alpha=0.7)
+
+    ax.set_xlabel('Sentiment')
+    ax.set_ylabel('Mean Sentiment Score')
+    ax.set_title('Mean Sentiment Scores for Non-abusive users v/s Abusive Users after Model Training')
+    ax.set_xticks(index + bar_width / 2)
+    ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
+    ax.legend()
+
+    # Save the plot as a PNG file
+    plt.savefig('mean_sentiment_scores_non_abusive_v_abusive_users_after_training.png')
+
     labels_zero = [label for label, _ in all_labels_feats if label == 0]
     labels_one = [label for label, _ in all_labels_feats if label == 1]
 
@@ -1200,7 +1219,7 @@ def main_19():
 
     print(f"Mean features for labels 0: {mean_zero_features}")
     print(f"Mean features for labels 1: {mean_one_features}")
-    
+
 if __name__ == "__main__":
     main_19()
 
