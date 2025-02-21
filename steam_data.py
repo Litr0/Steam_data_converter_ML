@@ -1124,7 +1124,7 @@ def main_19():
     print("u_to_idx length:", len(u_to_idx))
     print("u_labels length:", len(u_labels))
     print("d_labels length:", len(d_labels))
-    print("train_feats length:", len(train_feats))
+    print("train_feats type:", type(train_feats))
 
 
     new_train_labels = []
