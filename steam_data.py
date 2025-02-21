@@ -1117,15 +1117,13 @@ def main_19():
     val_preds = torch.exp(torch.tensor(val_logp))
     test_preds = torch.exp(torch.tensor(test_logp))
 
+    print("First 5 train feats:", train_feats[:5])
+    print("First 5 val feats:", val_feats[:5])
+    print("First 5 test feats:", test_feats[:5])
+
     train_preds_vals = extract_highest_probability_val(train_preds)
     val_preds_vals = extract_highest_probability_val(val_preds)
     test_preds_vals = extract_highest_probability_val(test_preds)
-
-    print("u_to_idx length:", len(u_to_idx))
-    print("u_labels length:", len(u_labels))
-    print("d_labels length:", len(d_labels))
-    print("train_feats type:", type(train_feats))
-
 
     new_train_labels = []
     new_val_labels = []
