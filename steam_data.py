@@ -1150,34 +1150,56 @@ def main_19():
     print("Number of new val labels:", len(new_val_labels))
     print("Number of val labels:", len(val_labels))
     print("Number of new test labels:", len(new_test_labels))
-    print("Number of test labels:", len(test_labels))
     print("Number of new train feats:", len(new_train_feats))
-    print("First 5 new train feats:", new_train_feats[:5])
     print("Number of new val feats:", len(new_val_feats))
-    print("First 5 new val feats:", new_val_feats[:5])
     print("Number of new test feats:", len(new_test_feats))
-    print("First 5 new test feats:", new_test_feats[:5])
 
-    # Compare train_labels with new_train_labels
-    mismatch_count = 0
-    for i, (old_labels, new_labels) in enumerate(zip(train_labels, new_train_labels)):
-        if not np.array_equal(old_labels, new_labels):
-            mismatch_count += 1
-    print(f"Number of mismatches: {mismatch_count}")
+    train_labels_feats = list(zip(new_train_labels, new_train_feats))
+    val_labels_feats = list(zip(new_val_labels, new_val_feats))
+    test_labels_feats = list(zip(new_test_labels, new_test_feats))
 
-    # Compare val_labels with new_val_labels
-    mismatch_count = 0
-    for i, (old_labels, new_labels) in enumerate(zip(val_labels, new_val_labels)):
-        if not np.array_equal(old_labels, new_labels):
-            mismatch_count += 1
-    print(f"Number of mismatches: {mismatch_count}")
+    train_preds_with_features = list(zip(train_preds_vals, new_train_feats))
+    val_preds_with_features = list(zip(val_preds_vals, new_val_feats))
+    test_preds_with_features = list(zip(test_preds_vals, new_test_feats))
 
-    # Compare test_labels with new_test_labels
-    mismatch_count = 0
-    for i, (old_labels, new_labels) in enumerate(zip(test_labels, new_test_labels)):
-        if not np.array_equal(old_labels, new_labels):
-            mismatch_count += 1
-    print(f"Number of mismatches: {mismatch_count}")    
+    all_labels_feats = train_labels_feats + val_labels_feats + test_labels_feats 
+    all_preds = train_preds_with_features + val_preds_with_features + test_preds_with_features
+
+    preds_zero = [pred for pred, _ in all_preds if pred == 0]
+    preds_one = [pred for pred, _ in all_preds if pred == 1]
+
+    print(f"Number of predictions 0: {len(preds_zero)}")
+    print(f"Number of predictions 1: {len(preds_one)}")
+
+    zero_features = [features for pred, features in all_preds if pred == 0]
+    one_features = [features for pred, features in all_preds if pred == 1]
+
+    mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
+    mean_one_features = [np.mean(features, axis=0) for features in one_features]
+
+    mean_zero_features = np.mean(mean_zero_features, axis=0)
+    mean_one_features = np.mean(mean_one_features, axis=0)
+
+    print(f"Mean features for predictions 0: {mean_zero_features}")
+    print(f"Mean features for predictions 1: {mean_one_features}")
+
+    labels_zero = [label for label, _ in all_labels_feats if label == 0]
+    labels_one = [label for label, _ in all_labels_feats if label == 1]
+
+    print(f"Number of labels 0: {len(labels_zero)}")
+    print(f"Number of labels 1: {len(labels_one)}")
+
+    zero_features = [features for label, features in all_labels_feats if label == 0]
+    one_features = [features for label, features in all_labels_feats if label == 1]
+
+    mean_zero_features = [np.mean(features, axis=0) for features in zero_features]
+    mean_one_features = [np.mean(features, axis=0) for features in one_features]
+
+    mean_zero_features = np.mean(mean_zero_features, axis=0)
+    mean_one_features = np.mean(mean_one_features, axis=0)
+
+    print(f"Mean features for labels 0: {mean_zero_features}")
+    print(f"Mean features for labels 1: {mean_one_features}")
     
 if __name__ == "__main__":
     main_19()
