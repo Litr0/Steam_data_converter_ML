@@ -1183,7 +1183,6 @@ def main_19():
     print(f"Mean features for predictions 0: {mean_zero_features}")
     print(f"Mean features for predictions 1: {mean_one_features}")
 
-    # Save a histogram of the features
     fig, ax = plt.subplots(figsize=(12, 6))
 
     bar_width = 0.35
@@ -1199,7 +1198,6 @@ def main_19():
     ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
     ax.legend()
 
-    # Save the plot as a PNG file
     plt.savefig('data/mean_sentiment_scores_non_abusive_v_abusive_users_after_training.png')
 
     labels_zero = [label for label, _ in all_labels_feats if label == 0]
