@@ -1140,11 +1140,11 @@ def main_19():
             test_mask = u_test_mask[batch_idxs]
             labels = u_labels[batch_idxs]
             if group == 'train':
-                new_train_labels.append(labels[train_mask])
+                new_train_labels.extend(labels[train_mask].tolist())
             
             else:
-                new_val_labels.append(labels[val_mask])
-                new_test_labels.append(labels[test_mask])
+                new_val_labels.extend(labels[val_mask].tolist())
+                new_test_labels.extend(labels[test_mask].tolist())
     
     print("Number of new train labels:", len(new_train_labels))
     print("Number of train labels:", len(train_labels))
@@ -1155,9 +1155,6 @@ def main_19():
     print("Number of new train feats:", len(new_train_feats))
     print("Number of new val feats:", len(new_val_feats))
     print("Number of new test feats:", len(new_test_feats))
-    print(new_train_labels[0].tolist())
-    print(train_labels[:len(new_train_labels[0])])
-    print(new_train_labels[0].tolist() == train_labels[:len(new_train_labels[0])])
 
     # Compare train_labels with new_train_labels
     mismatch_count = 0
