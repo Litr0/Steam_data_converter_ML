@@ -1200,7 +1200,7 @@ def main_19():
     ax.legend()
 
     # Save the plot as a PNG file
-    plt.savefig('mean_sentiment_scores_non_abusive_v_abusive_users_after_training.png')
+    plt.savefig('data/mean_sentiment_scores_non_abusive_v_abusive_users_after_training.png')
 
     labels_zero = [label for label, _ in all_labels_feats if label == 0]
     labels_one = [label for label, _ in all_labels_feats if label == 1]
