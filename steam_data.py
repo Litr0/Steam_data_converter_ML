@@ -1144,12 +1144,12 @@ def main_19():
             test_feats_mask = test_feats[batch_idxs]
             if group == 'train':
                 new_train_labels.extend(labels[train_mask].tolist())
-                new_train_feats.extend(train_feats_mask[train_mask].tolist()) 
+                new_train_feats.extend(train_feats_mask[train_mask]) 
             else:
                 new_val_labels.extend(labels[val_mask].tolist())
                 new_test_labels.extend(labels[test_mask].tolist())
-                new_val_feats.extend(val_feats_mask[val_mask].tolist())
-                new_test_feats.extend(test_feats_mask[test_mask].tolist())
+                new_val_feats.extend(val_feats_mask[val_mask])
+                new_test_feats.extend(test_feats_mask[test_mask])
     
     print("Number of new train labels:", len(new_train_labels))
     print("Number of train labels:", len(train_labels))
