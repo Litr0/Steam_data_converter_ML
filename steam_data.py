@@ -1,3 +1,4 @@
+from hmac import new
 import re
 from matplotlib.pylab import int64
 from networkx import is_empty
@@ -1132,21 +1133,18 @@ def main_19():
     new_train_feats = []
     new_val_feats = []
     new_test_feats = []
-    for batch_idxs in batch_idxs_array:
-        train_mask = u_train_mask[batch_idxs]
-        val_mask = u_val_mask[batch_idxs]
-        test_mask = u_test_mask[batch_idxs]
-        labels = u_labels[batch_idxs]
-        for idx in batch_idxs:
-            if len(train_feats[idx]) > 0:
-                new_train_feats.append((train_feats[idx], u_labels[idx]))
-            if len(val_feats[idx]) > 0:
-                new_val_feats.append((val_feats[idx], u_labels[idx]))
-            if len(test_feats[idx]) > 0:
-                new_test_feats.append((test_feats[idx], u_labels[idx]))
-        new_train_labels.append(labels[train_mask])
-        new_val_labels.append(labels[val_mask])
-        new_test_labels.append(labels[test_mask])
+    for batch_idxs, group, side_name in batch_idxs_array:
+        if side_name == 'u':
+            train_mask = u_train_mask[batch_idxs]
+            val_mask = u_val_mask[batch_idxs]
+            test_mask = u_test_mask[batch_idxs]
+            labels = u_labels[batch_idxs]
+            if group == 'train':
+                new_train_labels.append(labels[train_mask])
+            
+            else:
+                new_val_labels.append(labels[val_mask])
+                new_test_labels.append(labels[test_mask])
     
     print("Number of new train labels:", len(new_train_labels))
     print("Number of train labels:", len(train_labels))
@@ -1157,7 +1155,9 @@ def main_19():
     print("Number of new train feats:", len(new_train_feats))
     print("Number of new val feats:", len(new_val_feats))
     print("Number of new test feats:", len(new_test_feats))
-    
+    print(new_train_labels[0])
+    print(train_labels[0])
+
     # Compare train_labels with new_train_labels
     mismatch_count = 0
     for i, (old_labels, new_labels) in enumerate(zip(train_labels, new_train_labels)):
