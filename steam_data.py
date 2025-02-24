@@ -769,7 +769,7 @@ def main_15():
 
     ax.set_xlabel('Sentiment')
     ax.set_ylabel('Mean Sentiment Score')
-    ax.set_title('Mean Sentiment Scores for Review Bombing user v/s Non Review Bombing user')
+    ax.set_title('Mean Sentiment Scores for Review Bombing v/s Non Review Bombing Users')
     ax.set_xticks(index + bar_width / 2)
     ax.set_xticklabels(['Negative', 'Neutral', 'Positive'])
     ax.legend()
@@ -1219,5 +1219,5 @@ def main_19():
     print(f"Mean features for labels 1: {mean_one_features}")
 
 if __name__ == "__main__":
-    main_19()
+    main_15()
 
