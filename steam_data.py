@@ -1219,5 +1219,5 @@ def main_19():
     print(f"Mean features for labels 1: {mean_one_features}")
 
 if __name__ == "__main__":
-    main_15()
+    main_17()
 
